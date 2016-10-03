@@ -1,2 +1,4 @@
 # workspace
-problems (logical and mathematial) solved
+problems (logical and mathematical) solved
+
+
