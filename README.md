@@ -12,3 +12,7 @@ where 0<= i < j < k <= n-1 and n is the size of the array
 takes a string and if the string is palindrome we print "yes" along with even or odd based on whether it is odd palindrome or even palindrome
 and we print "no" if it is not palindrome
 
+#prob3 description:
+
+takes a list and sort the list using bubble sort in python
+
