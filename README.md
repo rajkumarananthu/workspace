@@ -16,3 +16,7 @@ and we print "no" if it is not palindrome
 
 takes a list and sort the list using bubble sort in python
 
+#prob4
+
+implements des algorithm in python
+
