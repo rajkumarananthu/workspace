@@ -20,3 +20,14 @@ takes a list and sort the list using bubble sort in python
 
 implements des algorithm in python
 
+#prob5
+
+DUPLICATION - 
+consider a binary strind s with an initial value "0". we expand s by performing the following steps:
+1-create a string t where t[i] is compliment of s[i]
+2-append t to s
+3-repeat 1 and 2 until s length exceeds 1000
+
+given q queries in the form of zero-based index,x,solve each query by printing the charecter at index x in s on a new line
+
+
