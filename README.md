@@ -45,3 +45,13 @@ we print no of secs taken to find the key to open the lock
 if not found we print -1
 
 
+#prob7
+
+inverse list:
+There are many ways to order a list of integers from 
+1 to n. For example, if n=3, the list could be : [312].
+
+But there is a special way to create another list from the given list of integers. In this list, position of integer 
+i is thei−th number in the given list. So following this rule, the given list will be written as: 
+[231]. This list is called inverse list. Now there exists some list whose inverse list is identical. For example, inverse list of 
+[123] is same as given list. Given a list of integers you have to determine whether the list is inverse or not.
