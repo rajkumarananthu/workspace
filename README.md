@@ -32,6 +32,7 @@ given q queries in the form of zero-based index,x,solve each query by printing t
 
 
 #prob6
+
 s_key is the original key with which a combination of key is selected from a list of keys[] to open the lock with the integer on it as l_key
 if a key matching to l_key is obtained then the lock opens
 each key is selected for one sec and selected key is merged with the original s_key until it gets matched  to l_key
