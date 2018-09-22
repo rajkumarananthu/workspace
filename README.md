@@ -55,3 +55,11 @@ But there is a special way to create another list from the given list of integer
 i is thei−th number in the given list. So following this rule, the given list will be written as: 
 [231]. This list is called inverse list. Now there exists some list whose inverse list is identical. For example, inverse list of 
 [123] is same as given list. Given a list of integers you have to determine whether the list is inverse or not.
+
+### prob8
+print a staircase of #
+given a number(integer) n, print the stair case.
+example for n =3
+   #
+  ##
+ ###
