@@ -63,3 +63,6 @@ example for n =3
    #
   ##
  ###
+
+### prob9
+get the min max sum : given 'm' integers and an integer n we have to print the maximum sum of n integers from this set and minimum sum of n integers from this set. provided m >=n.
