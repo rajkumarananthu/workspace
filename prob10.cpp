@@ -54,25 +54,6 @@ int main () {
         }
         std::cout << raj_ranks[i] << "\n";
     }
-    // instead of determining ranks and all we can do the following if loop:
-    //for (auto i = 0; i < m; ++i) {
-    //    if ((raj_scores[i] > scores[0]) || (raj_scores[i] == scores[0]) ) {
-    //        std::cout << "1\n";
-    //        continue;
-    //    }
-    //    for (auto j = 0; j < num_of_players; ++j) { 
-    //        if (raj_scores[i] < scores[j]) {
-    //            if (j == num_of_players - 1) {
-    //                std::cout << ranks[j] + 1 << "\n";
-    //                break;
-    //            }
-    //            continue;
-    //        } else {
-    //            std::cout << ranks[j] << "\n";
-    //            break;
-    //        }
-    //    }
-    }
 }
 
 
