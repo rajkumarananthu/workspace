@@ -54,6 +54,27 @@ int main () {
         }
         std::cout << raj_ranks[i] << "\n";
     }
+    /*for (auto i = 0; i < m; ++i) {
+        if ((alice[i] > scores[0]) || (alice[i] == scores[0]) ) {
+            alice_ranks.push_back(1);
+            continue;
+        }
+        int rank = 1;
+        for (auto j = 1; j < num_of_players; ++j) {
+            if (!(scores[j] == scores[j-1]))
+                rank = rank + 1;
+            if (alice[i] < scores[j]) {
+                if (j == num_of_players - 1) {
+                    alice_ranks.push_back(rank + 1);
+                    break;
+                }
+                continue;
+            } else {
+                alice_ranks.push_back(rank);
+                break;
+            }
+        }
+    }*/ // with out rank loop 
 }
 
 
