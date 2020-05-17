@@ -29,3 +29,6 @@
   ```  
 * the *--cflags* option will provide the preprocessor and compile flags required to compile the GTK+ programs, including flags for all the dependencies
 * the *--libs* option lists the necessary libraries
+
+
+**Source: http://zetcode.com/tutorials/gtktutorial/**
