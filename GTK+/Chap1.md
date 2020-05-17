@@ -11,4 +11,5 @@
 * This activate is called when we run the application using 
   *g_application_run(<application ptr>, argc, argv);* we pass argc and argv so that if any cmd line
   args to be parsed it will be done there in the activate signal mapped method/function
-*
+* *gtk_application_window_new()* will create a new window(GtkWindow) - a window will have a title bar,
+  frame and window control depending on the platform.
