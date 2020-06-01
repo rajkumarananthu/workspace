@@ -48,6 +48,7 @@
 - Strings are concatanated using `+`
 - Type casting operator are like `int()` `float()`.
 - Non-string values can be converted to strings using `str()`, `repr()`, and `format()`.
+- `split()` method splits the string into a list of fields based on the delimiter provided.
 ###### Lists
 - Lists are a sequence of arbitrary object, we can create a list using square brackets '[' and ']'.
   ` names = ['one', 'two', 'three'];`
@@ -57,4 +58,58 @@
 - `+` is used to conctatenate 2 lists.
 - Lists can contain any type of object, it can be another list also.
 - Lists are similar to arrays/vectors of C/C++, except that arrays/vectors are homogeneous data holders (same data).
+- `import` is used to import a Python module to other Python file. Different ways to use `import`:
+  `import <module_name>` or `from <module_name> import <name>` or `import <module_name> as <other_name>` or 
+  `from <module_name> import *`
+- There are some special constructs called 'comprehensions'. We will get to know about this more in detail later.
+  Example: `l = [float(a) for a in other_list];`
+- Some example of built-in functions of python are `min()` or `max()`.
+###### Tuples
+- This are to pack a collection of values into a single object. We create a tuple by enclosing the values in paranthesis
+- We can use all the ways of accessing list to tuples also.
+- But generally, we unpack the tuple by assigning the tuple to a comma separated values, like:
+  `name,age = details;`
+- A tuple is not mutable as list, i.e., we cannot add more elements like we do for lists.
+- Thus tuples are viewed as a single object having several parts rather than a collection of objects.
+- We can traverse/iterate over a tuple as follows:
+  ```
+  for name,age in details:
+     print "Name : %s, Age: %d" %(name, age);
+  ```
+###### Sets
+- Used to contain an unordered collection of objects, to create a set we use `set()` function.
+- Unlike lists or tuples, sets are unordered and cannot be accessed by index.
+- It will not alliw duplicates, and has a collection of operations Union, intersection, difference, symmetric difference.
+- New items can be added to set using `add()`(for single item) or `update()` (for multiple data items).
+- An item can be removed using `remove()` method.
+###### Dictionaries
+- An associative array or a hash table containing objects indexed by keys.
+- Dictionaries can be created using flower braces '{' and '}'.
+- To access dictionaries we use key-indexing.
+- You can use Python objects, including numbers and tuples. Where are lists /dictionaries cannot be used as keys, because
+  their content can change.
+- `del` statement is used to delete an element of the dictionary.
+- To get the list of keys used the a dictionary we can use `list()`.
+###### Iterations/Loops
+- `for n in range():` -> range(start, end[,step]) - it will generate a list of numbers from start till end at steps of
+  step value. `range()` create a fully populated list of numbers.
+- For extremely large range of numbers we `xrange()` - xrange computes the values on demand when lookups are requested.
+- In Python3 `xrange()` is renamed as `range()`.
+###### Functions
+- We use the keyword `def` to create a function. Example:
+  ```
+  def divide(a,b):
+      q = a//b; # truncating division
+      r = a - q*b;
+      return (q,r);
+  ```
+- For calling a function we use the function name along with the parameters for arguments.
+- For defining default arguments for variables, we use assigment operator: `def divide(a,b=1)`.
+- We can also invoke function by using keyword arguments and supplying the arguments in arbitrary order.
+  *Q - Does this mean the following declaration is valid? `def divide(a=1,b):`??*
+- We use global statement to modify the global variables inside a function.
+###### Generators
+-
+###### Coroutines
 
+ 
