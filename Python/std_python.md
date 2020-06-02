@@ -19,7 +19,7 @@
           a--;                     # and end here  
       print "END OF WHILE LOOP.\n" # ending of block is by reducing the block indendation, if you see.
   ```
-- Writing complex code may some time lead to long line of code, in such case to increase readability we can use '\' to 
+- Writing complex code may some time lead to long line of code, in such case to increase readability we can use '\\' to 
   tell the interpreter that the statement continues in next line. In such cases the normal indentation rules doesn't
   apply to the statments.
 ###### Conditionals
@@ -109,7 +109,8 @@
   *Q - Does this mean the following declaration is valid? `def divide(a=1,b):`??*
 - We use global statement to modify the global variables inside a function.
 ###### Generators
--
+- A function using the keyword `yield` is called as generator. Calling a generator function creates an object that
+  produces a sequence of results
 ###### Coroutines
 
  
