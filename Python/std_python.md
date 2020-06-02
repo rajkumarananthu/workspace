@@ -1,7 +1,7 @@
 # Learning Python
 
 ### Introduction
-###### Genral
+##### Genral
 - Two versions Python2 and Python3, most of the concepts apply to both the versions.
 - Python3 differs from Python2 in some critical syntax changes, mostly related to printing and IO.
 - Have an extension *.py*, '#' denotes the single line comment
@@ -22,7 +22,7 @@
 - Writing complex code may some time lead to long line of code, in such case to increase readability we can use '\\' to 
   tell the interpreter that the statement continues in next line. In such cases the normal indentation rules doesn't
   apply to the statments.
-###### Conditionals
+##### Conditionals
 - The conditional construct takes the following format:
   ```
   if a < b:
@@ -39,7 +39,7 @@
 - `in` operator in Python lets us to traverse over objects such as string, list or dictionary. Some times the same can
   be used to check whether a value is contained in other object. Like
   `if 'spam' in s: ...`
-###### Strings
+##### Strings
 - Strings in Python are defined/constructed using single(''), double(") or triple(''') quotes. Speciality about triple
   quotes is that, they are useful when the string literal span over multiple lines.
 - String can be accessed using index operator as `s[i]`, we also have slicing operator `s[i:j]`, this gets the substring
@@ -49,7 +49,7 @@
 - Type casting operator are like `int()` `float()`.
 - Non-string values can be converted to strings using `str()`, `repr()`, and `format()`.
 - `split()` method splits the string into a list of fields based on the delimiter provided.
-###### Lists
+##### Lists
 - Lists are a sequence of arbitrary object, we can create a list using square brackets '[' and ']'.
   ` names = ['one', 'two', 'three'];`
 - We can append more items to list using `append()` method. Otherwise we can use `insert()` method to insert an item at
@@ -64,7 +64,7 @@
 - There are some special constructs called 'comprehensions'. We will get to know about this more in detail later.
   Example: `l = [float(a) for a in other_list];`
 - Some example of built-in functions of python are `min()` or `max()`.
-###### Tuples
+##### Tuples
 - This are to pack a collection of values into a single object. We create a tuple by enclosing the values in paranthesis
 - We can use all the ways of accessing list to tuples also.
 - But generally, we unpack the tuple by assigning the tuple to a comma separated values, like:
@@ -76,13 +76,13 @@
   for name,age in details:
      print "Name : %s, Age: %d" %(name, age);
   ```
-###### Sets
+##### Sets
 - Used to contain an unordered collection of objects, to create a set we use `set()` function.
 - Unlike lists or tuples, sets are unordered and cannot be accessed by index.
 - It will not alliw duplicates, and has a collection of operations Union, intersection, difference, symmetric difference.
 - New items can be added to set using `add()`(for single item) or `update()` (for multiple data items).
 - An item can be removed using `remove()` method.
-###### Dictionaries
+##### Dictionaries
 - An associative array or a hash table containing objects indexed by keys.
 - Dictionaries can be created using flower braces '{' and '}'.
 - To access dictionaries we use key-indexing.
@@ -90,12 +90,12 @@
   their content can change.
 - `del` statement is used to delete an element of the dictionary.
 - To get the list of keys used the a dictionary we can use `list()`.
-###### Iterations/Loops
+##### Iterations/Loops
 - `for n in range():` -> range(start, end[,step]) - it will generate a list of numbers from start till end at steps of
   step value. `range()` create a fully populated list of numbers.
 - For extremely large range of numbers we `xrange()` - xrange computes the values on demand when lookups are requested.
 - In Python3 `xrange()` is renamed as `range()`.
-###### Functions
+##### Functions
 - We use the keyword `def` to create a function. Example:
   ```
   def divide(a,b):
@@ -108,9 +108,50 @@
 - We can also invoke function by using keyword arguments and supplying the arguments in arbitrary order.
   *Q - Does this mean the following declaration is valid? `def divide(a=1,b):`??*
 - We use global statement to modify the global variables inside a function.
-###### Generators
+##### Generators
 - A function using the keyword `yield` is called as generator. Calling a generator function creates an object that
-  produces a sequence of results
-###### Coroutines
+  produces a sequence of results through successive calls to `next()` function.
+- The `next()` makes a generator run until it reaches an `yeild` statement. At the yeild statemnet the value passed is
+  returned by next(), and function suspends the execution. When the next call to `next()` is made it resumes the
+  execution from the statement after the `yeild` statement.
+##### Coroutines
+- Generally a function operate on a set of input arguments. We can a write a function that operates as a task and can
+  operate on the sequence of inputs sent to it. These are called Coroutines.
+- This can be created by using and `yield` statement and `send()` method.
+- A coroutine will be suspended until an input is send to the coroutine, using the `send()` function.
+- In this case we catch the input send using a special statement as `(yeild)` - this gives the sequence of input sent
+  using `send()` function.
+- Similar to Generators, the processing continues until a `yeild` statement is encountered.
+##### Objects & Classes
+- All values used in Python are objects - which consist of data and methods that perform various kind of operations
+  involving that data.
+- To list the available methods on an object we can `dir()` function on that object.
+- `class` keyword is used to define new user define data types of objects. Example:
+  `class A(object):` - the paranthesis are used to specify the inheritance. `object` is the root class for all Python types.
+- `self` is a keyword used to represent the object that is being accessed. (like `this` in C++)
+- Methods in a class are defined/declared using `def` keyword. And first argument of every method is `self` the object
+  itself.
+- Methods with leading and trailing '\_\_' are special methods like `\_\_init\_\_` which is used to initialize the object.
+- There are different kinds of methods like static methods etc., we define such methods using something called decoraters.
+  ex: `@staticmethod`
+##### Exceptions
+- If an error occurs in your program, an exception is raised and the program is terminated with a trace-back message.
+- Instead of terminating a program when an exception occurs, you can catch that and handle it using `try:` and `except:`
+  blocks.
+- To create an exception, we use `raise` statement.
+##### Modules
+- Breaking a program/project into several files to increase readability and maintainability is a general practice.
+- Python allows to define all the definitions in one file and use them as module by using `import` statement in other
+  files.
+- `import` statement is like `namespace` in C++. This will create a new namespace and to access the contents of the module
+  we will place the module name before the content that we are accessing. Example
+  ```
+  import div;
+  q,r = div.divide(a,b);
+  ```
+- We can import a module as a different name using the `as` keyword like `import something as someotherthing;`.
+- We can load specific things from a module using `from` and `import` statemnts like this:
+  `from <something> import <something>`
 
+  
  
