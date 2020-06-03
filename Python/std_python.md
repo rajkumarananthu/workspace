@@ -132,7 +132,7 @@
 - Methods in a class are defined/declared using `def` keyword. And first argument of every method is `self` the object
   itself.
 - Methods with leading and trailing '\_\_' are special methods like `\_\_init\_\_` which is used to initialize the object.
-- There are different kinds of methods like static methods etc., we define such methods using something called decoraters.
+- There are different kinds of methods like static methods etc., we define such methods using something called decorators.
   ex: `@staticmethod`
 ##### Exceptions
 - If an error occurs in your program, an exception is raised and the program is terminated with a trace-back message.
@@ -154,5 +154,47 @@
   `from <something> import <something>`
 
 ### Some More Introduction
-  
- 
+##### Line Structure and Indentation
+- Statement terminator is a new line. Long lines can span multiple lines using line continuation character(\).
+- Strict indentation is used to denoted blocks of code like function bodies, if-else statement, loops etc.,
+- If the block is only of single line, we can place them in a single line without line continuation character.
+- To denote empty block we use `pass` statement.
+- We can place more than on statement in a single line using ';'
+- `#` is used to declare comments
+##### Identifiers and Keywords
+- Identifier is a name used to identify functions, variables, methods, classes etc.,. Identifiers must always start with
+  a non-numeric character and can contain letters, numbers, and '\_'.
+- Python is a case-sensitive language.
+- Reserved words are:
+  ```
+  and as assert break class continue def del elif else except exec finally for from global if import in is lambda nolocal
+  not or pass print raise return try while withe yeild
+  ```
+- Identifiers startin and ending with '\_\_' have special meaning.
+##### Numeric Literals
+- Four types:
+  1) Booleans
+  2) Integers
+  3) Floating point numbers
+  4) Complex number
+##### Strings
+- Are used to specify a sequence of characters by enclosing them in single or double or triple quotes.
+- There is a strict requirement to start and end the string with same type of quote.
+- Triple quoted string can span over multiple line whereas single and double quoted strings are not allowed to.
+- Escape sequences are used along with backslash '\' characeter.
+- Python2 treats strings as byte oriented character, so it doesn't represent international characters and Unicode.
+  To interpret a string as a unicode the string must be prefixed with a 'u' like `u"Jalape\u00f1o"`.
+##### Containers
+- Values enlcosed in [...] lists, (...) tuples, {...} dictonaries are a collection of objects.
+##### Documentation Strings
+- We can define the documentation of a module, class or a function by writing a string as the first statement of the
+  respective code like:
+  ```
+  def fact(n):
+      ''' This function is to calculate the factorial of a integer''' # this works are a documentation for the function
+      if n < 1:
+          return 1;
+      else:
+          return n * fact(n-1);
+  ```
+### Types and Objects 
