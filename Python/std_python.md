@@ -198,3 +198,53 @@
           return n * fact(n-1);
   ```
 ### Types and Objects 
+- Everything in Python is an object.
+- An object has an identity(a memory address basically), a type(also known as its class), a value.
+- An object is also some times referred as an *instanc* of a particular class.
+- If the object's value can be modified it is called *mutable* and if it can't be modified it is called *immutable*.
+- An object is characterized by methods and attributes. Attributes are values associated with object, methods are
+  functions that perform some sore of operation on the attributes.
+##### Object Identity and Type
+- `id()` returns identity of the object as an integer. `is` operator can be used to compare identity of 2 objects.
+- `type()` returns the type of an object. Type comparision also can be done `is` operator.
+- `isinstance(object,type)` checks whether the given object is of a given type.
+##### Reference Counting and Garbage Collection
+- All objects in Python are reference counted. Reference count is incremented each time it is assigned to a new name, or
+  added to a container.
+- We can get the reference count of an object using `sys.getregcount()`.
+- When an object reference count becomes zero, it is garbage collected. In some specific cases a circular dependency may
+  exist for an object, in such cases Python intepreter uses a cycle detector to detect objects in circulare dependency 
+  and are not in use and garbage collect them.
+- We can explicitly destroy the object using `del` statement.
+- Each time an object is destroyed, the objects reference count is decreased to zero and memory is freed.
+##### Reference and Copies
+- `a=b` has different output based on the type of a and b.
+- If they are immutable objects such as strings and numbers, a copy is created.
+- If they are mutable objects, they are not copied, a new name is mapped to the existing memory location.
+- The later one may have some side effects, if a and b are mutable and they are assigned using `a=b;`, and if a change
+  done to a will effect b also.
+- There are 2 types of copies - shallow copy and deep copy.
+- A shallow copy creates a new object but populates it with references to items in original object.
+- A deep copy creates a new object and recursively copies all the items in the original object.
+- No buit-in function to deep copy, but we can use `copy.deepcopy()`.
+##### First Class Objects
+- In Python all objects are *first-class*, that means all the objects that are named have equal status.
+- It also means that objects that are named can be treated as data.
+- example:
+  ```
+  items = {};
+  item["func"] = abs; # abs() function
+  item["mod"] = math;  # math module
+  ```
+- Now we can use the following statement to calculate the absolute value of a number.
+  `item["func"](-45)`
+- This allows us to write a compact and flexible code in python.
+##### Built-in Types
+- Built-in types are as follows
+###### None Type
+- The 'None' type denotes the null object, that is object with no value.
+- `None` has not attributes and evaluates to `False` in case of boolean expressions.
+###### Numeric Types
+- There are five numeric types Booleans, integers, long integers, floating point numbers, complex numbers.
+- Except for complex numbers all others are signed. All the numeric types are immutable.
+- Booleans are represented using two value `True` mapped to 1 and `False` mapped tp 0.
