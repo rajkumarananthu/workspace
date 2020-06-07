@@ -274,4 +274,20 @@
   - del s[i:j:stride] ----------- Extended slice deletion
   ```
 ###### Lists
+```
+- list(s) ----------------------- Converts s into list, if s is already list,
+				  a new list which is shallow copy of s is constructed
+- s.append(x) ------------------- Append a new element x to end of s
+- s.extend(x) ------------------- Append a new list t to end of s
+- s.count(x) -------------------- Counts the occurances of x in s
+- s.index(x[,start[,stop]]) ----- Returns the smallest i where s[i]==x, optional start and stop indicates the
+				  starting and ending position where to search
+- s.insert(i,x) ----------------- inserts x at index i
+- s.pop([i]) -------------------- returns the element i and removes it from the list. If i is ommitted, the last element is returned
+- s. remove(x) ------------------ Searches for x and removes it from s
+- s.reverse() ------------------- Reverses the items of s in place
+- s.sort([key[,reverse]]) ------- Sorts items of s in place. *key* is the function. *reverse* is flag that sorts the list in reverse
+                                  order. 
+```
+###### Strings
 - 
