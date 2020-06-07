@@ -248,3 +248,30 @@
 - There are five numeric types Booleans, integers, long integers, floating point numbers, complex numbers.
 - Except for complex numbers all others are signed. All the numeric types are immutable.
 - Booleans are represented using two value `True` mapped to 1 and `False` mapped tp 0.
+###### Sequence Types
+- Ordered set of objects indexed using non-negative integers. These include lists, strings, tuples.
+- Strings -> sequence of characters, lists, tuples -> sequences of arbitrary Python objects.
+- Strings and tuples are immutable, lists allow insertion, deletion and subtitutio of elements.
+- All sequences support iteration.
+  ```
+  Operations and methods common to all sequences
+  - s[i] ------------------------ Returns element i of the sequence
+  - s[i:j] ---------------------- Returns a slice of the sequence
+  - s[i:j:stride] --------------- Returns an extended slice
+  - len(s) ---------------------- Number of elements in s
+  - min(s) ---------------------- Minimum value in s
+  - max(s) ---------------------- Maximum value in s
+  - sum(s[, initial]) ----------- Sum of items in s
+  - all(s) ---------------------- Checks whether all the items in s are True
+  - any(s) ---------------------- Checks whether any of the items in s is False
+
+  Operations Applicable to Mutable sequences
+  - s[i] = v -------------------- Item assignment
+  - s[i:j] = t ------------------ slice assignment
+  - s[i:j:stride] = t ----------- Extended slice assignment
+  - del s[i] -------------------- Item deletion
+  - del s[i:j] ------------------ Slice deletion
+  - del s[i:j:stride] ----------- Extended slice deletion
+  ```
+###### Lists
+- 
