@@ -255,39 +255,63 @@
 - All sequences support iteration.
   ```
   Operations and methods common to all sequences
-  - s[i] ------------------------ Returns element i of the sequence
-  - s[i:j] ---------------------- Returns a slice of the sequence
-  - s[i:j:stride] --------------- Returns an extended slice
-  - len(s) ---------------------- Number of elements in s
-  - min(s) ---------------------- Minimum value in s
-  - max(s) ---------------------- Maximum value in s
-  - sum(s[, initial]) ----------- Sum of items in s
-  - all(s) ---------------------- Checks whether all the items in s are True
-  - any(s) ---------------------- Checks whether any of the items in s is False
+  - s[i] ------------------------------- Returns element i of the sequence
+  - s[i:j] ----------------------------- Returns a slice of the sequence
+  - s[i:j:stride] ---------------------- Returns an extended slice
+  - len(s) ----------------------------- Number of elements in s
+  - min(s) ----------------------------- Minimum value in s
+  - max(s) ----------------------------- Maximum value in s
+  - sum(s[, initial]) ------------------ Sum of items in s
+  - all(s) ----------------------------- Checks whether all the items in s are True
+  - any(s) ----------------------------- Checks whether any of the items in s is False
 
   Operations Applicable to Mutable sequences
-  - s[i] = v -------------------- Item assignment
-  - s[i:j] = t ------------------ slice assignment
-  - s[i:j:stride] = t ----------- Extended slice assignment
-  - del s[i] -------------------- Item deletion
-  - del s[i:j] ------------------ Slice deletion
-  - del s[i:j:stride] ----------- Extended slice deletion
+  - s[i] = v --------------------------- Item assignment
+  - s[i:j] = t ------------------------- slice assignment
+  - s[i:j:stride] = t ------------------ Extended slice assignment
+  - del s[i] --------------------------- Item deletion
+  - del s[i:j] ------------------------- Slice deletion
+  - del s[i:j:stride] ------------------ Extended slice deletion
   ```
 ###### Lists
 ```
-- list(s) ----------------------- Converts s into list, if s is already list,
+- list(s) ------------------------------ Converts s into list, if s is already list,
 				  a new list which is shallow copy of s is constructed
-- s.append(x) ------------------- Append a new element x to end of s
-- s.extend(x) ------------------- Append a new list t to end of s
-- s.count(x) -------------------- Counts the occurances of x in s
-- s.index(x[,start[,stop]]) ----- Returns the smallest i where s[i]==x, optional start and stop indicates the
+- s.append(x) -------------------------- Append a new element x to end of s
+- s.extend(x) -------------------------- Append a new list t to end of s
+- s.count(x) --------------------------- Counts the occurances of x in s
+- s.index(x[,start[,stop]]) ------------ Returns the smallest i where s[i]==x, optional start and stop indicates the
 				  starting and ending position where to search
-- s.insert(i,x) ----------------- inserts x at index i
-- s.pop([i]) -------------------- returns the element i and removes it from the list. If i is ommitted, the last element is returned
-- s. remove(x) ------------------ Searches for x and removes it from s
-- s.reverse() ------------------- Reverses the items of s in place
-- s.sort([key[,reverse]]) ------- Sorts items of s in place. *key* is the function. *reverse* is flag that sorts the list in reverse
+- s.insert(i,x) ------------------------ inserts x at index i
+- s.pop([i]) --------------------------- returns the element i and removes it from the list. If i is ommitted, the last element is returned
+- s. remove(x) ------------------------- Searches for x and removes it from s
+- s.reverse() -------------------------- Reverses the items of s in place
+- s.sort([key[,reverse]]) -------------- Sorts items of s in place. *key* is the function. *reverse* is flag that sorts the list in reverse
                                   order. 
 ```
 ###### Strings
-- 
+```
+- s.capitalize() ----------------------- Capitalizes the first character
+- s.center(width[,pad])----------------- Centers the string in a field of width and with pad character for padding
+- s.count(sub[, start[,end]])----------- counts the occurances of sub-string sub in s from start to end.
+- s.decode([encoding[,errors]])--------- Decodes a string and returns a unicode string
+- s.encode([encoding[,errors]])--------- Returns an encoded version of a string(unicode characters only)
+- s.endswith(suffix[,start[,end]])------ Checks the end of the string for suffix
+- s.expandtabs([tabsize]) -------------- Replaces tabs with spaces
+- s.find(sub[, start[, end]]) ---------- Finds the first occurance of subtring sub otherwise return -1
+- s.format(*args, **kwargs) ------------ Formats the string s
+- s.index(sub[,start[,end]]) ----------- Finds the first occurance of substring sub or raise an error
+- s.isalnum() -------------------------- Checks whether all the characters are alphanumeric
+- s.isalpha() -------------------------- Checks whether all the characters are alphabets
+- s.isdigit() -------------------------- Checks whether all the characters are digits
+- s.islower() -------------------------- Checks whether all the characters are in lower case
+- s.isspace() -------------------------- Checks whether all the characters are whitespaces
+- s.istitle() -------------------------- Checks whether the string is in title-cased string
+- s.isupper() -------------------------- Checks whether all the characters are uppercase
+- s.join(t) ---------------------------- Joins the strings in sequence t with s as a separator
+- s.ljust(width[,fill]) ---------------- Left aligns s in a string of size width
+- s.lower() ---------------------------- Converts to lowercase
+- s.lstrip([chars]) -------------------- Removes leading whitespaces or characters supplied in chars
+- s.partition(sep) --------------------- Partitions a string based on the separator sep, return a tuple of (head, sep, tail) or (s, "", "") if sep not found
+- s.replace(old,new[, maxreplace]) ----- Replaces a substring
+```
