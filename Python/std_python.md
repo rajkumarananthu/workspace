@@ -299,7 +299,7 @@
 - s.endswith(suffix[,start[,end]])------ Checks the end of the string for suffix
 - s.expandtabs([tabsize]) -------------- Replaces tabs with spaces
 - s.find(sub[, start[, end]]) ---------- Finds the first occurance of subtring sub otherwise return -1
-- s.format(*args, **kwargs) ------------ Formats the string s
+- s.format(\*args, \*\*kwargs) ------------ Formats the string s
 - s.index(sub[,start[,end]]) ----------- Finds the first occurance of substring sub or raise an error
 - s.isalnum() -------------------------- Checks whether all the characters are alphanumeric
 - s.isalpha() -------------------------- Checks whether all the characters are alphabets
@@ -331,11 +331,62 @@
 - s.upper() ---------------------------- Converts a string to uppercase
 - s.zfill() ---------------------------- Pads a string with zero on the left up to the specified width.
 ```
-##### xrange() Object
+###### xrange() Object
 - The built-in funciton is `xrange([i,]j[,stride])` creates a range of integers.
 - Calculates the value whenever it is accessed (like using `yield` stmt).
 - It is not a sequence completely. None of standard slicing operators are applicable.
-##### Mapping Type
+###### Mapping Type
 - A mapping object is an arbitrary collection of objects that are indexed by another collection of nearly arbitrary key values.
 - A mapping object is unordered and can be indexed by numbers, strings and other objects. These are mutable.
-- Dictionaries are the only mapping type in Python. 
+- Dictionaries are the only mapping type in Python. Any immutable object like strings, numbers, tuples and so on.
+- Mutable objects are not allowed to be keys. Because they can be changed, and as a result they doesn't remain constant.
+- To select an item from dictionary we use keys as index, if the key is not found a KeyError exception is thrown.
+```
+- len(m) ------------------------------- Returns the number of elements in the dictionary
+- m[k] --------------------------------- Returns the item from dictionary whose key is k
+- m[k] = x ----------------------------- Set m[k] to x
+- del m[k] ----------------------------- Removes the key and its item from m
+- k in m ------------------------------- Returns True if k is a key in m
+- m.clear() ---------------------------- Removes all the items from m
+- m.copy() ----------------------------- Makes a copy of m
+- m.fromkeys(s[,value]) ---------------- Creates a new dictionary with the elements from sequence s as keys and all are set to value
+- m.get(k[,v]) ------------------------- Returns m[k] if found; otherwise returns v
+- m.has\_key(k) ------------------------ Retruns True if m has key k, otherwise returns false.
+- m.items() ---------------------------- Returns a sequence of (key, value) pairs
+- m.keys() ----------------------------- Retruns a sequence of key values
+- m.pop(k[,default]) ------------------- Returns m[k] if found and removes it from m; otherwise returns default if supplied or raises KeyError if not.
+- m.popitem() -------------------------- Removes a random (key,value) pair from m and returns it as a tuple.
+- m.setdefault(k[,v]) ------------------ Returns m[k] if found; otherwise returns v and set m[k] = v
+- m.update(b) -------------------------- Adds all objects from b to m
+- m.values() --------------------------- Returns the sequence of all the values in m
+```
+###### Set Types
+- An unorded collection of items. As a result of this we cannot index/slice a set.
+- No key values associated to objects. Items placed into a set must be immutable.
+- Set is a mutable set, frozenset is an immutable set. Both are created using `set()` and `unset()` built-in functions
+  respectively.
+```
+- len(s) ------------------------------- Returns the number of items in s.
+- s.copy() ----------------------------- Makes a copy of s.
+- s.difference(t) ---------------------- Set difference with set t
+- s.intersection(t) -------------------- Set intersection
+- s.isdisjoint(t) ---------------------- Returns True if s and t disjoint, otherwise False.
+- s.issubset(t) ------------------------ Returns True if s is a subset of t, otherwise False.
+- s.issuperset(t) ---------------------- Returns True if s is a superset of t, otherwise False.
+- s.symmetric\_difference() ------------ Symmetric Difference
+- s.union(t) --------------------------- Set Union
+```
+- The parameter t in above can be anything that can be iterated.
+- Following are the special methods supported over mutable sets
+```
+- s.add(item) -------------------------- Add item to s
+- s.clear() ---------------------------- Removes all the items in s
+- s.difference\_update(t) -------------- Removes all the items from s that are also in t.
+- s.discard(item) ---------------------- Removes item from s.
+- s.intersection\_update(t) ------------ Computes the intesection of s and t and leaves the result in s.
+- s.pop() ------------------------------ Returns an arbitrary element from s and remove it from s.
+- s.remove(item) ----------------------- Removes item from s, and if item is not found KeyError exception is thrown.
+- s.symeetric\_difference\_update(t) --- Computes symmetric difference of s and t and leaves the result in s.
+- s.update(t) -------------------------- Adds all items in t to s.t may be another set or iteratable sequence.
+```
+##### Built-in Types for Program Structure
