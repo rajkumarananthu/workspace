@@ -33,4 +33,4 @@ group.add_argument("-q", "--quiet");
 ## API Information
 
 #### ArgumentParser.add\_argument() method
-- `add\_argument(name or flags...[,action][,nargs][,const][,default][,type][,choice][,required][,help][,metavar][,dest])`
+- `add_argument(name or flags...[,action][,nargs][,const][,default][,type][,choice][,required][,help][,metavar][,dest])`
