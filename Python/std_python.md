@@ -314,4 +314,28 @@
 - s.lstrip([chars]) -------------------- Removes leading whitespaces or characters supplied in chars
 - s.partition(sep) --------------------- Partitions a string based on the separator sep, return a tuple of (head, sep, tail) or (s, "", "") if sep not found
 - s.replace(old,new[, maxreplace]) ----- Replaces a substring
+- s.rfind(sub[, start[,end]]) ---------- Finds the last occurence of the string
+- s.rindex(sub[, start[,end]]) --------- Finds the last occurence of the string or raises an error.
+- s.rjust(width[,fill]) ---------------- Right aligns the string of length width.
+- s.rpartition(sep) -------------------- Partitions s based on separator but searches the string in reverse order.
+- s.rsplit([sep[,maxsplit]]) ----------- Splits a string from the end of the string using sep as a delimiter. maxsplit is the maximum number of splits to perform
+                                         If maxsplit is omitted, the result is identiacal to split() method
+- s.rstrip([chrs]) --------------------- Removes trailing whitespace or character supplied in chrs
+- s.split([sep[,maxsplit]]) ------------ Splits a string using sep as a delimiter, maxsplit is the number of splits to perform
+- s.splitlines([keepends]) ------------- Splits the string into a list of lines. If keepends is 1, trailing new line characters are preserved.
+- s.startswidth(prefix[,start[,end]]) -- Checks whether a string starts with a prefix
+- s.strip([chrs]) ---------------------- Removes leading and trailing whitespaces or characters supplied in chrs
+- s.swapcase() ------------------------- Converts uppercase to lowercase and vice versa
+- s.title() ---------------------------- Returns a title case version of string
+- s.translate(table[,deletechars]) ----- Translates a string using the character translation table  removing characters in deletechars
+- s.upper() ---------------------------- Converts a string to uppercase
+- s.zfill() ---------------------------- Pads a string with zero on the left up to the specified width.
 ```
+##### xrange() Object
+- The built-in funciton is `xrange([i,]j[,stride])` creates a range of integers.
+- Calculates the value whenever it is accessed (like using `yield` stmt).
+- It is not a sequence completely. None of standard slicing operators are applicable.
+##### Mapping Type
+- A mapping object is an arbitrary collection of objects that are indexed by another collection of nearly arbitrary key values.
+- A mapping object is unordered and can be indexed by numbers, strings and other objects. These are mutable.
+- Dictionaries are the only mapping type in Python. 
