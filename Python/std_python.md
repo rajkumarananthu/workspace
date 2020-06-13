@@ -413,4 +413,22 @@
   - Called by built-in `str()` function. It provides a more concise information compared to `__repr__()` method.
   - If this method is undefined, `__repr__()` is called.
 ###### Object Comparision and Ordering
+- `__bool__(self)` is used to test for truth value testing.
+  - If undefined `__len__()` is a fallback that is invoked to determine truth.
+- `__hash__(self)` is defined on objects that want to work as keys in a dictionary.
+  - The value returned is an integer that should be identical for two objects that compare to be equal.
+- Objects can implement the relational operators (some what like operator overloading in C++).
+- `__lt__(self, other)`  implements `self < other`
+- `__le__(self, other)`  implements `self <= other`
+- `__gt__(self, other)`  implements `self > other`
+- `__ge__(self, other)`  implements `self => other`
+- `__eq__(self, other)`  implements `self == other`
+- `__ne__(self, other)`  implements `self != other`
+- All these can return any kind of object Boolean, list, tuple etc.,
+- If comparision can't be made, may throw and exception.
+- Not mandatory to implement all the operators
+###### Type Checking
+- `__instancecheck__(cls, object)` - invoked by `isinstance(object, cls)`.
+- `__subclasscheck__(cls, sub)` invoked by `issubclass(sub, cls)`.
+###### Attribute Access
 - 
