@@ -390,3 +390,27 @@
 - s.update(t) -------------------------- Adds all items in t to s.t may be another set or iteratable sequence.
 ```
 ##### Built-in Types for Program Structure
+##### Built-in Types for Interpreter Internals
+##### Object Behaviour and special methods
+- Objects are classified based on their behaviours and the features they implement. All basic interpretor operations are 
+  implemented through special object methods.
+- The names of special methods are always preceeded and followed by double underscores (\_\_).
+- User defined objects can define new objects, that behave simlar to the built-in types by supplying an appropriate
+  subset of special methods.
+- Built-in types can be specialized by redefining some of the special methods (via inheritance).
+###### Object Creation and Destruction
+- `__new__(cls[, *args[,**kwargs]])` a class method to create an instance.
+- `__init__(self[, *args [,**kwargs]])` a class method to initialize the instance. Called immediately after the new object has been created.
+- `__del__(self)` a class method called when the object is about to be destroyed. (Note: `del` is necessarily not equal to this)
+###### Object String Representation
+- `__format__(self, format_spec)` creates a formatted representation.
+  - Called by `format()` function or the `format()` method of objects.
+- `__repr__(self)` creates a string representation of the object.
+  - Generally creates an expression string, which can be evaluated using `eval` to recreate the object.
+  - Invoked by built-in `repr()` function. If the expression string cannot be created then it returns a string of the form
+    `<.....message....>`.
+- `__str__(self)` creates a simple string represenation.
+  - Called by built-in `str()` function. It provides a more concise information compared to `__repr__()` method.
+  - If this method is undefined, `__repr__()` is called.
+###### Object Comparision and Ordering
+- 
