@@ -107,9 +107,11 @@ group.add_argument("-q", "--quiet");
 - `store` - just store the argument value
 - `store_const` - Stores the value specified by const key word argument.
 - ``store_true` and `store_false` - store true or false, if specified just like `store_const`
-- `append` - stores a list and appends each argument to the value list.
-- `append_const` - 
-- `count` - 
-- `help` - 
-- `version` - 
-- `extend` -
+- `append` - stores a list and appends each argument to the value list. Allows an option to be specified multiple times.
+- `append_const` - stores a list and appends the value specified by const keyword argument.
+- `count` - counts the number of time a keyword argument occurs
+- `help` - help message to be printed for all the options and exits. By default a help action is automatically added.
+- `version` - calls and prints the version information and exits.
+- `extend` - stores a list and extend each argument value to the list
+###### nargs
+- Argument Parser objects usually associate one command line option with one action
