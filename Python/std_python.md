@@ -444,4 +444,59 @@
 - `__setitem__(self, key, value)` sets `self[key] = value`
 - `__delitem__(self, key)` Deletes self[key]
 - `__contains__(self, obj)` returns True if obj is in self, otherwise False. Called using `in` operator.
-
+###### Iteration
+###### Mathematical Operations
+- When an expression `x + y` is encountered by the interpreter, it tried to invoke the method `x.__add__(y)`.
+- If for the expression `x + y`, x didn't implement `__add__()` method, the interpreter tries to call `y.__radd__(x)`.
+- These special methods with `r` at the beginning is to tell reverse operands for the operation.
+- `__add__(self, other)` self + other
+- `__sub__(self, other)` self - other
+- `__mul__(self, other)` self * other
+- `__div__(self, other)` self / other
+- `__truediv__(self, other)` self / other
+- `__floordiv__(self, other)` self // other
+- `__mod__(self, other)` self % other
+- `__divmod__(self, other)` divmod(self, other)
+- `__pow__(self, other[,modulo])` self ** other or pow(self, other, modulo)
+- `__lshift__(self, other)` self << other
+- `__rshift__(self, other)` self >> other
+- `__and__(slef, other)` self & other
+- `__or__(self, other)` self | other
+- `__xor__(self, other)` self ^ other
+- `__radd__(self, other)` other + self
+- `__rsub__(self, other)` other - self
+- `__rmul__(self, other)` other * self
+- `__rdiv__(self, other)` other / self
+- `__rtruediv__(self, other)` other / self
+- `__rfloordiv__(self, other)` other // self
+- `__rmod__(self, other)` other % self
+- `__rdivmod__(self, other)` divmod(other, self)
+- `__rpow__(self, other)` other ** self
+- `__rlshift__(self, other)` other << self
+- `__rrshift__(self, other)` other >> self
+- `__rand__(self, other)` other & self
+- `__ror__(self, other)` other | self
+- `__rxor__(self, other)` other ^ self
+- `__iadd__(self, other)` self += other (inplace addition or augmented addition)
+- `__isub__(self, other)` self -= other
+- `__imul__(self, other)` self *= other
+- `__idiv__(self, other)` self /= other
+- `__itruediv__(self, other)` self /= other
+- `__ifloordiv__(self, other)` self //= other
+- `__imod__(self, other)` self %= other
+- `__ipow__(self, other)` self **= other
+- `__iand__(self, other)` self &= other
+- `__ior__(self, other)` self |= other
+- `__ixor__(self, other)` self ^= other
+- `__ilshift__(self, other)` self <<= other
+- `__irshift__(self, other)` self >>= other
+- `__neg__(self)` -self
+- `__pos__(self)` +self
+- `__abs__(self)` abs(self)
+- `__invert__(self)` ~self
+- `__int__(self)` int(self)
+- `__long__(self)` long(self)
+- `__float__(self)` float(self)
+- `__complex__(self)` complex(self)
+##### Callable Interface
+- An object
