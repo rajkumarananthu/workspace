@@ -431,4 +431,17 @@
 - `__instancecheck__(cls, object)` - invoked by `isinstance(object, cls)`.
 - `__subclasscheck__(cls, sub)` invoked by `issubclass(sub, cls)`.
 ###### Attribute Access
-- 
+- `__getattribute__(self, name)` returns the attribute of the class `self.name`
+- `__getattr__(self, name)` returns the attribute of class `self.name`, if not found through normal attribute lookup
+  or raise `AttributeError`.
+- `__setattr__(self, name, value)` sets the attribute value `self.name = value`. Overrides the default mechanism.
+- `__delattr__(self, name)` deletes the attribute self.name.
+###### Attribute Wrapping and Descriptors
+
+###### Sequence and Mapping methods
+- `__len__(self)` returns the length of `self`. Called by built-in `len()` function to return non negative length.
+- `__getitem__(slef, key)` returns `self[key]`
+- `__setitem__(self, key, value)` sets `self[key] = value`
+- `__delitem__(self, key)` Deletes self[key]
+- `__contains__(self, obj)` returns True if obj is in self, otherwise False. Called using `in` operator.
+

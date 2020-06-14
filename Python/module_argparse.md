@@ -106,7 +106,7 @@ group.add_argument("-q", "--quiet");
 - This is to tie up an argument with an action. The supplied action are
 - `store` - just store the argument value
 - `store_const` - Stores the value specified by const key word argument.
-- ``store_true` and `store_false` - store true or false, if specified just like `store_const`
+- `store_true` and `store_false` - store true or false, if specified just like `store_const`
 - `append` - stores a list and appends each argument to the value list. Allows an option to be specified multiple times.
 - `append_const` - stores a list and appends the value specified by const keyword argument.
 - `count` - counts the number of time a keyword argument occurs
