@@ -457,7 +457,7 @@
 - `__floordiv__(self, other)` self // other
 - `__mod__(self, other)` self % other
 - `__divmod__(self, other)` divmod(self, other)
-- `__pow__(self, other[,modulo])` self ** other or pow(self, other, modulo)
+- `__pow__(self, other[,modulo])` self \*\* other or pow(self, other, modulo)
 - `__lshift__(self, other)` self << other
 - `__rshift__(self, other)` self >> other
 - `__and__(slef, other)` self & other
@@ -465,13 +465,13 @@
 - `__xor__(self, other)` self ^ other
 - `__radd__(self, other)` other + self
 - `__rsub__(self, other)` other - self
-- `__rmul__(self, other)` other * self
+- `__rmul__(self, other)` other \* self
 - `__rdiv__(self, other)` other / self
 - `__rtruediv__(self, other)` other / self
 - `__rfloordiv__(self, other)` other // self
 - `__rmod__(self, other)` other % self
 - `__rdivmod__(self, other)` divmod(other, self)
-- `__rpow__(self, other)` other ** self
+- `__rpow__(self, other)` other \*\* self
 - `__rlshift__(self, other)` other << self
 - `__rrshift__(self, other)` other >> self
 - `__rand__(self, other)` other & self
@@ -479,12 +479,12 @@
 - `__rxor__(self, other)` other ^ self
 - `__iadd__(self, other)` self += other (inplace addition or augmented addition)
 - `__isub__(self, other)` self -= other
-- `__imul__(self, other)` self *= other
+- `__imul__(self, other)` self \* = other
 - `__idiv__(self, other)` self /= other
 - `__itruediv__(self, other)` self /= other
 - `__ifloordiv__(self, other)` self //= other
 - `__imod__(self, other)` self %= other
-- `__ipow__(self, other)` self **= other
+- `__ipow__(self, other)` self \*\* = other
 - `__iand__(self, other)` self &= other
 - `__ior__(self, other)` self |= other
 - `__ixor__(self, other)` self ^= other
@@ -498,5 +498,22 @@
 - `__long__(self)` long(self)
 - `__float__(self)` float(self)
 - `__complex__(self)` complex(self)
-##### Callable Interface
-- An object
+###### Callable Interface
+- An object can emulate the behaviour of a function by providing the `__call(self[,*args[,**kwargs]])` method.
+- If an object x provides this method, we can invoke the method by `x(arg1, arg2, ...)` this invokes the `__call__` method.
+###### Context Management Protocol
+- `with` statement allows a sequence of statements to execute under the control of other object known as context manager.
+- ```
+  with context [as var]:
+      statements;
+  ```
+- The context object is expected to implement, the ```__enter__``` and ```__exit__()``` methods.
+- ```__enter__()``` is invoked when the with statement is executed and ```__exit__()``` is executed when the control flow leaves the
+  with block.
+- ```__enter__(self)``` 
+- ```__exit__()```
+###### Object inspectio and dir()
+- `dir()` is commonly used to inspect object.
+- An object can supply a list of names returned by `dir()` by implementing ```__dir__(self)```.
+- Defining this makes it easier to hide the internal details of objects that you don't want a user to directly access.
+- However keep in mind that user can still inspect ```__dict__()``` attribute of instances and classes to see everything that is defined.
