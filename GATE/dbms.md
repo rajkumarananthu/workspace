@@ -38,3 +38,12 @@
   - Please refer to the Figure1, in the same GIT Repo.
 
 ### ER Model
+- ER model allows us to describe the real-world data in terms of objects and thier relationships and is widely used to develop initial database design.
+- ER diagrams are used in conceptual database design to move from more inforaml description of user requirement to what can be implemented in a DBMS.
+- **Database design Process:**
+  - Requirement Analysis: 
+  - Conceptual Database Design:
+  - Logical Database Design:
+  - Schema Refinement
+  - Physical Database Design
+  - Application and Security Design
