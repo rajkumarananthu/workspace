@@ -1,12 +1,12 @@
 # Database Management Systems
 
-## P1 FOUNDATIONS
-#### 1. Overview
-####
+# P1 FOUNDATIONS
+### 1. Overview
+###
 
 
 
-### Overview
+#### Overview
 - **Database:** A collection of data, typically describing the activities of an organization
 - **DBMS:** A software designed to assist in maintaining and utilize large collections of data.
 - **Advantages of DBMS:**
@@ -37,7 +37,7 @@
 - **DBMS Architecture:**
   - Please refer to the Figure1, in the same GIT Repo.
 
-### ER Model
+#### ER Model
 - ER model allows us to describe the real-world data in terms of objects and thier relationships and is widely used to develop initial database design.
 - ER diagrams are used in conceptual database design to move from more inforaml description of user requirement to what can be implemented in a DBMS.
 - **Database design Process:**
@@ -47,3 +47,16 @@
   - Schema Refinement
   - Physical Database Design
   - Application and Security Design
+- **Entity:** An object in a real world that is distinguishable from other objects.
+- **Entity Set:** Collection of similar entities(By similar I mean, that all the entities have same attributes).
+- **Attributes:** Set of properties associated to an entity are called attributes.
+- Attributes are of designer choice how detailed view he/she likes to represent the data.
+- For each attribute, the possible values are determined by domain.
+- **Key:** A minimal set of attributes whose values uniquely identify an entity in the set.
+- **Relationship:** An association among 2 or more entities.
+- **Relationship set:** A set of similar relationships is called a relationship set.
+  - Defined as {(e1,e2,e3...en) | e1 is in E1, e2 is in E2 ..... en is in En}.
+  - Where E1,E2,E3..En are entity sets and e1,e2,...en are entities.
+- **Descriptive Attributes:** Attributes which define the relationship is called descriptive attributes.
+  - These are used to describe about the relationship.
+- 
