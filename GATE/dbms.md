@@ -64,14 +64,7 @@
 - **Key Constraints:** The restriction that we impose on the association in a  relation is called key constraints.
   - Example: Let's say the two entities Employee and Department, and the relation Manages. We have a restriction that atmost one manager can manage a department. We explain this by placing and arrow (Solid arrow '<|' ) from Entity Department to Relation Manages.
 
-
-                                       /       \  
-      ___________________             /         \                  ______________
-     |                   |           /           \                |              |
-     |     Employee      |-----------   Manages   <|--------------|  Department  |               
-     |___________________|           \           /                |______________|
-                                      \         /
-                                       \       /
+   ![Entities: Employee, Department; Relations: Manages, Works_in](images/Manges_works_in.png)
 
   - The above relation is called one to many relation, that is one employee can manage many departments, where as if a department is considered, a department can be managed by atmost one employee.
 - **Participation Constraints:** The restrictions on the participation of the entity sets in the relation is called Participation constraints.
