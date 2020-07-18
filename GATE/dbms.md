@@ -59,4 +59,6 @@
   - Where E1,E2,E3..En are entity sets and e1,e2,...en are entities.
 - **Descriptive Attributes:** Attributes which define the relationship is called descriptive attributes.
   - These are used to describe about the relationship.
-- 
+- **Instance:** A snapshot of a relationship set at some point of time.
+- Note: The entities involved in a relationship need to be distinct, there can be a relation between 2 entities in same entity set.
+- **Key Constraints:**
