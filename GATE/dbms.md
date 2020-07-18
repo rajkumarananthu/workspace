@@ -61,4 +61,22 @@
   - These are used to describe about the relationship.
 - **Instance:** A snapshot of a relationship set at some point of time.
 - Note: The entities involved in a relationship need to be distinct, there can be a relation between 2 entities in same entity set.
-- **Key Constraints:**
+- **Key Constraints:** The restriction that we impose on the association in a  relation is called key constraints.
+  - Example: Let's say the two entities Employee and Department, and the relation Manages. We have a restriction that atmost one manager can manage a department. We explain this by placing and arrow (Solid arrow '<|' ) from Entity Department to Relation Manages.
+
+
+                                       /       \  
+      ___________________             /         \                  ______________
+     |                   |           /           \                |              |
+     |     Employee      |-----------   Manages   <|--------------|  Department  |               
+     |___________________|           \           /                |______________|
+                                      \         /
+                                       \       /
+
+  - The above relation is called one to many relation, that is one employee can manage many departments, where as if a department is considered, a department can be managed by atmost one employee.
+- **Participation Constraints:** The restrictions on the participation of the entity sets in the relation is called Participation constraints.
+  - **Total participation:** If the whole entity set is participating in the relation, then it is called total participation
+  - **Partial participation:** If there is only partial entity set in the relation, then it is partial participation.
+  - Example: Let's say in the above example, if there should not be a department without a manager, then all the entities in the entity set of Department will be in Manages relation. So in that case Department entity set is having Total participation. And in the same example, every employee need not manage a department, so Employee entity set is having partial participation.
+  - Total pariticipation is indicated by thick line(double line) and partial participation is indicated by thin line (single line)
+- **Weak Entities:** 
