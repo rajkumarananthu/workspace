@@ -2,5 +2,5 @@
 
 #### NOTES
 
-[Software Engineering](software_engineering.md)
-[Database Management Systems](database_management_systems.md)
+1. [Software Engineering](notes/software_engineering.md)
+2. [Database Management Systems](notes/database_management_systems.md)
