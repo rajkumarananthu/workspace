@@ -16,6 +16,7 @@
   - Security
   - Integrity constraints
 - Role of DBMS:
+
   ![Role of a DBMS](../images/Role_of_a_dbms.png)
 - Levels of Data Abstraction:
   - Physical Level: How the data is stored physically in the disk. (Implementation level)
@@ -32,6 +33,7 @@
       2) Non Procedural
       3) Mixed
 - DBMS components:
+
   ![DBMS Components](../images/DBMS_Components.png)
 - Role of Database manager: DB manager is very significant part of the DBMS
   - Interface with File manager
