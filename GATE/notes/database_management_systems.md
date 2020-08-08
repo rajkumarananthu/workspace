@@ -2,6 +2,7 @@
 
 #### Contents
 [INTRODUCTION](database_management_systems.md#INTRODUCTION)
+[CONCEPTUAL DESIGN](database_management_systems.md#CONCEPTUAL_DESIGN)
 
 
 ### INTRODUCTION
@@ -36,7 +37,43 @@
 
   ![DBMS Components](../images/DBMS_Components.png)
 - Role of Database manager: DB manager is very significant part of the DBMS
-  - Interface with File manager
-  - Integrity constraint enforcement
-  - Backup and recovery
-  - Concurrecy control
+  - Interface with File manager.
+  - Integrity constraint enforcement.
+  - Backup and recovery.
+  - Concurrecy control.
+  - Security.
+  - Prevents Data Redundancy and Inconsistency.
+- **Data Models:** Tools to conceptually design the database.
+  - Entity-Relationship model (Object based model)
+  - Relational Model (Record based model)
+  - Network Model (Record based model)
+  - Hierarchial model (Record based model)
+  - Object-Oriented data model (Object based model)
+  - Semantic data model (Object based model)
+  - Functional data model (Object based model)
+- Entity Relationship Model: E-R Model
+  - Entities
+  - Attributes
+  - Relationship
+  Example: Library Management
+
+  ![Library Mangement: E-R Model](../images/library_management_er_model.png)
+- Relational model:
+  - Tables/Relations (Columns: Attributes of ER model)
+  Example: Library management
+
+  ![Library Management: Relatonal Model](../images/library_magement_relational_model.png)
+- Network Model:
+  - Records and Pointers
+  Note: Cycles are possible, so it is a graph model
+
+  ![Library Management: Network model](../images/library_management_network_model.png)
+- Hierarchial Model:
+  - Records and pointers
+  Note: Only a tree model, may require duplication
+      : Useful when the structure is inherantly tree.
+
+  ![Hospital Management: Hierarchial model](../images/hospital_management_hierarchial_model.png)
+
+### CONCEPTUAL DESIGN
+- 
