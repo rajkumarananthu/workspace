@@ -1,8 +1,8 @@
 # Database Management Systems
 
 #### Contents
-[INTRODUCTION](database_management_systems.md#INTRODUCTION)
-[CONCEPTUAL DESIGN](database_management_systems.md#CONCEPTUAL_DESIGN)
+1. [INTRODUCTION](database_management_systems.md#INTRODUCTION)
+2. [CONCEPTUAL DESIGN](database_management_systems.md#CONCEPTUAL-DESIGN)
 
 
 ### INTRODUCTION
