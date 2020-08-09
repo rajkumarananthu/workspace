@@ -97,15 +97,14 @@
     - Critical paths, gnatt charts etc..,
 
 ### PHASES OF SDLC
-
 - Main steps in an SDLC:
-  - Problem Definition:
+  1.Problem Definition:
     - What is the problem? Where and by whom the problem is faced?
     - Meet users and management and get their agreement on the problem and decide on going on for a project.
     - Brief statement of the problem in a document format (**Problem Definition Document**).
     - Estimate the cost and schedule of the feasibility study. And also roughly estimated cost for the whole project.
     - Short process.
-  - Feasibility Study:
+  2.Feasibility Study:
     - Understanding the problems and reasons with existing system.
     - Answer the questions?
       - Is there a feasible solution?
@@ -119,8 +118,8 @@
       - Technical: Is technology available?
       - Operational: Will it be operationally feasible to deploy in the organization?
     - Study about Costs(Initial and recurring) and Benefits(tangible and intangible)!
-  - Planning(Optional)
-  - (Requirement) Analysis:
+  3.Planning(Optional)
+  4.(Requirement) Analysis:
     - Determine what to do to solve the problem (without how!).
     - Covers what and how the problem is solved at business level.
     - All the functional/performance requirements and important constraints are defined.
@@ -130,8 +129,73 @@
     - A fault at this level may cause 2 to 25 times more cost in the following steps.
     - Long process.
     - Data models are used to represent/organize the user inputs/requirements.
-  - System Design
-  - Detailed Design
-  - Implementation
-  - Maintenance
-- 
+  5.System Design:
+    - How to solve the problem?
+    - Consider several technical alternatives based on automation, boundaries etc.,
+    - For each alternative, prepare high level system-design, implementation schedule and cost-benefit analysis.
+    - Then prepare for the review with technical and management teams.
+    - Should end with a final clear choice.
+    - System Architecture:
+      - Decompose a complex system: 1) Partitions(vertical) 2) Layers (Horizontal)
+      - Modules are the building blocks. Higher level modules do co-ordination/control where as lower modules do computation tasks.
+      - Some modules can be iterated and some modules may be visited on a conditional basis, we can represent this in the *structure chart* with a specific notation without providing much details.
+    - OO Approach:
+      - Decompose into packages. Building blocks are classes.
+    - Output is the **Design Document**.
+  6.Detailed Design:
+    - Specific implementation explaining overall system architecture, modules etc.,
+    - Each component is further refined to proceed with implementation.
+    - Program spec(psuedo-code), file design(organization, access method), h/w specifications, test plans, implementation schedule are the deliverables here.
+    - A technical review happens here.
+  7.Implementation
+    - Programs are coded, debugged and documented here.
+    - Create operating procedures for users.
+  8.Maintenance
+
+- SRS Format: (Based on IEEE recommendation)
+  ```
+  1. Introduction
+     1.1. Purpose: Clearly state the purpose of the document.
+     1.2. Scope: By whom and how it will be used.
+     1.3. Definitions: Acronyms, Abbreviations as applicable.
+     1.4. References: to other documents.
+     1.5. Overview of Developer's Responsibilities: In terms of development, installation, training, maintenance etc.,
+  2. General Description
+     2.1. Product perspective: relationship with other products and principle interfaces.
+     2.2. Product functions overview: general overview of tasks, including data flow diagrams.
+     2.3. User Characteristics: who they are and what training they may need.
+     2.4. General Constraints: about schedule, resources, cost etc.,
+  3. Functional Requirements
+     3.1. Functional Requirement 1
+          3.1.1. Introduction
+          3.1.2. Inputs
+          3.1.3. Processing
+          3.1.4. Outputs
+     3.2. repeat for each functional requirement
+  4. External Interface Requirements
+     4.1. User Interfaces: user manual giving commands, screen formats, outputs, error messages etc.,
+     4.2. Hardware Interfaces: with existing as well as new or special purpose hardware.
+     4.3. Software Interfaces: with other software packages.
+  5. Performance Requirements: Capacity requirements, response time, throughput etc.,
+  6. Design Constraints
+     6.1. Standards Compliance
+     6.2. Hardware Limitations
+  7. Other Requirements: Like future extensions.
+  ```
+- Structure Chart: Tool to define system architecture in terms of modules.
+  - Used in functional methodology to define modules and their calling relations.
+  - Basically a hierarchical structure representing the calling relationship, no control flow information.
+  - Module at level i can call a module at level i+1. No other calls are not possible.
+  - Notation:
+
+  ![Structure Chart](../images/structure_chart.png)
+- Class Diagrams: Tool to define the system architecture in terms of classes.(We also use Interaction diagrams to explain the dynamic behavior of classes)
+- Design Document Format:
+  ```
+  1. Introduction
+  2. Problem Specification
+  3. Software Structure
+  4. Data definitions
+  5. Module specifications
+  6. Requirements Tracing
+  ```
