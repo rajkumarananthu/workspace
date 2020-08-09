@@ -1,7 +1,8 @@
 # Software Engineering
 
 #### Contents
-[INTRODUCTION](software_engineering.md#INTRODUCTION)
+1. [INTRODUCTION](software_engineering.md#INTRODUCTION)
+2. [PHASES OF SDLC](software_engineering.md#PHASES-OF-SDLC)
 
 
 ### INTRODUCTION
@@ -94,4 +95,43 @@
       - Make quality control plans: reviews, inspection and testing strategies
   - Project monitoring and controlling.
     - Critical paths, gnatt charts etc..,
-  
+
+### PHASES OF SDLC
+
+- Main steps in an SDLC:
+  - Problem Definition:
+    - What is the problem? Where and by whom the problem is faced?
+    - Meet users and management and get their agreement on the problem and decide on going on for a project.
+    - Brief statement of the problem in a document format (**Problem Definition Document**).
+    - Estimate the cost and schedule of the feasibility study. And also roughly estimated cost for the whole project.
+    - Short process.
+  - Feasibility Study:
+    - Understanding the problems and reasons with existing system.
+    - Answer the questions?
+      - Is there a feasible solution?
+      - Is the problem worth solution?
+    - Understanding the alternative solution and their estimated cost.
+    - Do quick design and analysis.
+    - Report the alternative solutions and costs in the form of a document(**Feasibility Study Report**).
+    - Many projects get terminated here.
+    - Types of Feasibility:
+      - Economical: Will the returns on the project justify the investment?
+      - Technical: Is technology available?
+      - Operational: Will it be operationally feasible to deploy in the organization?
+    - Study about Costs(Initial and recurring) and Benefits(tangible and intangible)!
+  - Planning(Optional)
+  - (Requirement) Analysis:
+    - Determine what to do to solve the problem (without how!).
+    - Covers what and how the problem is solved at business level.
+    - All the functional/performance requirements and important constraints are defined.
+    - Done by an Analyst and output is **Software Requirement Specification**.
+    - Incorrect, ambiguous, incomplete, inconsistent SRS can lead to project failures.
+    - Basis/Reference document for subsequent design phases.
+    - A fault at this level may cause 2 to 25 times more cost in the following steps.
+    - Long process.
+    - Data models are used to represent/organize the user inputs/requirements.
+  - System Design
+  - Detailed Design
+  - Implementation
+  - Maintenance
+- 
