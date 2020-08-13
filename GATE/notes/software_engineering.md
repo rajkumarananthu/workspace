@@ -199,3 +199,16 @@
   5. Module specifications
   6. Requirements Tracing
   ```
+  
+### REQUIREMENTS ENGINEERING
+- The process of establishing/translating the services that the customer requires from the system and the involved constraints.
+- Requirement: the definitation may range from a high level abstraction statement of a service or of a system constraint to a detailed mathematical functional specification.
+- Types of Requirements:
+  - User Requirements(Definition): Written of the end users. Statements in natural language/diagrams explaining the services provided by the system and its operational constraints.
+    Example: The software must provide a means to access external files created by other tools.
+  - System Requirements(Specification): A structured document with detail description of systems functionality, services and operational constraints.
+    Example:
+    The user should have a facility to define the type of the external file
+    Each external file type should have a tool which can be applied to view the file. etc.,
+
+
