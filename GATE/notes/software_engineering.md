@@ -3,7 +3,7 @@
 #### Contents
 1. [INTRODUCTION](software_engineering.md#INTRODUCTION)
 2. [PHASES OF SDLC](software_engineering.md#PHASES-OF-SDLC)
-3. [REQUIREMENTS ENGINEERING](software_engineering.md#REQUIREMENTS_ENGINEERING)
+3. [REQUIREMENTS ENGINEERING](software_engineering.md#REQUIREMENTS-ENGINEERING)
 
 
 ### INTRODUCTION
