@@ -3,6 +3,7 @@
 #### Contents
 1. [INTRODUCTION](software_engineering.md#INTRODUCTION)
 2. [PHASES OF SDLC](software_engineering.md#PHASES-OF-SDLC)
+3. [REQUIREMENTS ENGINEERING](software_engineering.md#REQUIREMENTS_ENGINEERING)
 
 
 ### INTRODUCTION
@@ -204,11 +205,28 @@
 - The process of establishing/translating the services that the customer requires from the system and the involved constraints.
 - Requirement: the definitation may range from a high level abstraction statement of a service or of a system constraint to a detailed mathematical functional specification.
 - Types of Requirements:
-  - User Requirements(Definition): Written of the end users. Statements in natural language/diagrams explaining the services provided by the system and its operational constraints.
+  - User Requirements(Definition): Written for the end users. Statements in natural language/diagrams explaining the services provided by the system and its operational constraints.
     Example: The software must provide a means to access external files created by other tools.
   - System Requirements(Specification): A structured document with detail description of systems functionality, services and operational constraints.
     Example:
     The user should have a facility to define the type of the external file
     Each external file type should have a tool which can be applied to view the file. etc.,
+  - Functional Requirements: Statements describing the response/reaction of the system for particular inputs and for particular scenarios.
+  - Non-Functional Requirements: Constraints on the services/functions offered by the system. Other than functional requirements.
+    - Product Requirements: Execution seed, reliability etc.,
+    - Organizational Requirements: process stanadards, implementation requirements etc.,
+    - External Requirements: interoperability requirements, legislative requirements etc.,
+    - Goals and Requirements: A goal is a general intention of the user where as a requirement is some thing that can be verified/objectively tested.
+- Requirements Amalgamation: Combining related requirements to one.
+- Requirement Documents and the respective audience
 
+  ![Requirements and the respective Audience](../images/Requirements_and_audience.png)
 
+- Requirements must be:
+  - Complete: should include description of everything that is needed.
+  - Consistent: no conflicts or contradictions between the requirements.
+- Note: Requirements imprecision/ambiguity would lead to very erroneous system/software which may cause very much loss.
+- Alternates to Natural language Specification: 
+  - Structured Natural Language(forms/templates)
+  - Design Description Languages with graphical notations(UML, sequence charts)
+  - Mathematical Specification(ADTs)
