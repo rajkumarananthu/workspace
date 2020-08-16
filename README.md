@@ -6,3 +6,5 @@ Set of tutorials and learning documents
 2. [GTK+](GTK+/README.md)
 3. [Python](Python/README.md)
 4. [Linux Help](linux\_help/linux\_tips.md)
+5. UML
+6. Bash

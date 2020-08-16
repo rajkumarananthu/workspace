@@ -1,6 +1,11 @@
+#### Other Topics
+1. Linux File System
+
 # Linux command line tools
 - *dpkg*
 - *git*
+- *awk*
+- *grep*
 
 # vim.rc tips
 * *set cc=120* sets a mark at column 120, this will help in coding to wrap the text that exceeds the mark 

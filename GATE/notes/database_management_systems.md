@@ -76,4 +76,38 @@
   ![Hospital Management: Hierarchial model](../images/hospital_management_hierarchial_model.png)
 
 ### CONCEPTUAL DESIGN
-- 
+- Entity Relationship Model:
+  - ENTITY: A distinguishable object of a DB.
+    Examples:
+    - Any particular book (Compiler design by Aho,Sethi, Ullmann published in the year 1992, published by Addison wesley with accession number 722756).
+    - Any particular user (Ajay singh , project staff, Cryogenics Dept, Card-No C-56).
+    - Any particular supplier to the library.
+  - ENTITY SET: Collection of entities of same type/structure.
+    Example:
+    - Book
+    - User
+    - Supplier
+  - ATTRIBUTE: Specifies part of any entity structure. It is a mapping from an entity set to a domain of values.
+    Note: No two entities will have all the attributes same in an entity set. It is defined as a set by definition.
+    Examples:
+    - Book entity have the attributes:
+      - PUBLISHER which has its value mapped to STRING.
+      - NAME which has its value mapped to STRING.
+      - AUTHOR which has its value mapped to STRING.
+      - ACCESSION NUMBER which has its value mapped to INTEGER.
+      - PUBLISHED DATE which has its value mapped to INTEGER.
+  - RELATIONSHIP: An association/mapping between entities.
+  - RELATIONSHIP SET: Collection of relationships between same/similar entities(so that it becomes a set of relationships between entity sets).
+
+  ![SuppliedBy and BorrowedBy relations](../images/suppliedby_and_borrowedby.png)
+
+  - Note:
+    1) The Borrowed By relationship is defined by the attributes from USER and BOOKS entity sets.
+    2) The Supplied By relationship is defined by the attributes from USER and SUPPLIERS entity sets.
+    3) Other than the attributes from the entities, a relationship may have it's own attributes to define the relationship.
+    4) A relationship set may not be binary always, it can be n-ary relationship set.
+    5) A relationship set may not be between 2/more different entity sets. It can be between same entity set(one entity set).
+       Example:
+
+       ![Relationship to same entity set](../images/relationship_to_same_entityset.png)
+    
