@@ -4,7 +4,7 @@
 1. [INTRODUCTION](database_management_systems.md#INTRODUCTION)
 2. [CONCEPTUAL DESIGN](database_management_systems.md#CONCEPTUAL-DESIGN)
 
-
+-------------------------------------------------------------------------------
 ### INTRODUCTION
 - **Database:** Collection of inter-related data.
 - **DBMS:** Database and Query engine (a set of software tools to access, process and modify the data in database).
@@ -16,16 +16,19 @@
   - Concurrency => updation of shared data
   - Security
   - Integrity constraints
+-------------------------------------------------------------------------------
 - Role of DBMS:
 
   ![Role of a DBMS](../images/Role_of_a_dbms.png)
+-------------------------------------------------------------------------------
 - Levels of Data Abstraction:
   - Physical Level: How the data is stored physically in the disk. (Implementation level)
   - Conceptual Level: What is the data, what are the fields, how the data is related. (Design Level, admin level)
   - View Level: The conceptual level to a sophisticated user/application developer.
   - User Level: The conceptual level to a naive user(who cannot program anything, just to watch the data).
 - **Schema:** The definition of the database, what are the fields, what is the type of each field.
-- **Instance:** A particular set of data following a schema is called Instance.
+- **Instance:** A particular set of data following a schema is called Instance
+-------------------------------------------------------------------------------
 - Components of a database:
   - User's:
     - Data Definition Language. (DDL)
@@ -36,6 +39,7 @@
 - DBMS components:
 
   ![DBMS Components](../images/DBMS_Components.png)
+-------------------------------------------------------------------------------
 - Role of Database manager: DB manager is very significant part of the DBMS
   - Interface with File manager.
   - Integrity constraint enforcement.
@@ -43,6 +47,7 @@
   - Concurrecy control.
   - Security.
   - Prevents Data Redundancy and Inconsistency.
+-------------------------------------------------------------------------------
 - **Data Models:** Tools to conceptually design the database.
   - Entity-Relationship model (Object based model)
   - Relational Model (Record based model)
@@ -51,6 +56,7 @@
   - Object-Oriented data model (Object based model)
   - Semantic data model (Object based model)
   - Functional data model (Object based model)
+
 - Entity Relationship Model: E-R Model
   - Entities
   - Attributes
@@ -58,16 +64,19 @@
   Example: Library Management
 
   ![Library Mangement: E-R Model](../images/library_management_er_model.png)
+  
 - Relational model:
   - Tables/Relations (Columns: Attributes of ER model)
   Example: Library management
 
   ![Library Management: Relatonal Model](../images/library_magement_relational_model.png)
+  
 - Network Model:
   - Records and Pointers
   Note: Cycles are possible, so it is a graph model
 
   ![Library Management: Network model](../images/library_management_network_model.png)
+  
 - Hierarchial Model:
   - Records and pointers
   Note: Only a tree model, may require duplication
@@ -75,7 +84,7 @@
 
   ![Hospital Management: Hierarchial model](../images/hospital_management_hierarchial_model.png)
 
-===============================================================================
+-------------------------------------------------------------------------------
 
 ### CONCEPTUAL DESIGN
 - Using Entity Relationship Model (ER Modelling).
@@ -163,7 +172,7 @@
   Question: Why can't we design a ternary relation between BOOKS, TEACHER and SUBJECTS?
   Question: what is the difference between a ternary relation and Aggregation?
   
-  ![Aggregation_2](../images/aggregation_1.png)
+  ![Aggregation_2](../images/aggregation_2.png)
 -------------------------------------------------------------------------------
 - ER model from Relational Model point of view:
   - Relational model consists of set of tables, and columns correponding to the attributes of entity set or relationship set.

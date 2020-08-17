@@ -5,7 +5,7 @@
 2. [PHASES OF SDLC](software_engineering.md#PHASES-OF-SDLC)
 3. [REQUIREMENTS ENGINEERING](software_engineering.md#REQUIREMENTS-ENGINEERING)
 
-
+-------------------------------------------------------------------------------
 ### INTRODUCTION
 - Challenges in Large Software Projects:
   - Effort intensive
@@ -19,6 +19,7 @@
 - In other domains of engineering(Building DAMS, Bridges, Power plants), there are large projects that are completed successfully.
 - So as a result **Engineering** is used as a solution to software development, to reduce the failures in delivering a s/w system.
   *To design, develop (build and fabricate) and artifact that meets specifications efficiently, cost effectively ensuring quality.* or *To use scientific principles.*
+-------------------------------------------------------------------------------
 - Engineering approach(process) applied to software development:
   1) Attempt to estimate cost/effort.
   2) Plan and schedule work.
@@ -28,6 +29,7 @@
   6) Schedule reviews both for control and quality.
   7) Define deliverables.
   8) Plan extensive testing.
+-------------------------------------------------------------------------------
 - **Software Process:** A process consist of activities/steps to be carried out in a particular order. A software process deals with technical and management issues for a software project.
   - Software Development (Software Development Life Cycle: SDLC)
   - Project Management
@@ -45,6 +47,7 @@
   - Facilitates early detection and removal of defects.
   - Facilitate monitoring and improvement.
 - Example SDLC: Waterfall Model, Prototyping model, Iterative model, Spiral Model.
+-------------------------------------------------------------------------------
 - **Waterfall Model:**
   == Image: representation of waterfall model == 
   - Steps:
@@ -69,6 +72,7 @@
       Ex: Knowledge management for a central bank: no manual system, SRS may not be clear.
     - Requirements change with time during project life cycle itself.
     - Documentation heavy - may not require for all types of projects.
+-------------------------------------------------------------------------------
 - **Prototyping Model:** when the customer/developer is not sure about requirements/algorithms/efficiency/human-machine interaction.
   == Image: representation of prototyping model ==
   - Steps:
@@ -77,8 +81,10 @@
     - Developer may continue with the implementation choices made during prototyping.
     - Good tools required to quick development.
     - May increase project cost.
+-------------------------------------------------------------------------------
 - **Iterative Development:** Where product is defined by many features. Early version with limited features to establish market and get customer feedback. Developed in versions. Each version may follow any model to develop s/w.
    == Image: representation of iterative model ==
+-------------------------------------------------------------------------------
 - **Spiral Model:** Activities are arranged in a spiral having many cycles, and each cycle has four quadrants.
   == Image: representation of spiral model ==
   - Quadrants:
@@ -86,6 +92,7 @@
     - Evaluate alternatives, identify and handle risks.
     - Develop the s/w.
     - Plan the next step.
+-------------------------------------------------------------------------------
 - **Project Management process:**
   - Runs in parallel to development process.
   - Project planning
@@ -97,6 +104,7 @@
   - Project monitoring and controlling.
     - Critical paths, gnatt charts etc..,
 
+-------------------------------------------------------------------------------
 ### PHASES OF SDLC
 - Main steps in an SDLC:
   1.Problem Definition:
@@ -153,6 +161,7 @@
     - Create operating procedures for users.
   8.Maintenance
 
+-------------------------------------------------------------------------------
 - SRS Format: (Based on IEEE recommendation)
   ```
   1. Introduction
@@ -183,6 +192,7 @@
      6.2. Hardware Limitations
   7. Other Requirements: Like future extensions.
   ```
+
 - Structure Chart: Tool to define system architecture in terms of modules.
   - Used in functional methodology to define modules and their calling relations.
   - Basically a hierarchical structure representing the calling relationship, no control flow information.
@@ -200,7 +210,7 @@
   5. Module specifications
   6. Requirements Tracing
   ```
-  
+-------------------------------------------------------------------------------  
 ### REQUIREMENTS ENGINEERING
 - The process of establishing/translating the services that the customer requires from the system and the involved constraints.
 - Requirement: the definitation may range from a high level abstraction statement of a service or of a system constraint to a detailed mathematical functional specification.
