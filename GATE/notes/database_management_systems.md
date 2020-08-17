@@ -75,10 +75,11 @@
 
   ![Hospital Management: Hierarchial model](../images/hospital_management_hierarchial_model.png)
 
-========================================================================
+===============================================================================
 
 ### CONCEPTUAL DESIGN
 - Using Entity Relationship Model (ER Modelling).
+-------------------------------------------------------------------------------
 - ENTITY: A distinguishable object of a DB.
   Examples:
   - Any particular book (Compiler design by Aho,Sethi, Ullmann published in the year 1992, published by Addison wesley with accession number 722756).
@@ -89,6 +90,7 @@
   - Book
   - User
   - Supplier
+-------------------------------------------------------------------------------
 - ATTRIBUTE: Specifies part of any entity structure. It is a mapping from an entity set to a domain of values.
   Note: No two entities will have all the attributes same in an entity set. It is defined as a set by definition.
   Examples:
@@ -98,6 +100,7 @@
     - AUTHOR which has its value mapped to STRING.
     - ACCESSION NUMBER which has its value mapped to INTEGER.
     - PUBLISHED DATE which has its value mapped to INTEGER.
+-------------------------------------------------------------------------------
 - RELATIONSHIP: An association/mapping between entities.
 - RELATIONSHIP SET: Collection of relationships between same/similar entities(so that it becomes a set of relationships between entity sets).
 
@@ -113,6 +116,7 @@
 
        ![Relationship to same entity set](../images/relationship_to_same_entityset.png)
 
+-------------------------------------------------------------------------------
 - Mapping Constraints:
   
   ![Mapping Constraints](../images/mapping_constraints.png)
@@ -131,16 +135,36 @@
   ![Representation of Mappings](../images/representing_maping_of_relationships.png)
   - Examples:
     ![Examle for mapping](../images/example_representing_mapping.png)
-    
+-------------------------------------------------------------------------------
 - Existence Dependencies:
   ![]()
   
-  - In the above relationship, let's say that for every account entity there will be a customer. Then we say that ACCOUNT entity is EXISTENT DEPENDENT on CUSTOMER entity.
+  - In the above relationship, let's say that for every account entity there will be a customer. Then we say that ACCOUNT entity is EXISTENCE DEPENDENT on CUSTOMER entity.
   - In such cases, the entity set which is existent dependent is called WEAK ENTITY.
   - A weak entity is defined by it's own set of attributes along with the primary key of the strong entity (which the weak entity is dependendant on).
-  
+-------------------------------------------------------------------------------
 - KEY ATTRIBUTE: 
   - SUPER KEY: A set of one or more attributes, which taken collectively allows us to uniquely identify and entity in an entity set.
   - CANDIDATE KEY: A superkey for which no proper subset is a superkey. (a super key may have some attributes, which when removed, the remaining attributes can uniquely identiy an entity in the set. Such superkeys are called candidate keys).
   - PRIMARY KEY: A candidate key chosen by the conceptual designer as the chief attribute set by which an entity is identified in an entity set.
-   
+-------------------------------------------------------------------------------
+- GENERALIZATION:
+
+  ![Genralization](../images/generaliation.png)
+  
+  - In the above relation Ticket is the generalization of both RESERVED TICKET and UNRESERVED TICKET.
+  - The attributes of RESERVED/UNRESERVED TICKET are the combination of TICKET's attributes along with their own special attributes.
+  - The attributes of TICKET are inherited to RESERVED & UNRESERVED TICKET.
+-------------------------------------------------------------------------------
+- AGGREGATION:
+  
+  ![Aggregation_1](../images/aggregation_1.png)
+  
+  Question: Why can't we design a ternary relation between BOOKS, TEACHER and SUBJECTS?
+  Question: what is the difference between a ternary relation and Aggregation?
+  
+  ![Aggregation_2](../images/aggregation_1.png)
+-------------------------------------------------------------------------------
+- ER model from Relational Model point of view:
+  - Relational model consists of set of tables, and columns correponding to the attributes of entity set or relationship set.
+  - 
