@@ -75,39 +75,72 @@
 
   ![Hospital Management: Hierarchial model](../images/hospital_management_hierarchial_model.png)
 
+========================================================================
+
 ### CONCEPTUAL DESIGN
-- Entity Relationship Model:
-  - ENTITY: A distinguishable object of a DB.
-    Examples:
-    - Any particular book (Compiler design by Aho,Sethi, Ullmann published in the year 1992, published by Addison wesley with accession number 722756).
-    - Any particular user (Ajay singh , project staff, Cryogenics Dept, Card-No C-56).
-    - Any particular supplier to the library.
-  - ENTITY SET: Collection of entities of same type/structure.
-    Example:
-    - Book
-    - User
-    - Supplier
-  - ATTRIBUTE: Specifies part of any entity structure. It is a mapping from an entity set to a domain of values.
-    Note: No two entities will have all the attributes same in an entity set. It is defined as a set by definition.
-    Examples:
-    - Book entity have the attributes:
-      - PUBLISHER which has its value mapped to STRING.
-      - NAME which has its value mapped to STRING.
-      - AUTHOR which has its value mapped to STRING.
-      - ACCESSION NUMBER which has its value mapped to INTEGER.
-      - PUBLISHED DATE which has its value mapped to INTEGER.
-  - RELATIONSHIP: An association/mapping between entities.
-  - RELATIONSHIP SET: Collection of relationships between same/similar entities(so that it becomes a set of relationships between entity sets).
+- Using Entity Relationship Model (ER Modelling).
+- ENTITY: A distinguishable object of a DB.
+  Examples:
+  - Any particular book (Compiler design by Aho,Sethi, Ullmann published in the year 1992, published by Addison wesley with accession number 722756).
+  - Any particular user (Ajay singh , project staff, Cryogenics Dept, Card-No C-56).
+  - Any particular supplier to the library.
+- ENTITY SET: Collection of entities of same type/structure.
+  Example:
+  - Book
+  - User
+  - Supplier
+- ATTRIBUTE: Specifies part of any entity structure. It is a mapping from an entity set to a domain of values.
+  Note: No two entities will have all the attributes same in an entity set. It is defined as a set by definition.
+  Examples:
+  - Book entity have the attributes:
+    - PUBLISHER which has its value mapped to STRING.
+    - NAME which has its value mapped to STRING.
+    - AUTHOR which has its value mapped to STRING.
+    - ACCESSION NUMBER which has its value mapped to INTEGER.
+    - PUBLISHED DATE which has its value mapped to INTEGER.
+- RELATIONSHIP: An association/mapping between entities.
+- RELATIONSHIP SET: Collection of relationships between same/similar entities(so that it becomes a set of relationships between entity sets).
 
   ![SuppliedBy and BorrowedBy relations](../images/suppliedby_and_borrowedby.png)
 
-  - Note:
-    1) The Borrowed By relationship is defined by the attributes from USER and BOOKS entity sets.
-    2) The Supplied By relationship is defined by the attributes from USER and SUPPLIERS entity sets.
-    3) Other than the attributes from the entities, a relationship may have it's own attributes to define the relationship.
-    4) A relationship set may not be binary always, it can be n-ary relationship set.
-    5) A relationship set may not be between 2/more different entity sets. It can be between same entity set(one entity set).
-       Example:
+- Note:
+  1) The Borrowed By relationship is defined by the attributes from USER and BOOKS entity sets.
+  2) The Supplied By relationship is defined by the attributes from USER and SUPPLIERS entity sets.
+  3) Other than the attributes from the entities, a relationship may have it's own attributes to define the relationship.
+  4) A relationship set may not be binary always, it can be n-ary relationship set.
+  5) A relationship set may not be between 2/more different entity sets. It can be between same entity set(one entity set).
+     Example:
 
        ![Relationship to same entity set](../images/relationship_to_same_entityset.png)
+
+- Mapping Constraints:
+  
+  ![Mapping Constraints](../images/mapping_constraints.png)
+  
+  Note: all these are for binary relations.
+  - ONE-ONE: One from left entity to only one on right entity.
+  - ONE-MANY: One from left entity to many on right entity. But one from left set can't be mapped to many on right set.
+  - MANY-ONE: many from left set to one on right set. But one from right set can't be mapped to many on left set.
+  - MANY-MANY: Many from left set can be mapped to many on right set. Combination of both MANY-ONE and ONE-MANY.
+  
+  - There can be some entities in the set that are not at all mapped.
+  Note: If there is an arrow on the link between entity set and the relation ship set, then it has either one-many/one-one mapping.
+  Note: If there is nothing on the link between entity set and the relationship set, then it has either many-one/many-many mapping.
+  TODO: Some clarity needed on the relatioships here. How to place the arrows?
+  
+  ![Representation of Mappings](../images/representing_maping_of_relationships.png)
+  - Examples:
+    ![Examle for mapping](../images/example_representing_mapping.png)
     
+- Existence Dependencies:
+  ![]()
+  
+  - In the above relationship, let's say that for every account entity there will be a customer. Then we say that ACCOUNT entity is EXISTENT DEPENDENT on CUSTOMER entity.
+  - In such cases, the entity set which is existent dependent is called WEAK ENTITY.
+  - A weak entity is defined by it's own set of attributes along with the primary key of the strong entity (which the weak entity is dependendant on).
+  
+- KEY ATTRIBUTE: 
+  - SUPER KEY: A set of one or more attributes, which taken collectively allows us to uniquely identify and entity in an entity set.
+  - CANDIDATE KEY: A superkey for which no proper subset is a superkey. (a super key may have some attributes, which when removed, the remaining attributes can uniquely identiy an entity in the set. Such superkeys are called candidate keys).
+  - PRIMARY KEY: A candidate key chosen by the conceptual designer as the chief attribute set by which an entity is identified in an entity set.
+   
