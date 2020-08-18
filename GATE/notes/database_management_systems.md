@@ -3,6 +3,7 @@
 #### Contents
 1. [INTRODUCTION](database_management_systems.md#INTRODUCTION)
 2. [CONCEPTUAL DESIGN](database_management_systems.md#CONCEPTUAL-DESIGN)
+3. [RELATIONAL ALGEBRA](database_management_systems.md#RELATIONAL-ALGEBRA)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -175,5 +176,49 @@
   ![Aggregation_2](../images/aggregation_2.png)
 -------------------------------------------------------------------------------
 - ER model from Relational Model point of view:
-  - Relational model consists of set of tables, and columns correponding to the attributes of entity set or relationship set.
-  - 
+  - Relational model consists of set of tables, and columns correponding to the attributes.
+  - For an entity set we create a table, and the columns will be the attributes of that entity set.
+  - For the relationship set, we have a table and the attributes of the relationship set. Ideally along with that we have the attributes of the participating entity sets.
+  - But from the above definitions of KEY and PRIMARY KEY, we can have only the primary key attributes, thus to identify the entities in the entity set.
+  Example2:
+  
+  ![Relational model view 1](../images/relational_model_1.png)
+  
+  In the above even if we add any mapping constraints, there will be no change in the tables. Because if only mapping constraints are specified there may be entities which are not at all mapped.
+  
+  Example2: (Weak entity)
+  
+  ![Relational model view 2](../images/relational_model_2.png)
+  
+  In the above model, we can combine the ACCOUNT entity set and the ACC relation as each entity in the ACCOUNT will be in ACC relationship.
+  
+  Example3: (Generalization)
+  
+  ![Relational model view 3](../images/relational_model_3.png)
+  
+  Example4: (Aggregation)
+  
+-------------------------------------------------------------------------------
+- Database Scheme:
+  
+  ![Database scheme](../images/database_scheme.png)
+  
+  Scheme definition for the above ER model:
+  ```
+  BOOKS_SCHEME(**ACCNO**, YR, TITLE);
+  USERS_SCHEME(**CARDNO**, NAME, ADDR);
+  SUPPLIERS_SCHEME(**SNAME**, ADDR);
+  BORROWED\_By\_SCHEME(ACCNO,CARDNO, DOI); -- ACCNO and DOI combined will be a primary key.
+  SUPPLIED\_By\_SCHEME(ACCNO,PRICE,DOS,SAME);
+  ```
+  Database declaration:
+  ```
+  book(BOOKS_SCHEME)
+  user(USERS_SCHEME)
+  supplier(SUPPLIERS_SCHEME)
+  borrowed(BORROWED\_BY\_SCHEME)
+  supplied(SUPPIED\_BY\_SCHEME)
+  ```
+-------------------------------------------------------------------------------
+
+### RELATIONAL ALGEBRA
