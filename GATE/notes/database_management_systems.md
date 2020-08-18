@@ -160,7 +160,7 @@
 -------------------------------------------------------------------------------
 - GENERALIZATION:
 
-  ![Genralization](../images/generaliation.png)
+  ![Genralization](../images/generalization.png)
   
   - In the above relation Ticket is the generalization of both RESERVED TICKET and UNRESERVED TICKET.
   - The attributes of RESERVED/UNRESERVED TICKET are the combination of TICKET's attributes along with their own special attributes.

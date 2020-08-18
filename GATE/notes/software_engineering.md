@@ -240,3 +240,54 @@
   - Structured Natural Language(forms/templates)
   - Design Description Languages with graphical notations(UML, sequence charts)
   - Mathematical Specification(ADTs)
+-------------------------------------------------------------------------------
+
+### FORMAL SPECIFICATION
+- A formal specication is *the techniques for unambiguous specification of software*.
+- A natural language specification may lead to ambiguos/inconsistent specification.
+- A formal specification is part of a more general collection of techniques called formal methods which are based on mathematical representation and analysis of a software.
+- Steps in formal specification:
+  - Formal specification.
+  - Specification analysis and proof.
+  - Transformational development.
+  - Program Verification.
+- These are not the mainstream specification methods. Reasons include:
+  - Other new software engineering techniques are more used because they are able to increase software quality.
+  - Time-to-market was made the key factor instead of low-error-count. Where as formal specification require an expertise of mathematical domain and that is less available in the industry which can't the reduce the time.
+  - Formal methods are not well suited for specifying and analysing user interfaces and user interaction. Thus less scope.
+  - These methods are hard to scale upto large systems.
+- The formal methods are good in reducing the number of errors, which can be used in areas of mission critical systems.
+- Techniqies: 1) Algebraic Approach (in terms of operations and relationships) 2) Model-based approach (in terms of state model, using sets and sequences)
+- Formal Specification languages:
+
+  ![Formal Specification Languages](../images/formal_spec_languages.png)
+  
+- Formal specification will take a lot of time in the initial stage of development thus reduces a lot of errors in the software process.
+- Properties of a FORMAL SPECIFICATION
+  - Complete
+  - Consistent
+  - Concise
+  - Unambiguous
+  - Executable
+  - Reusable
+  - Common language for communication between clients, designers and implementors.
+  - Has it's basis from discrete mathematics
+    - Set theory
+    - Boolean logic
+    - Predicate logic
+- Example:
+  1) Library - Informal statement
+     - A book can either be in the stacks, on reserve or loaned out
+     - If a book is in the stack or reserve, it can be requested
+  2) Library - Formalization
+     - S: the book is in the stacks
+     - R: the book is in the reserve
+     - L: the book is on loan
+     - Q: the book is requested
+     - A book can either be in the stacks, on reserve or loaned out.
+       - S ∧ ¬(R ∨ L)
+       - R ∧ ¬(S ∨ L)
+       - L ∧ ¬(R ∨ S)
+     - If a book is in the stack or reserve, it can be requested
+       - Q ⇒ (R ∨ S)
+       
