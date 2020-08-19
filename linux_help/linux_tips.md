@@ -6,6 +6,7 @@
 - *git*
 - *awk*
 - *grep*
+- *charmap*
 
 # vim.rc tips
 * *set cc=120* sets a mark at column 120, this will help in coding to wrap the text that exceeds the mark 

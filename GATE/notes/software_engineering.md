@@ -4,7 +4,9 @@
 1. [INTRODUCTION](software_engineering.md#INTRODUCTION)
 2. [PHASES OF SDLC](software_engineering.md#PHASES-OF-SDLC)
 3. [REQUIREMENTS ENGINEERING](software_engineering.md#REQUIREMENTS-ENGINEERING)
-
+4. [FORMAL SPECIFICATION](software_engineering.md#FORMAL-SPECIFICATION)
+   4.1. [ALGEBRAIC SPECIFICATION METHODS](software_engineering.md#ALGEBRAIC-SPECIFICATION-METHODS)
+5.
 -------------------------------------------------------------------------------
 ### INTRODUCTION
 - Challenges in Large Software Projects:
@@ -275,6 +277,7 @@
     - Set theory
     - Boolean logic
     - Predicate logic
+-------------------------------------------------------------------------------
 - Example:
   1) Library - Informal statement
      - A book can either be in the stacks, on reserve or loaned out
@@ -290,4 +293,26 @@
        - L ∧ ¬(R ∨ S)
      - If a book is in the stack or reserve, it can be requested
        - Q ⇒ (R ∨ S)
-       
+   3) Library - Prove Correctness
+      - A book that is on loan cannot be requested, that is * L ⇒ ¬Q *
+      - We prove this proof using contradiction.
+                        _______________________________________________
+                       |    ¬(L ⇒ ¬Q)     ----> assuming the negation |
+                       |    ¬(¬L ∨ ¬Q)    ----> By rewriting          |
+                       |    L ∧ Q         ----> By Demorgan's law     |
+                       |______________________________________________|
+                            /                               \
+                           /                                 \
+                          /                                   \
+        L         ----> By simplification            Q     -----> By Simplification
+        ¬(S ∨ R)  ----> L ⇔ ¬(S ∨ R)                S ∨ R -----> Q ⇒ (S ∨ R)
+      - One is leading to the negation of other, so the assumption is a contradiction, therefore: ** L ⇒ ¬Q **
+-------------------------------------------------------------------------------
+- Specification Types:
+  - Interface specification: Tell you how subsystem interact with each other.
+    - deal with the operations --> return types, parameters, name.
+    - each module is made up of such multiple operations.
+  - Behavioural specification: Focus on the internals of individual subsystem.
+    - Deals with the constraints on how the operations to be performed.
+-------------------------------------------------------------------------------
+#### ALGEBRAIC SPECIFICATION METHODS

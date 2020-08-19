@@ -222,3 +222,41 @@
 -------------------------------------------------------------------------------
 
 ### RELATIONAL ALGEBRA
+
+- Relational model:
+  1. Concept of a relation
+     - K = {A, B, C} is a set of attributes.
+       dom(A) is the set of values that can be taken by the attribute A. Similarly dom(B), dom(C).
+       Let's say:
+         dom(A) = {1,2,3}
+         dom(B) = Sset of all strings that has length=50
+         dom(C) = {'AJAY', 'RAKESH'}
+     
+         now a realtion in a relational model can be described as :
+     
+         r ⊆ dom(A) X dom(B) X dom(C)
+  2. Unifying idea combining entities & relationships.
+  3. May be looked upon as a table of elements where each table is characterized by a set of attributes.
+- Each row in a relation is called a **tuple**.
+- Database Scheme has:
+  - set of attributes
+  - set of relation schemes
+  - set of relations
+-------------------------------------------------------------------------------
+- Relational Algebra: A formal query language based on a set of operation on relations.
+  - Fundamental operations:
+    1. SELECT:(σ) Select the rows(tuples) of the relation, based on the condition specified. No change in the attributes.
+    2. PROJECT: Select the columns(tuples) of the relation, based on the attributes specified. No change in the number of tuples. No duplicated will be allowed.
+    3. CARTESIAN PRODUCT:
+    4. UNION:
+    5. SET DIFFERENCE:
+    6. RENAME:
+  - Additional Operations (can be defined using the fundamental Operations)
+    1. NATURAL JOIN
+    2. INTERSECTION
+    3. ASSIGNMENT
+    4. DIVISION/QUOTIENT
+    5. ⊝ - JOIN
+  - All the above operations will not modify the database. They will return a new relation.
+  TODO: Need to add more info/examples on the above operations, once the character map is set.
+ 
