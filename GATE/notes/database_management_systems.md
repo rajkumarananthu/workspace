@@ -4,6 +4,7 @@
 1. [INTRODUCTION](database_management_systems.md#INTRODUCTION)
 2. [CONCEPTUAL DESIGN](database_management_systems.md#CONCEPTUAL-DESIGN)
 3. [RELATIONAL ALGEBRA](database_management_systems.md#RELATIONAL-ALGEBRA)
+4. [RELATIONAL CALCULUS](database_management_systems.md#RELATIONAL-CALCULUS)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -239,9 +240,21 @@
   3. May be looked upon as a table of elements where each table is characterized by a set of attributes.
 - Each row in a relation is called a **tuple**.
 - Database Scheme has:
-  - set of attributes
-  - set of relation schemes
-  - set of relations
+  - Set of attributes
+    ACC_NO, YR_PUB, TITLE, CARD_NO, B_NAME, B_ADDR, S_NAME, S_ADDR, DOI, PRICE, DOS
+  - Set of relation schemes
+    BOOK_SCHEME(*ACC_NO*, YR_PUB, TITLE)
+    USER_SCHEME(*CARD_NO*, B_NAME, B_ADDR)
+    SUPPLIER_SCHEME(*S_NAME*, S_ADDR)
+    B_BY_SCHEME(*ACC_NO,CARD_NO*, DOI)
+    S_BY_SCHEME(*ACC_NO,S_NAME*,PRICE,DOS)
+  - Set of relations
+    book(BOOK_SCHEME)
+    user(USER_SCHEME)
+    supplier(SUPPLIER_SCHEME)
+    borrow(B_BY_SCHEME)
+    supp(S_BY_SCHEME)
+- The above definitions are used for the relational algebra and relational calculus examples.
 -------------------------------------------------------------------------------
 - Relational Algebra: A formal query language based on a set of operation on relations.
   - Fundamental operations:
@@ -259,4 +272,62 @@
     5. ⊝ - JOIN
   - All the above operations will not modify the database. They will return a new relation.
   TODO: Need to add more info/examples on the above operations, once the character map is set.
--  
+- Relational algebra is *procedural* in nature - define the details how to do the query and what are the sequence of steps required to obtain the desired relation.
+-------------------------------------------------------------------------------
+### RELATIONAL CALCULUS
+- Language for defining new relations in a database.
+- Forms the basis of a query language.
+- Non procedural.
+- Uses the concept of formal logic to express relational query.
+- Two well known formulations:
+  - TUPLE RELATIONAL CALCULUS
+  - DOMAIN RELAITONAL CALCULUS
+-------------------------------------------------------------------------------
+#### TUPLE RELATIONAL CALCULUS
+- A relation is expressed as a set.
+  `S = {t | P(t)}`
+  t - is the tuple variable
+  P - is the predicate which must be true for every element of the set i.e., P(t) must be true for every tuple in S.
+
+  - Example:
+    S = { t | t ∈  book ∧ t[YR_PUB] = 1992} or S = { t | t ∈  book(t[YR_PUB] = 1992)}
+
+    Here S is the resultant relation, and the attributes of S are the attributes of the relation *book*.
+    And S will contain the books that are published in the year 1992.
+
+  - Example:
+    S = {t | ∃u∈ book(u[YR_PUB] = 1991) ∧ t[ACC_NO] = u[ACC_NO] ∧ t[TITLE] = u[TITLE]}
+
+    Now the resultant relation S has the attributes ACC_NO and TITLE of all the books that are published in the year 1991.
+
+  - Example
+    S = {t | ∃s∈ supp ∧ s[PRICE] > 1000 ∧ s[S_NAME] = t[S_NAME]}
+
+    The attribute in S is only S_NAME of all the suppliers who supplied atleast a book whose price is greater than 1000.
+-------------------------------------------------------------------------------
+
+- Problems:
+  1. Find all the borrowers (B_NAMES) and their addresses (B_ADDR) for those who have been issued a book on 14/08/95.
+
+     - {t | ∃u∈ user (t[B_NAME] = u[B_NAME] ∧ t[B_ADDR] = u[B_ADDR] ∧ ∃w∈  borrow(w[CARD_NO] = u[CARD_NO] ∧ w[DOI] = '14/08/95'))}
+     - {t | ∃w∈ borrow (w[DOI] = '14/08/95' ∧ ∃u∈ user (w[CARD_NO] = u[CARD_NO] ∧ t[B_NAME] = u[B_NAME] ∧ t[B_ADDR] = u[B_ADDR]))}
+
+  2. Find all the borrowers who have been issued a book supplied by "NAROSA" or "ALLIED"
+
+     - {t | ∃u∈ user (t[B_NAME] = u[B_NAME] ∧ ∃b∈ borrow (b[CARD_NO] = u[CARD_NO] ∧ ∃s∈ supp (b[ACC_NO] = s[ACC_NO] ∧ (s[S_NAME] = "NAROSA" ∨ s{[S_NAME] == "ALLIED"))))}
+  3. Find all borrowers who have been issued a book supplied by NAROSA but have not been issued any book supplied by ALLIED.
+
+     - {t | ∃u∈ user(t[B_NAME] = u[B_NAME] ∧ ∃b∈ borrow (u[CARD_NO] = b[CARD_NO] ∧ (∃s∈ supp (s[ACC_NO] = b[ACC_NO] ∧ s[S_NAME] = "NAROSA")) ∧ ¬∃q∈ supp (q[ACC_NO] = b[ACC_NO] ∧ q[S_NAME] = "ALLIED")))}
+     NOTE: observe the q[ACC_NO] = b[ACC_NO]
+
+  4. Find the names of all suppliers who have the same address as NAROSA.
+
+     - {t | ∃s∈ supp (t[S_NAME] = s[S_NAME] ∧ ∃u∈ supp (u[S_ADDR] = s[S_AADR] ∧ u[S_NAME] = "NAROSA"))}
+
+  5. Find the supplier who has supplied titles correspnding to SOME of  the books that are issued to VIJAY.
+
+     - Need to answer it!!
+
+  6. Find the suppliers who have supplied titles corresponding to ALL BOOKS issued to VIJAY.
+
+     - Need to answer it!!
