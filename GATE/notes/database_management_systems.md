@@ -209,7 +209,7 @@
   USERS_SCHEME(**CARDNO**, NAME, ADDR);
   SUPPLIERS_SCHEME(**SNAME**, ADDR);
   BORROWED\_By\_SCHEME(ACCNO,CARDNO, DOI); -- ACCNO and DOI combined will be a primary key.
-  SUPPLIED\_By\_SCHEME(ACCNO,PRICE,DOS,SAME);
+  SUPPLIED\_By\_SCHEME(ACCNO,PRICE,DOS,SNAME);
   ```
   Database declaration:
   ```
@@ -259,4 +259,4 @@
     5. ⊝ - JOIN
   - All the above operations will not modify the database. They will return a new relation.
   TODO: Need to add more info/examples on the above operations, once the character map is set.
- 
+-  
