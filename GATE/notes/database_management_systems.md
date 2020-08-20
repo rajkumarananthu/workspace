@@ -330,4 +330,17 @@
 
   6. Find the suppliers who have supplied titles corresponding to ALL BOOKS issued to VIJAY.
 
-     - Need to answer it!!
+     - Need to answer it!! Hint (Use ∀ )
+
+  7. S = {t | ∀u∈ book (t[TITLE] = u[TITLE] ⇒ u[YR_PUB] = 1991)}
+
+     All the tuples t in S will have the all the titles of the books which are published in 1991. 
+-------------------------------------------------------------------------------
+- Safety of expressions:
+  - {t | ¬ (t∈ book} --> Not safe, because the domain is not defined.
+    dom(P) = The set of all values referenced by P.
+    The expression {t | P(t)} is said to be SAFE if all the values that appear in the RESULT are values from dom(P).
+-------------------------------------------------------------------------------
+- THEOREM:
+  TUPLE RELATIONAL CALCULUS RESTRICTED TO SAFE EXPRESSIONS IS EQUIVALENT TO RELATIONAL ALGEBRA IN EXPRESSIVE POWER.
+-------------------------------------------------------------------------------
