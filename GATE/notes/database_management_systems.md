@@ -347,6 +347,7 @@
 -------------------------------------------------------------------------------
 
 ### SQL
+
 - Commercial Database languages:
   - SQL (based on both Relational Algebra and Relational Calculus)\*\*
   - QUEL (based on Tuple relational calculus)
@@ -392,8 +393,7 @@
   
      eqvt relational algebra expression: ???
 
-  NOTE: Similar to MINUS we have UNION, INTERSECTION
-
+  NOTE: Similar to MINUS we have UNION, INTERSECTION 
   4. SELECT CARD_NO FROM BOOK,BORROW WHERE BOOK.ACC_NO = BORROW.ACC_NO
   
      eqvt relational algebra expression: ??? (CARTESIAN PRODUCT)
@@ -431,4 +431,18 @@
     - What does the above ques mean?
 
       Find out the supplier name and the accession number of those books which cost more than the least price of the book supplied by NAROSA.
+      or
+      Find out the supplier name and the accession number of those books which cost more than any one book supplied by NAROSA.
       It may even include even NAROSA.
+
+  4. SELECT ACC_NO,S_NAME FROM SUPP WHERE PRICE > SOME(SELECT PRICE FROM SUPP WHERE SUPP.S_NAME = "NAROSA")
+
+  NOTE: In the above we can replace > with >, >=, <=, != and SOME can be replaced with ALL.
+
+  5. SELECT T.S_NAME FROM SUPP T WHERE (SELECT TITLE FROM BOOK S WHERE T.ACC_NO=S.ACC_NO) CONTAINS (SELECT TITLE FROM BOOK,USER,BORROW WHERE BOOK.ACC_NO=BORROW.ACC_NO AND USER.CARD_NO=BORROW.CARD_NO AND USER.B_NAME="VIJAY")
+
+     Give the names of the suppliers who supplied all the books with the titles same as the books borrowed by VIJAY.
+
+  6. SELECT B_NAME FROM USER T WHERE EXISTS (SELECT * FROM SUPP,BORROW WHERE SUPP.ACC_NO = BORROW.ACC_NO AND T.CARD_NO = BORROW.CARD_NO AND S_NAME = "NAROSA") AND NOT EXISTS (SELECT * FROM SUPP,BORROW WHERE SUPP.ACC_NO = BORROW.ACC_NO AND T.CARD_NO = BORROW.CARD_NO AND S_NAME = "ALLIED")
+
+     Give the borrower names who have borrowed atleast one book supplied by NAROSA and no books supplied by ALLIED.
