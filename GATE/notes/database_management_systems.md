@@ -5,6 +5,7 @@
 2. [CONCEPTUAL DESIGN](database_management_systems.md#CONCEPTUAL-DESIGN)
 3. [RELATIONAL ALGEBRA](database_management_systems.md#RELATIONAL-ALGEBRA)
 4. [RELATIONAL CALCULUS](database_management_systems.md#RELATIONAL-CALCULUS)
+5. [SQL](database_management_systems.md#SQL)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -344,3 +345,90 @@
 - THEOREM:
   TUPLE RELATIONAL CALCULUS RESTRICTED TO SAFE EXPRESSIONS IS EQUIVALENT TO RELATIONAL ALGEBRA IN EXPRESSIVE POWER.
 -------------------------------------------------------------------------------
+
+### SQL
+- Commercial Database languages:
+  - SQL (based on both Relational Algebra and Relational Calculus)\*\*
+  - QUEL (based on Tuple relational calculus)
+  - QBE (table driven language based on domain relational calculus)
+  - etc.,,
+- All the above have the power of DDL, DML, expressing CONSTRAINTS, AUTHORIZATION etc.,
+-------------------------------------------------------------------------------
+- Strucuted Query Language.
+  - Data Definition language - DDL.
+  - Interactive Data Manipulation language -DML.
+  - Embedded DML.
+  - View Definition.
+  - Authorization.
+  - Integrity constraints.
+  - Transacation Definition and Control.
+- Query Processing using SQL:
+  - Example Library Database:
+    ```
+    book(*ACC_NO*, YR_PUB, TITLE)
+    user(*CARD_NO*, B_NAME, B_ADDR)
+    supplier(*S_NAME*, S_ADDR)
+    borrow(*ACC_NO,CARD_NO*, DOI)
+    supp(*ACC_NO,S_NAME*,PRICE,DOS)
+    ```
+- Structure of a query:
+   ```
+   SELECT A1,A1,...An   <----- set of attributes
+   FROM r1,r2,...rm     <----- set of relations
+   WHERE P              <----- Predicate
+   ```
+- Examples:
+  1. SELECT TITLE FROM BOOK                  <-- behaves as per default setting
+  1.1. SELECT ALL TITLE FROM BOOK              <-- includes duplicate titles also
+  1.2. SELECT DISTINCT TITLE FROM BOOK         <-- doesn't include dupilcate titles
+  
+     eqvt relational algebra expression: ???
+
+  2. SELECT ACC_NO,YR_PUB FROM BOOK WHERE TITLE="COMPILER DESIGN"
+  
+     eqvt relational algebra expression: ???
+
+  3. (SELECT ACC_NO FROM BOOK WHERE TITLE="COMPILER DESIGN") MINUS (SELECT ACC_NO FROM BORROW)
+  
+     eqvt relational algebra expression: ???
+
+  NOTE: Similar to MINUS we have UNION, INTERSECTION
+
+  4. SELECT CARD_NO FROM BOOK,BORROW WHERE BOOK.ACC_NO = BORROW.ACC_NO
+  
+     eqvt relational algebra expression: ??? (CARTESIAN PRODUCT)
+
+-------------------------------------------------------------------------------
+- Problems
+  1. Find out the CARD_NO of the borrowers who have taken a book titled compiler design.
+
+     eqvt relational algebra:???
+
+     SELECT CARD_NO FROM BOOK,BORROW WHERE (BOOK.ACC_NO = BORROW.ACC_NO) AND (BOOK.TITLE = "COMPILER DESIGN")
+
+     SELECT CARD_NO FROM BORROW WHERE ACC_NO IN (SELECT ACC_NO FROM BOOK WHERE TITLE = "COMPILER DESIGN")
+
+  NOTE: IN is set operation to check if it is in the set of values returned(IS AN ELEMENT).
+
+  2. Find out the NAME and ADDRESS of borrowers who have issued a book on 15/08/94.
+
+     eqvt relational algebra:???
+
+     SELECT B_NAME,B_ADDR FROM USER,BORROW WHERE (USER.CARD_NO = BORROW.CARD_NO) AND (BORROW.DOI = "15/08/94")
+
+     SELECT DISTINCT B_NAME,B_ADDR FROM USER u, BORROW b WHERE (u.CARD_NO = b.CARD_NO) AND (b.DOI = "15/08/94")
+
+  3. Find out the names of all borrowers who have the same address as VIJAY.
+
+     eqvt relational algebra:???
+
+     SELECT T.B_NAME FROM USER T, USER S WHERE (S.B_NAME = "VIJAY") AND (T.B_ADDR = S.B_ADDR)
+
+
+  Example:
+  SELECT T.ACC_NO, T.S_NAME FROM SUPP T, SUPP S WHERE (T.PRICE > S.PRICE) AND (S.S_NAME = "NAROSA")
+ 
+    - What does the above ques mean?
+
+      Find out the supplier name and the accession number of those books which cost more than the least price of the book supplied by NAROSA.
+      It may even include even NAROSA.
