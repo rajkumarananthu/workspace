@@ -437,7 +437,7 @@
 
   4. SELECT ACC_NO,S_NAME FROM SUPP WHERE PRICE > SOME(SELECT PRICE FROM SUPP WHERE SUPP.S_NAME = "NAROSA")
 
-  NOTE: In the above we can replace > with >, >=, <=, != and SOME can be replaced with ALL.
+  NOTE: In the above we can replace > with <, >=, <=, !=, = and SOME can be replaced with ALL.
 
   5. SELECT T.S_NAME FROM SUPP T WHERE (SELECT TITLE FROM BOOK S WHERE T.ACC_NO=S.ACC_NO) CONTAINS (SELECT TITLE FROM BOOK,USER,BORROW WHERE BOOK.ACC_NO=BORROW.ACC_NO AND USER.CARD_NO=BORROW.CARD_NO AND USER.B_NAME="VIJAY")
 
@@ -446,3 +446,51 @@
   6. SELECT B_NAME FROM USER T WHERE EXISTS (SELECT * FROM SUPP,BORROW WHERE SUPP.ACC_NO = BORROW.ACC_NO AND T.CARD_NO = BORROW.CARD_NO AND S_NAME = "NAROSA") AND NOT EXISTS (SELECT * FROM SUPP,BORROW WHERE SUPP.ACC_NO = BORROW.ACC_NO AND T.CARD_NO = BORROW.CARD_NO AND S_NAME = "ALLIED")
 
      Give the borrower names who have borrowed atleast one book supplied by NAROSA and no books supplied by ALLIED.
+
+  7. SELECT S_NAME FROM SUPP WHERE PRICE > 1000 ORDER BY S_NAME
+
+     Give the names of the suppliers who supply the books with PRICE > 1000. And it will give the names in an order(ascending or descending based on default setting).
+
+    SELECT S_NAME FROM SUPP WHERE PRICE > 1000 ORDER_BY S_NAME ASC  ------------> explicitly in ascending order 
+    SELECT S_NAME FROM SUPP WHERE PRICE > 1000 ORDER_BY S_NAME DESC ------------> explicitly in descending order 
+
+  8. SELECT * FROM BOOK ORDER BY YR_PUB ASC, ACC_NO DESC
+
+     Will select all the attributes(*) of the BOOK, will order the tuples in ascending order of YR_PUB and if there are multiple entries with same YR_PUB, it will then order them in descending order of ACC_NO.
+
+  9. Aggregate Functions: AVG, MIN, MAX, SUM, COUNT
+
+     SELECT S_NAME,AVG(PRICE) FROM SUPP GROUP BY S_NAME
+
+     Will give the S_NAME and average price of all the books supplied by suppliers with the same S_NAME.
+
+     SELECT S_NAME,SUM(PRICE) FROM SUPP GROUP BY S_NAME
+
+     Will give the S_NAME and total price of all the books supplied by suppliers with the same S_NAME.
+
+     SELECT TITLE,COUNT(ACC_NO) FROM BOOK GROUP BY TITLE
+
+  10. Find out the titles of all the books which have  more that 50 copies
+
+      SELECT TITLE FROM BOOK GROUP BY TITLE HAVING COUNT(ACC_NO) > 50
+
+      Note: HAVING is used on aggregat functions.
+
+  11. List supplier names with total number of books supplied by each supplier and the total value of books supplied by them.
+
+      SELECT S_NAME,COUNT(ACC_NO),SUM(PRICE) FROM SUPP GROUP BY S_NAME  
+
+  12. List out the names of all borrowers and the number of distinct titles of books issued to them.
+
+      SELECT B_NAME, COUNT(DISTINCT TITLES) FROM USER,BORROW,BOOK WHERE USER.CARD_NO == BORROW.CARD_NO AND BORROW.ACC_NO == BOOK.ACC_NO GROUP BY B_NAME ORDER BY B_NAME
+
+  13. List out the names of all borrowers and the number of books borrowed by each user.
+
+      SELECT B_NAME, COUNT(ACC_NO) FROM USER,BORROW WHERE USER.CARD_NO == BORROW.CARD_NO GROUP BY B_NAME ORDER BY B_NAME
+
+  14. SELECT S_NAME FROM SUPP GROUP BY S_NAME HAVING MAX(PRICE) >= ALL (SELECT MAX(PRICE) FROM SUPP GROUP BY S_NAME)
+
+      List of supplier names who has supplied the book with largest/highest price.
+
+  Modify operations: INSERT, DELETE, UPDATE
+  Data Defintions: 
