@@ -400,6 +400,7 @@
 
 -------------------------------------------------------------------------------
 - Problems
+- Querying:
   1. Find out the CARD_NO of the borrowers who have taken a book titled compiler design.
 
      eqvt relational algebra:???
@@ -492,5 +493,75 @@
 
       List of supplier names who has supplied the book with largest/highest price.
 
-  Modify operations: INSERT, DELETE, UPDATE
-  Data Defintions: 
+  Modification using INSERT, UPDATE, DELETE
+
+  15. DELETE borrow 
+ 
+      delete all tuples in borrow. The table is still present.
+
+  16. DELETE BORROW WHERE CARD_NO=F53
+
+      delete all tuples in borrow where card_no is F53
+
+  17. Delete all entries of books from the borrow relation corresponding to the borrower "VIJAY"
+
+      DELETE BORROW WHERE CARD_NO IN (SELECT CARD_NO FROM USER WHERE B_NAME = "VIJAY")
+
+  18. Delete all entries of books from the borrow relation corresponding to the borrower VIJAY and on 15/07/95.
+
+      DELETE BORROW WHERE CARD_NO IN (SELECT CARD_NO FROM USER WHERE B_NAME = "VIJAY") AND DOI = "15/07/95"
+
+      Database: r(A,B,C,D) and s(A,B,P) be 2 tables specific for this next problem
+  20. Delete entries of s where A,B correspsonding to r where C=X and D=Y.
+
+      DELETE s WHERE <A,B> IN (SELECT A,B FROM r WHERE C=X AND D=Y)
+
+  21. INSERT INTO BORROW VALUES(53786, 1985, "DATABASE TECHNOLOGY")
+
+      This will insert the data into the table as a tuple
+
+  22. INSERT INTO BORROW(YR_PUB, TITLE, ACC_NO) VALUES (1985, "DATABASE TECHNOLOGY", 53786)
+
+      This will take the values out of order. And the order of values must be similar to the order which we have given at the start of the INSERT.
+
+      Note: If you missed to mention some attribute while inserting the data, the missing attribute will take a NULL value. Once we have the NULL values in our data tables, we can use that in the SELECT queries also.
+
+  23. Update operation can be achieved using INSERT and DELETE combined.
+
+      UPDATE BORROW SET DOI = "19/08/96" WHERE ACC_NO = 57839
+
+      Updates DOI in the borrow relation where ACC_NO is 57839.
+
+  24. UPDATE SUPP SET PRICE = PRICE * 0.95 WHERE S_NAME = "ALLIED" AND PRICE > 1000
+
+      Update the price value of the book for books supplied by ALLIED and price is greater than 1000.
+
+- Views:
+  - All the users may not need all the information in the database. As a result we create views for specific set of users.
+  - A view is not a new relation. It is just a part of the existing relation. It is just a logical name for a QUERY EXPRESSION.
+
+  25. CREATE VIEW V AS \<QUERY EPRESSION\>
+
+      V is the new logical name. Whenever V is used, the QUERY EXPRESSION is evaluated and the result is produced.
+
+      Example: CREATE VIEW BOOKS_1995 AS SELECT TITLE,ACC_NO FROM BOOK WHERE YR_PUB=1995
+
+      Usage: SELECT * FROM BOOKS_1995 WHERE ACC_NO=55009
+             SELECT ACC_NO FROM BOOKS_1995 WHERE TITLE="COMPILER DESIGN"
+
+  26. Create a view to provide the suppliers and the titles supplied by them.
+
+      CREATE VIEW ST AS SELECT S_NAME,TITLE FROM SUPP,BOOK WHERE BOOK.ACC_NO = SUPP.ACC_NO
+
+  - If we try to update a VIEW which is formed by more than one relations, then it may create a lot of complications in the database.
+  - So most of the standard implementations don't allow updating through VIEWS. Some allow updation if the VIEW is from only one relation.
+
+- Database Definition:
+  To create the table:
+  CREATE TABLE TABLE_NAME (attribute1 type1, attribute2 type2.......)
+  CREATE TABLE BOOK (YR_PUB date, TITLE char[50], ACC_NO char[10])
+
+  To destroy the table:
+
+  DROP TABLE TABLE_NAME
+-------------------------------------------------------------------------------
