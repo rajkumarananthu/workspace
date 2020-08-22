@@ -646,3 +646,87 @@
 -------------------------------------------------------------------------------
 
 ### FUNCTIONAL DEPENDENCIES
+
+- A concept relating the attributes of a relation.
+- book(ACC_NO, YR_PUB, TITLE)
+  - We denote a dependency as ACC_NO -> YR_PUB. Read as YR_PUB is functionally dependent on ACC_NO.
+  - Its meaning is that we cannot have 2 different YR_PUB given same ACC_NO.
+  - On the same relation we can define ACC_NO -> TITLE. So we cannot have 2 different TITLE given same ACC_NO.
+- user(CARD_NO, B_NAME, B_ADDR)
+  - CARD_NO -> B_NAME
+  - CARD_NO -> B_ADDR
+- supplier relation
+  - S_NAME -> S_ADDR
+- borrow relation
+  - ACC_NO -> CARD_NO
+  - ACC_NO -> DOI
+- supp relation
+  - ACC_NO -> S_NAME
+  - ACC_NO -> PRICE
+  - ACC_NO -> DOS   
+- All these functional dependencies are based on primary key attributes. And all these dependencies must be checked while inserting/updating a database.
+- We can add other functional dependencies as well for a database, because we can have more than one candidate keys.
+- Let's say that in our borrow relation, we have only one book can be issued to a borrower, then we can define other FD's:
+  CARD_NO -> ACC_NO
+  CARD_NO -> DOI
+- The above FD's are based on the concept of CANDIDATE KEY.
+- Similary we can have FD's which are not defined by the KEYs at all.
+- These FDs will provide some additional conditions to check while insertion/updation.
+```
+- Formal defintion:
+  Α -> Β
+  Holds on a relation r(R) if (R is the set of attributes)
+  i) A,B ⊆ R and 
+  ii) if in any legal instance of r, we have 
+      ∀t1,t2 in T t1[A] = t2[A] ⇒ t1[B] = t2[B]
+```
+- Examples:
+  1. flight(FLIGHT_NO, C_ARR, C_DEPT, PL_TYPE)
+     seats_free(FLIGHT_NO, DATE, SEATS_AVL)
+
+     FLIGHT_NO -> C_ARR
+     FLIGHT_NO -> C_DEPT
+     FLIGHT_NO -> PL_TYPE
+     FLIGHT_NO,DATE -> SEAT_AVL
+
+  2. stud_addr(NAME, ADDR)
+     stud_grade(NAME, SUBJECT, GRADE)
+
+     NAME -> ADDR
+     NAME,SUBJECT -> GRADE 
+
+  3. deposit(BR_NAME, *AC_NO*, C_NAME, BALANCE)
+     customer(*C_NAME*, *STREET*, C_CITY)
+     borrow(BR_NAME, *LOAN_NO*, C_NAME, AMOUNT)
+     branch(*BR_NAME*, ASSETS, BR_CITY)
+
+     BR_NAME, C_NAME -> LOAN_NO (imposing a constraint that a customer can have only one loan in a branch_name)
+
+  4. Which functional dependencies hold here?
+     _______________________
+    |  X  |  Y  |  Z  |  W  |
+    -------------------------
+    | x1  | y1  | z1  | w1  |
+    -------------------------
+    | x1  | y2  | z1  | w2  |
+    -------------------------
+    | x2  | y2  | z2  | w2  |
+    -------------------------
+    | x2  | y3  | z2  | w3  |
+    -------------------------
+    | x3  | y3  | z2  | w4  |
+    -------------------------
+
+     X -> Y ( ✕ )
+     X -> Z ( ✓ )
+     X -> W ( ✕ )
+     Y -> X ( ✕ )
+     Y -> Z ( ✕ )
+     Y -> W ( ✕ )
+     Z -> X ( ✕ )
+     Z -> Y ( ✕ )
+     Z -> W ( ✕ )
+     W -> X ( ✕ )
+     W -> Y ( ✓ )
+     W -> Z ( ✕ )
+     Simalarly we can get through all the other combinations of the attributes.
