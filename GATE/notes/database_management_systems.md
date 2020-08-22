@@ -6,6 +6,8 @@
 3. [RELATIONAL ALGEBRA](database_management_systems.md#RELATIONAL-ALGEBRA)
 4. [RELATIONAL CALCULUS](database_management_systems.md#RELATIONAL-CALCULUS)
 5. [SQL](database_management_systems.md#SQL)
+6. [INTEGRITY CONSTRAINTS](database_management_systems.md#INTEGRITY-CONSTRAINTS)
+7. [FUNCTIONAL DEPENDENCIES](database_management_systems.md#FUNCTIONAL-DEPENDENCIES)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -565,3 +567,82 @@
 
   DROP TABLE TABLE_NAME
 -------------------------------------------------------------------------------
+
+### INTEGRITY CONSTRAINTS
+- To maintain the consistency of a database, we need to ensure that the conditions/constraints on which database is designed should hold.   
+- To ensure the consistency of the conditions, we need to check the condition very often mostly when we are doing INSERT, DELETE or UPDATE.
+- Checking consistency is also required in case of recovery from failure, during concurrent operations.
+- So to impose these conditions on the database, a database designed require tools/mechanisms for specifying the integrity constraints in a dbms so that the checks can be made effectively(detection/correction of errors and efficiently).
+- In ER Model:
+  Key constraints: Definfing the primary key and key attributes etc.,
+  Cardinality Constraints: Mapping constraints 
+  Type of the entity: Strong/Weak
+- In Relational model we have a general relation(predicate) which must always hold.
+- There are some useful schemes in specifying and checking the integrity constraints in a relational model.
+  Domain constraints: 
+  Referential Integrity:
+  Functional Dependencies:
+
+-------------------------------------------------------------------------------
+
+- Domain constraints: Definition of domains of each attribute.
+  Example:
+  ACC_NO char[20]
+         char[10]
+         INTEGER
+         UNSIGNED INTEGER
+         RANGE
+  DOI DATE
+  - This domain constraints are checked whenever we insert data into the relation.
+  - If the data violates the domain constraints it will give error.
+  - Along with these domain constraints we can place other condition as well.
+  - Let's say the library is started on 01/10/1996, then there is no point in having an entry with DOI as 01/08/1996.
+    DOI >= 01/10/1996
+    example for additional constraints:
+
+    SALARY (NAME, ADDR, DEPT, GROSS_SALARY, DEDUCTIONS, SALARY_PAID) GROSS_SALARY = DEDUCTIONS + SALARY_PAID
+
+-------------------------------------------------------------------------------
+
+- Referential Integrity Constraints:
+  Case -1:
+    book(ACC_NO, YR_PUB, TITLE)
+    borrow(ACC_NO, CARD_NO, DOI)
+
+  - Situation: There is a tuple with ACC_NO 57326 in borrow but no tuple with ACC_NO 57236 in book relation.
+  - This is a problem because, we know borrow is a relation with books those are borrowed by specific CARD_NO. But now it is saying there is a book that is borrowed, but that is book is not avaiable in the library book database. This situation is meaningless and inconsistent.
+  Case - 2:
+  - There is a tuple with ACC_NO 57236 in book, but no tuple with ACC_NO 57236 in borrow relation.
+  - This is fine, as it says that a specific book is in book data base in the library, but it is not borrowed by any. This is absolutely fine.
+  - This is consistent.
+
+  - Now here there are 2 situations which are syntactically similar but one lead to consistent state and other lead to inconsistent state.
+  - This give the idea to consider REFERENTIAL INTEGRITY, also called as SUBSET DEPENDENCIES.
+
+  Solution:
+  - If we say that the ACC_NO in borrow must be a foreign key referencing to book, then it says that an ACC_NO in borrow exists iff it exists in book relation.
+  - This will solve our problem of inconsistency. Foriegn key will always be referencing to a PRIMARY KEY in the referenced relation.
+
+  Formal Definition:
+  Let r1(R1) r2(R2)  be relations suppose alpha (subset of R2) is a foreign key referencing k1 (primary key of r1) if: pi(alpha)(r2) subset of pi(k1)(r1)
+
+  SQL constructs to enforce these constraints:
+  
+  - CREATE TABLE USER (CARD_NO CHAR[8] NOT NULL, B_NAME CHAR[20] NOT NULL, B_ADDR CHAR[500], PRIMARY KEY (CARD_NO))
+  - CREATE TABLE book ( ACC_NO CHAR[10] NOT NULL, YR_PUB DATE, TITLE CHAR[10] NOT NULL, PRIMARY KEY(ACC_NO) )
+  - CREATE TABLE BORROW (ACC_NO CHAR[10] NOT NULL, CARD_NO CHAR[8] NOT NULL, DOI DATE NOT NULL, PRIMARY KEY (ACC_NO), FOREIGN KEY(ACC_NO) REFERENCING(BOOK), FOREIGN KEY (CARD_NO) REFERENCING (USER))
+
+  - Database modification with referential integrity:
+
+    Constraint: pi(alpha)(r2) subset of pi(k)(r1)
+
+    INSERT: If t2 is inserted in r2 ensure that t2(alpha) ∈  pi(k)(r1)
+
+    DELETE: It t1 is deleted from r1 we must ensure that sigma(alpha = t1[k]) (r2) is empty
+
+    UPDATE: if t2 is updated in r2 and update modifies values for foreign key aplha then check is similar to INSERT.
+            if t1 is updated in r1 and update modifies values for primary key k then check is similar to DELETE.
+
+-------------------------------------------------------------------------------
+
+### FUNCTIONAL DEPENDENCIES
