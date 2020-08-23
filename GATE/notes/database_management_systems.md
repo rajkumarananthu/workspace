@@ -859,3 +859,33 @@
     D -> B
   ```
 
+- A functional dependency A -> B is said to be trivial if A ⊇ B.
+- To get the minimal cover we use the following rule:
+  1) Identical check: Decompose complex FD and find the identical one if any and remove them.
+  2) derivable check: If some FD can be derived from other FDs remove it.
+
+- NOTE:
+  - When we want to impose complex constraints like involving more than one relation, our traditional integrity constraints are not sufficient.
+  - So we have the most generalized concept of integrity constraint concept called ASSERTION.
+
+-------------------------------------------------------------------------------
+
+- Assertions:
+  ASSERT YR_CONSTRAINT ON BOOK: YR_PUB >= 1800 AND YR_PUB \<= 1996
+
+  - Assertions are more costlier operation compared to FDs. Because FDs are defined most oftenly in terms of primary keys.
+  - So we can optimize the efficiency of FDs.
+
+  Examples:
+
+  1. ASSERT BORROW_CONSTR ON INSERTION TO BORROW: EXISTS (SELECT * FROM BOOK WHERE BORROW.ACC_NO = BOOK.ACC_NO) AND EXISTS (SELECT * FROM USER WHERE BORROW.CARD_NO = USER.CARD_NO)
+
+- Triggers: Daemons
+  - Daemon is something that wakes up on a condition and perform a certain action.
+  - Assertion is a Daemon.
+  - Assertion just check the constraint. But triggers allow us to modify the database.
+
+  NOTE: We need to be very careful when adding assertions or triggers because assertions are very costly to use and triggers sometimes may lead to invocation of other triggers. This will slow down the database.
+-------------------------------------------------------------------------------
+
+###
