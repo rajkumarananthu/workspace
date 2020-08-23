@@ -8,6 +8,7 @@
 5. [SQL](database_management_systems.md#SQL)
 6. [INTEGRITY CONSTRAINTS](database_management_systems.md#INTEGRITY-CONSTRAINTS)
 7. [FUNCTIONAL DEPENDENCIES](database_management_systems.md#FUNCTIONAL-DEPENDENCIES)
+8. [DATABASE DECOMPOSITION](database_management_systems.md#DATABASE-DECOMPOSITION)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -888,4 +889,34 @@
   NOTE: We need to be very careful when adding assertions or triggers because assertions are very costly to use and triggers sometimes may lead to invocation of other triggers. This will slow down the database.
 -------------------------------------------------------------------------------
 
-###
+### DATABASE DECOMPOSITION
+
+- To improve the design(which consists of set of attributes, set of schemas, set of relations, set of integrity constratins and FDs)
+- What is a good design?
+  - efficiency - how fast the results are produced.
+- Steps to generate a good design:
+  - decomposition: to ensure insert/delete/update works quickly and efficiently.
+  - query optimization: to ensure that each query is evaluated fast.
+  - efficient file handling & implementation: both the above are indirectly dependant how the data is stored in the disk at low level.
+
+-------------------------------------------------------------------------------
+
+- Decomposition:
+  - Example: S_BY(S_NAME, S_ADDR, ITEM, PRICE)
+            - S_NAME -> S_ADDR
+            - S_NAME, ITEM -> PRICE
+    - Now in this example, based on the given FDs, a supplier may supply 1000s of items and for each item that is stored in the table, we save the same supplier name and supplier address. This causes a very serious problem called REDUNDANCY.
+    - Now lets say that a supplier changed his address to some other place, now to protect the functional dependency S_NAME -> S_ADDR we have to change the address corresponding to that particular S_NAME in the whole table S_BY. This is caused by REDUNDANCY.
+    - This redundancy will introduce difficulties in insertion/deletion/updation.
+  - Solution: Breakup the table. How? Based on the FDs (Lossless Decomposition)
+    - S_BY2(S_NAME, S_ADDR)          -------> S_NAME -> S_ADDR
+    - S_BY1(S_NAME, ITEM, PRICE)  -------> S_NAME,ITEM -> PRICE
+    - Now the problems that we faced earlier are not seen now, just by decomposition without loosing the integrity constraints and data.
+    - We didn't loose any data because we can obtain the original S_BY by naturally joining the two relations S_BY1 and S_BY2.
+  - Apart from Lossless decomposition, there is one more desirable property which is the new FDs that we get on the individual relations after decomposition must cover the original one. This is called **Dependency Preservation**.
+  - So all together a good design in terms of decomposition should have:
+    - reduction of REDUNDANCY
+    - LOSSLESS join
+    - DEPENDENCY preservation
+
+-------------------------------------------------------------------------------
