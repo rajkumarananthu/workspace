@@ -703,6 +703,7 @@
      BR_NAME, C_NAME -> LOAN_NO (imposing a constraint that a customer can have only one loan in a branch_name)
 
   4. Which functional dependencies hold here?
+    ```
      _______________________
     |  X  |  Y  |  Z  |  W  |
     -------------------------
@@ -716,6 +717,7 @@
     -------------------------
     | x3  | y3  | z2  | w4  |
     -------------------------
+    ```
 
      X -> Y ( ✕ )
      X -> Z ( ✓ )
@@ -730,3 +732,130 @@
      W -> Y ( ✓ )
      W -> Z ( ✕ )
      Simalarly we can get through all the other combinations of the attributes.
+
+- From the formal definition of an FD, if A -> R (if A gives all the attributes of relation r) holds, then A is SUPER KEY of the relation r.
+- From the common database example, the applicable FDs are as follows:
+
+  ACC_NO -> YR_PUB, TITLE, CARD_NO, DOI, S_NAME, PRICE, DOS
+  CARD_NO -> B_NAME, B_ADDR
+  S_NAME -> S_ADDR 
+
+- FDs are useful in expressing PRIMARY/CANDIDATE/SUPER KEYS.
+- We can have FDs between attributes which are not primary or candidate keys.
+
+------------------------------------------------------------------------------- 
+
+- Full Functional Dependency: When the functional dependency is MINIMAL in size (containing NON-REDUNDANT terms).
+- Redundant terms can be on left side or right side. To understand redundant terms, we need to know the closure of a set of FDs.
+
+- Closure of a set of FD's:
+  F+ : Closure of F: The set of FDs which logically follow F.
+
+  Example:
+  Let R = (A,B,C,D,E,F)
+ 
+     ```
+     A -> B
+     A -> C
+     CD -> E
+     CD -> F
+     B -> E
+     ```
+
+    From the above FDs we can get additional FDs like:
+     ```
+     A -> E 
+     AB -> B
+     AC -> B
+     AD -> B
+     ABCD -> B
+     etc.,
+     ```
+    
+    We can derive all such additional FDs from the given FDs, and combination of all such FDs is called CLOSURE of set of FDs.
+
+  Example:
+
+     ```
+     ACC_NO -> YR_PUB, TITLE
+     ACC_NO -> CARD_NO, DOI
+     CARD_NO -> B_NAME, B_ADDR
+     S_NAME -> S_ADDR
+     ACC_NO -> S_NAME, PRICE, DOS
+     ```
+
+    From the above FDs we can get additional FDs like:
+     ```
+     ACC_NO -> B_NAME, B_ADDR
+     ACC_NO -> S_ADDR
+     ACC_NO -> ACC_NO
+     YR_PUB -> YR_PUB
+     ```
+    
+- Closure of Attribute set:
+  The set of all attributes functionally determined by A(set of attributes) under a set of FDs.
+  or
+  if A is set of attributes from the FD F i.e., A(F), then closure of attributes of A(F) denoted by A+(F) is given by the set of attributes that can be logically derived from A.
+
+  Example:
+
+     ```
+     ACC_NO -> YR_PUB, TITLE
+     ACC_NO -> CARD_NO, DOI
+     CARD_NO -> B_NAME, B_ADDR
+     S_NAME -> S_ADDR
+     ACC_NO -> S_NAME, PRICE, DOS
+     ```
+
+    Now ACC_NO+(F) = {ACC_NO, YR_PUB, TITLE, CARD_NO, DOI, S_NAME, PRICE, DOS, S_ADDR, B_NAME, B_ADDR}
+
+- Computation of Closure of FDs: ARMSTRONG'S AXIOMS
+  3 Rules:
+    1) Reflexivity Rule: if B ⊆  A then A -> B holds
+    2) Augmentation Rule: if A -> B holds then CA -> CB holds
+    3) Transitivity Rule: if A -> B holds and B -> C holds then A -> C holds.
+  By applying all these 3 rules one by one, repetitivelyi(until none of them is applicable further) we can get F+.
+
+  - Armstrong's AXIOMS are:
+    SOUND: Any new FD derived by the axioms is indeed a member of the closure.
+    COMPLETE:  All elements of the closure can be determined by repeated application of the axioms.
+
+  - Other useful rules: (can be derived using armstrong's axioms themselves)
+    Union: if A -> B holds, A -> C holds, then A -> BC holds.
+    Decomposition: if A -> BC holds then A -> B holds and A -> C holds
+    Psuedo Transitivity: if A -> B holds and BC -> D holds then AC -> D holds.
+
+- Computation of closure of attributes:
+  ```
+    ALGORITHM to compute A+(F) {
+        RESULT <- A
+        MODIFIED <- TRUE
+        WHILE (MODIFIED) {
+            MODIFIED <- FALSE
+            ∀ FD A -> B IN F DO {
+                IF A ⊆ RESULT {
+                    RESULT <- {RESULT} ∪ {B}
+                    MODIFIED <- TRUE if RESULT CHANGES
+                }
+            }
+        }
+    }
+  ```
+- Cover of a set of FDs:
+  Let F and G be two sets of FDs on a relation scheme R, then **F is a cover of G** if F+ = G+ (F is equivalent to G).
+- Minimal cover/canonical cover (Fc):
+  A cover is said to be minimal if it has no redundant term.
+
+  Example:
+  ```
+  A -> BC 
+  AC -> D
+  D -> B
+  AB -> D
+  ```
+  Minimal cover is: 
+  ```
+    A -> CD
+    D -> B
+  ```
+
