@@ -920,3 +920,58 @@
     - DEPENDENCY preservation
 
 -------------------------------------------------------------------------------
+
+- Lossless Join:
+  - Let R = {R1, R2, R3, R4 ...Rn} be a decomposition D.
+  - Then D is said to satisfy the LOSSLESS JOIN property if for each T(R) tuple of R we have 
+     `r = pi(R1)(r) natural join pi(R2)(r).....`
+
+- Dependency preservation:
+  - Let R = {R1, R2, R3, R4 ...Rn} be a decomposition D.
+  - Let F be the set of FDs that hold on R.
+  - Let Fi be the set of FDs in F+ that hold on Ri.
+  - Then the decomposition is said to be DEPENDENCY PRESERVING if
+    `F+ = F1 U F2 ....`
+
+- A good decomposition is one that is free from redundancy, gives lossless join, preserve the dependency.
+
+-------------------------------------------------------------------------------
+
+- Normal forms:
+  - The objective of normal forms is to give a good design, to reduce redundancy.
+
+- FIRST Normal Form(1NF): All attributes must be simple.
+  - Simple attributes are those attributes which are/have not sub parts as attributes.
+    - Example: First Name, Last Name
+  - The atrributes which are having sub parts like a structured definition are called complex attributes.
+    - Example: Name (First and Last), Address (street, D.no ect.,)
+  - No concept of FD.
+  - Example:
+    ![First normal form](../images/)
+
+- SECOND Normal Form(2NF): A relation R is in 2NF if every non-prime attribute of R is fully functionally dependent on each candidate key of relation.
+  - Non-prime attributes: The attributes which are not part of the candidate key of relation.
+  - Prime attributes: The attributes which are part of the candidate key of relation.
+  - Fully Functionally Dependent: A -> B is fully functionally dependent iff we cannot remove a part of A and the FD still holds.
+  - Example:
+    - LOAN_SCH(C_NAME, LOAN_NO, AMOUNT)
+    - C_NAME, LOAN_NO -> AMOUNT
+    - Candidate key from the FD is {C_NAME, LOAN_NO}. C_NAME, LOAN_NO are the prime attributes, AMOUNT is the non-prime attributes.
+    - And AMOUNT is fully functionally depenedent on {C_NAME, LOAN_NO}, therefore it is in 2NF.
+  - Example:
+    - COURSES(COURSE_NO, TITLE, LOC, TIME)
+    - COURSE_NO -> TITLE
+    - COURSE_NO,TIME -> LOC
+    - Candidate key = {COURSE_NO, TIME}. Prime attributes = {COURSE_NO, TIME}, Non-prime attributes = {LOC, TITLE}
+    - Now from here, the non-prime attribute TITLE is not fully functionally dependent on the candidate keys.
+    - As a result this is not in 2NF.
+    - Solution: Break the relations into 2.
+      - COURSE_TITLE(COURSE_NO, TITLE)     ------>   COURSE_NO -> TITLE
+      - COURSE_OTHER(COURSE_NO, LOC, TIME) ------>   COURSE_NO, TIME -> LOC
+      - Both are in 2NF, redundancy eliminated, lossless join, FD preservancy.
+  - Example:
+    - BANKER(BR_CODE, C_NAME, AGENT)
+    - AGENT -> BR_CODE
+    - C_NAME, BR_CODE -> AGENT
+    - Candidate key = {C_NAME, BR_CODE}, {AGENT, C_NAME}. Non-prime attribute = NULL(empty), no non-prime attributes.
+    - But is there redundancy here? - Lecture says YES, there is redundancy. But I didn't get that correct.
