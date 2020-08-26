@@ -949,7 +949,7 @@
   - Example:
     ![First normal form](../images/)
 
-- SECOND Normal Form(2NF): A relation R is in 2NF if every non-prime attribute of R is fully functionally dependent on each candidate key of relation.
+- SECOND Normal Form(2NF): A relation R is in 2NF if it is already in 1NF and every non-prime attribute of R is fully functionally dependent on each candidate key of relation.
   - Non-prime attributes: The attributes which are not part of the candidate key of relation.
   - Prime attributes: The attributes which are part of the candidate key of relation.
   - Fully Functionally Dependent: A -> B is fully functionally dependent iff we cannot remove a part of A and the FD still holds.
@@ -974,4 +974,47 @@
     - AGENT -> BR_CODE
     - C_NAME, BR_CODE -> AGENT
     - Candidate key = {C_NAME, BR_CODE}, {AGENT, C_NAME}. Non-prime attribute = NULL(empty), no non-prime attributes.
-    - But is there redundancy here? - Lecture says YES, there is redundancy. But I didn't get that correct.
+    - It is in 2NF, but the redundancy is still existing, because there may be 2 customers with 2 diff agents and these 2 diff agents may belong to same branch. So the BR_CODE is casuing the redundancy.
+  - Example:
+    - S_BY(S_NAME, ITEM, PRICE, GIFT_ITEM)
+    - S_NAME, ITEM -> PRICE
+    - PRICE -> GIFT_ITEM
+    - Candidate key = {S_NAME, ITEM}, Non-prime attribute = {PRICE, GIFT_ITEM}, Prime-attribute = {S_NAME, ITEM}
+    - Both PRICE and GIFT_ITEM(through transitivity) are fully functionally dependent on the candidate key.
+    - It is in 2NF, but there is still redundancy existing. For each item of same price, the PRICE and GIFT_ITEM is causing the redundancy.
+  - In the last 2 examples, we have an FD which is comprising of non-prime attributes.
+  - As we are not able to completely remove the redundancy with 2NF, we proceed further through 3NF.
+
+- THIRD Normal Form: A realtion R is in 3NF if it is in 2NF and no non-prime attribute is functionally dependent on other non-prime attributes.
+  - Example:
+    - BANKER(BR_CODE, C_NAME, AGENT)
+    - AGENT -> BR_CODE
+    - C_NAME, BR_CODE -> AGENT
+    - Candidate key = {C_NAME, BR_CODE}, {AGENT, C_NAME}. Non-prime attribute = NULL(empty), no non-prime attributes.
+    - It is in 2NF and 3NF(No non-prime attributes, so implicitly it is in 2NF and 3NF), but the redundancy is still existing, because there may be 2 customers with 2 diff agents and these 2 diff agents may belong to same branch. So the BR_CODE is casuing the redundancy.
+
+- Boyce-Codd Normal Form: A relation schem R is in BCNF if for all FDs A -> B which hold on R either of the following two hold:
+                          - A superset of B (Trivial FD)
+                          - A -> R ( A is a super key)
+  - As the first one if a trivial FD we generally don't consider trivial FD.
+  - As the second one states that A must be superkey, if A is a superkey then there is no chance of redundancy.
+  - BCNF is the intersection of 2NF and 3NF.
+    - 3NF: if A -> B is a FD, then A is superset of B or A -> R (A is super key) or Each attribute C in B is a part of some candidate key.
+    - 2NF: if A -> B is a FD, then A is superset of B................(need to fill here)
+  - Dependency preservation is not always possible with BCNF.
+  - Example:
+    - BANKER(BR_CODE, C_NAME, AGENT)
+    - AGENT -> BR_CODE
+    - C_NAME, BR_CODE -> AGENT
+    - Candidate key = {C_NAME, BR_CODE}, {AGENT, C_NAME}. Non-prime attribute = NULL(empty), no non-prime attributes.
+    - In 3NF, so to get the BCNF, we decompose the relation:
+      - B_1(AGENT, BR_CODE)
+      - B_2(C_NAME, AGENT)
+    - Here in this we got rid of redundancy by the FD didn't get preserved.
+  - So we can have one of the following:
+    - 3NF, lossless join, and dependency preserving relation.
+    - BCNF, lossless join. (Dependency preservation is not guranteed, in some cases we may get preservation but not all).
+  - We have to make trade off between the redundancy to dependency preservation in such cases.
+
+-------------------------------------------------------------------------------
+
