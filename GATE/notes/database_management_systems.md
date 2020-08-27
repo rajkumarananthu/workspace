@@ -9,6 +9,7 @@
 6. [INTEGRITY CONSTRAINTS](database_management_systems.md#INTEGRITY-CONSTRAINTS)
 7. [FUNCTIONAL DEPENDENCIES](database_management_systems.md#FUNCTIONAL-DEPENDENCIES)
 8. [DATABASE DECOMPOSITION](database_management_systems.md#DATABASE-DECOMPOSITION)
+8. [FILE SYSTEM](database_management_systems.md#FILE-SYSTEM)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -902,6 +903,9 @@
 -------------------------------------------------------------------------------
 
 - Decomposition:
+  - Motivation: Reduction of Redundancy
+  - Necessary Condition: Lossless join
+  - Desired Condition: Dependency preservation
   - Example: S_BY(S_NAME, S_ADDR, ITEM, PRICE)
             - S_NAME -> S_ADDR
             - S_NAME, ITEM -> PRICE
@@ -1018,3 +1022,76 @@
 
 -------------------------------------------------------------------------------
 
+- Method to obtain Lossless join BCNF decomposition:
+  - Database Decomposition - 4
+- Method to obtain Lossless join, dependency preservation 3NF decomoposition:
+  - Database Decomposition - 4
+
+-------------------------------------------------------------------------------
+
+### FILE SYSTEM
+- The cases where the file system access is required:
+  - To store the Data Dictionary. -> require non-volatile memory
+  - To store actual Database. -> require non-volatile memory
+  - Intermdiate computation. -> can be done in volatile memory
+  - Queries. -> can be done in volatile memory.
+- Types of physical storage media:
+  - Cache memory -> Volatile memory
+  - Main memory -> Volatile Memory
+  - Disk Storage(Direct Access storage) -> Non-Volatile memory
+  - Tape Storage(Sequential Access storage) -> Non-Voltile memory
+- Objective:
+  - How tables are stored physically?
+  - How can we access these tables effectively and efficiently?
+- Disk storage has a number of disks placed on top of each other. To access the data stored in the disk, we have read/write head that will move on the disk as the disk rotates. Data is stored in terms of concentric cricles called Tracks.
+- We have 2 types of times which are required to read/write data.
+  - Seek time: time required to place the read/write head on the track.
+  - Latency: time required to read/write a unit of data.
+- Disk Organization:
+  - Track: are comprised of blocks.
+
+  ![Representation of Track](../images/representation_of_track.png)
+
+  - Block: A unit of data that is read in one go.
+  - Records:
+    - Fixed Length Blocking for Fixed Length Records:
+
+      ![Fixed length Records](../images/fixed_length_records.png)
+
+      - Each table is stored as a file. And each tuple in the relation table is stored as a record in the file.
+      - Each of these records are stored in Block.
+      - A block is divided into parts called and records and two records have inter-record gap between them.
+    - Variable Length Records:
+      - In some cases we may decide to have one record for each attribute, because the size is big enough for the block.
+      - In such cases we will come across variable length records.
+      - There are other cases where we will come across variable length records - in one file we may store more than one table.
+      - 2 types:
+        - Unspanned: Doesn't allow a part of record in one block and other part in other block.
+        - Spanned: Allow part of record in one block and other part in other block.
+    - Pinned and Unpinned Records: ??
+  - Files: Collection of Records
+    - Data Dictionaries:
+      - Relation names
+      - Attribute names
+      - Domain
+      - View definitions
+      - Integrity constraints
+      - Access rights
+      - Corresponding data files
+    - Data Files:
+      - One Relation to one file
+      - One relation to many files
+      - Many realtions to one file
+- Buffer Management:
+  - A scheme to manage the existing blocks of data in the main memory as required by the CPU for query processing.
+  - Uses locality of reference, block replacement policy, taking care of pinned and unpinned records etc.,
+  - Part of Operating system.
+
+-------------------------------------------------------------------------------
+
+- File Organization: How records are organized inside a file. 
+  - Heap or Pile
+  - Sequential file
+  - Indexed Sequential Files
+  - Hashed Files
+  - B-Tress/B+ Trees
