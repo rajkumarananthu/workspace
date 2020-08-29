@@ -1094,4 +1094,47 @@
   - Sequential file
   - Indexed Sequential Files
   - Hashed Files
-  - B-Tress/B+ Trees
+  - B-Trees/B+ Trees
+- Heap or Pile Organization: 
+  - Simplest form of organization, data is piled up/stacked up one after another.
+  - Insertion is done by stacking.
+  - Deletion is done by setting a field in record. (Physically no removing)
+  - Search by Brute force (From top/bottom). (No much help in searching, which is main for queries and deletion)
+  - We can have additional garbage collection to remove the deleted records frequently.
+- Sequential Files:
+  - Records are kept in sequential order based on some attributes(usually the primary key).
+  - Searching is done in the order based on the primary. We do search in terms of blocks(gets a block and do a binary search) because as the primary key is sorted.
+  - Insertion is very costly here, because each time we insert a new record, the existing records must be adjusted to insert a new one.
+  - Deletion is also similar to Insertion, a deletion of a record makes other records to be moved up or down.
+  - Example:
+    - BOOK(ACC_NO, TITLE, YR_PUB)
+    ```
+     _______________________________________
+    | 5721  | COMPILER DESIGN        | 1978 |
+    -----------------------------------------
+    | 5732  | DATABASE ENGG          | 1986 |
+    -----------------------------------------
+    | 5734  | DATABASE ENGG          | 1986 |
+    -----------------------------------------
+    | 5735  | ALGORITHMS             | 1992 |
+    -----------------------------------------
+    | 5740  | GRAHICS                | 1994 |
+    -----------------------------------------
+    ```
+  - Different solutions for the problems of sequential Files.
+
+- Indexed Sequential Files:
+  - The problem with sequential files is that we have access the records in a sequential manner where as the disk is a direct access device.
+  - The solution is such that, we maintain an index over the sequential file. An index is a smaller file which is sorted according to one of the attribute like primary key.
+
+    ![Index file](../images/index_file.png)
+  
+  - We have the entries in the index file sorted. And we start searching from index file, instead of searching actual sequential file.
+  - This index file is in turn another sequential file (generally much smaller than the sequential file).
+  - There are 2 types of indexing:
+    - DENSE INDEX:
+    - SPARSE INDEX:
+  - The insetion and deletion are more complex in these indexed sequential files. 
+  - If the index file grows to a bigger size. We can have a multi-level indexing(indexing on index files).
+  - Generally we use sparse index over the index file as they are always sorted.
+  - We can also index on an attribute which is not a primary key also, using bucketing.
