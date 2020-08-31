@@ -1138,3 +1138,18 @@
   - If the index file grows to a bigger size. We can have a multi-level indexing(indexing on index files).
   - Generally we use sparse index over the index file as they are always sorted.
   - We can also index on an attribute which is not a primary key also, using bucketing.
+
+-------------------------------------------------------------------------------
+
+- The major problem with the indexing is: In case of multi-level indexing, we may conitnuosly need to update the indices/index files in case of an insertion/deletion to the table. This may cause a lot of over head.
+- The solution to this is B+ Trees.
+- B+ Tree is a balenced-biary Search tree.
+- B+ Trees Index Files:
+  - Motivation: After a certain number of insertions/updations, the indexed files may get skewed, i.e., one index may refer to a very large number of records and one may refer to very few number of records.
+    - The solution to this is to have a multi-level indexing and the number of levels of to be dynamic. So that each level access an approximately equal number of blocks.
+    - The searching in a binary search tree is similar to searching in the indexed files. So the number of levels are indicated by balencing the tree.
+    - For a binary search tree, if there are n nodes then the height must not be greater that *log n*.
+  - So with this explanation we proceed to have the indexing in a tree manner instead of sequential.
+  - Size of each node in a B+ Tree is equal to the size of the block.
+  - For each index node here, we have K records and K+1 pointers. (Each record corresponding to a key attribute)
+  - 
