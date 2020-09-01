@@ -1150,10 +1150,14 @@
     - The searching in a binary search tree is similar to searching in the indexed files. So the number of levels are indicated by balencing the tree.
     - For a balenced binary search tree, if there are n nodes then the height must not be greater that *log n*.
   - So with this explanation we proceed to have the indexing in a tree manner instead of sequential.
-  - Size of each node in a B+ Tree is equal to the size of the block.
+  - Size of each node in a B+ Tree is equal to the size of the block. There are 2 types of node: Internal Node(Non-leaf Node) and Leaf Node.
+  - All the leaf nodes are at the same level in a B+ Tree.
+  - We can differentiate the intermediate node from leaf node using a TAG(for programming purpose) or we can take the help of the height of the tree(because all the leaf nodes are at same level).
   - For each index node here, we have K records and K+1 pointers. (Each record corresponding to a key attribute)
 
-    ![B+ Tree Node](../images/)
+    ![B+ Tree Intermediate (Non-Leaf) Node](../images/)
+
+    ![B+ Tree Leaf Node](../images/)
 
   - The most important property of B+ Tree is: **ALL INDEX BLOCKS HAVE TO BE ATLEAST HALF FULL.**
   - Insertion:
