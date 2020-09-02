@@ -1152,6 +1152,7 @@
   - So with this explanation we proceed to have the indexing in a tree manner instead of sequential.
   - Size of each node in a B+ Tree is equal to the size of the block. There are 2 types of node: Internal Node(Non-leaf Node) and Leaf Node.
   - All the leaf nodes are at the same level in a B+ Tree.
+  - In B+ Tress, insert, delete and find all can be done in O(log N) time.
   - We can differentiate the intermediate node from leaf node using a TAG(for programming purpose) or we can take the help of the height of the tree(because all the leaf nodes are at same level).
   - For each index node here, we have K records and K+1 pointers. (Each record corresponding to a key attribute)
 
@@ -1168,3 +1169,9 @@
 
     ![B+ Tree Insertion Step 3](../images/b_plus_tree_insertion3.png)
 
+  - Deletion:
+
+- B-Tree: A variant of B+ Tree which tries to save some place.
+- Hashed files: Uses Hashed Index
+  - f(A) -> value; (Hashing)
+  - Use a function to map the attribute value to a block pointer.
