@@ -9,7 +9,8 @@
 6. [INTEGRITY CONSTRAINTS](database_management_systems.md#INTEGRITY-CONSTRAINTS)
 7. [FUNCTIONAL DEPENDENCIES](database_management_systems.md#FUNCTIONAL-DEPENDENCIES)
 8. [DATABASE DECOMPOSITION](database_management_systems.md#DATABASE-DECOMPOSITION)
-8. [FILE SYSTEM](database_management_systems.md#FILE-SYSTEM)
+9. [FILE SYSTEM](database_management_systems.md#FILE-SYSTEM)
+10. [RECOVERY FROM FAILURE](database_management_systems.md#RECOVERY-FROM-FAILURE)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -1175,3 +1176,63 @@
 - Hashed files: Uses Hashed Index
   - f(A) -> value; (Hashing)
   - Use a function to map the attribute value to a block pointer.
+
+-------------------------------------------------------------------------------
+
+### RECOVERY FROM FAILURE
+
+- Any computing system is subjected to scenario of failure. Failure can occur due to power failure, software error, hardware error etc.,
+- In database system these failures are to be treated with atmost care. (Not only databases, in every information system we need to tackle these failure with care).
+- Atomicity & Consistency and Commitment - These principles can make sure that data stays consistent in the database.
+- Basic approach of recovery:
+  - Action during normal processing to ensure retaining sufficient information for recovery.
+  - Action taken after failure.
+- Storage types:
+  - Volatile storage.
+  - Non-Volatile storage.
+  - Stable storage. -> A set of interconnect non-volatile storage.
+- Categories of Failure:
+  - Logical Errors
+  - System Errors
+  - System Crash
+  - Disk Crash
+- Data Transfer b/w Main memory and Secondary Disk:(These are done by system not the user).
+  - INPUT(X) :- Transfer the block where X resides from Secondary disk to Main memory.
+  - OUTPUT(X) :- Transfer the buffer block(from Main memory) on which X resides to Secondary disk replacing the old block.
+  - Note:
+    - X is a variable, may be a record or an attribute in a record.
+- Operation performed by User:
+  - READ(X,xi):
+    - If X not in Main memory INPUT(X)
+    - xi <- X
+  - WRITE(X,xi):
+    - If X not in main memory INPUT(X)
+    - X <- xi
+  - The OUTPUT(X) (to write the updated xi) function is used depending on buffer management technique used.
+- Transaction: (Informal: An atomic job(a job which must be completed as a single job) in which a variable is atmost read once and atmost written once is called a transaction)
+  - Formal: A program unit that reads required data items only once and write them(if updated) only once.
+  - It maintains database consistency.
+  - Example:
+    ```
+    T: READ(A, a1)
+       a1 <- a1 + 500
+       WRITE(A, a1)
+       READ(B, b1)
+       b1 <- b1 - 500
+       WRITE(B, b1)
+    ```
+  - Features of a Transaction:
+    - Correctness and Consistency.
+    - Atomicity.
+  - States of A Transaction:
+    - Active :- When the transaction execution is in progress.
+    - Partially committed :- When the transaction execution is completed, but the effective changes are not written to disk(or necessarry action is not taken).
+    - Failed :- When the transaction failed due to some error.
+    - Aborted :- When after the fail, you cannot go back to some previous state and you have restart the whole transaction again.
+    - Committed :- When the changes respective to the transaction are written back to disk or some necessary action is taken to ensure that the write will happen to disk.
+    - Note: If the transaction failed/aborted then we can have 2 options, one is RESTART other is KILL.
+    - State diagram of a transaction:
+    
+      ![State Diagram of a Transaction](../images/state_diagram_transaction.png)
+
+-------------------------------------------------------------------------------
