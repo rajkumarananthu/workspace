@@ -1155,9 +1155,16 @@
   - We can differentiate the intermediate node from leaf node using a TAG(for programming purpose) or we can take the help of the height of the tree(because all the leaf nodes are at same level).
   - For each index node here, we have K records and K+1 pointers. (Each record corresponding to a key attribute)
 
-    ![B+ Tree Intermediate (Non-Leaf) Node](../images/)
+    ![B+ Tree Intermediate (Non-Leaf) Node](../images/b_plus_tree_nonleaf_node.png)
 
-    ![B+ Tree Leaf Node](../images/)
+    ![B+ Tree Leaf Node](../images/b_plus_tree_leaf_node.png)
 
   - The most important property of B+ Tree is: **ALL INDEX BLOCKS HAVE TO BE ATLEAST HALF FULL.**
-  - Insertion:
+  - Insertion: Example for K = 2, so 2 records and 3 pointers.
+
+    ![B+ Tree Insertion Step 1](../images/b_plus_tree_insertion1.png)
+
+    ![B+ Tree Insertion Step 2](../images/b_plus_tree_insertion2.png)
+
+    ![B+ Tree Insertion Step 3](../images/b_plus_tree_insertion3.png)
+
