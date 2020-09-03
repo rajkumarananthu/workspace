@@ -11,6 +11,7 @@
 8. [DATABASE DECOMPOSITION](database_management_systems.md#DATABASE-DECOMPOSITION)
 9. [FILE SYSTEM](database_management_systems.md#FILE-SYSTEM)
 10. [RECOVERY FROM FAILURE](database_management_systems.md#RECOVERY-FROM-FAILURE)
+11. [CONCURRENCY CONTROL](database_management_systems.md#CONCURRENCY-CONTROL)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -1355,3 +1356,62 @@
 - Shadow Paging: ???
 
 -------------------------------------------------------------------------------
+
+### CONCURRENCY CONTROL
+
+- To increase the throughput of CPU(from the IO operations), we make use of concurrent operations/multi programming.
+- Multi Programming: More than one Transaction(database terminology) is in an active state at a point of time.
+  - Multi processing: with multiple processors.
+  - Time-Share processing: single processor is distributed among multiple programs.
+- The problem with concurrent processing arises with 2 transactions operating on some shared data, which may lead to inconsistency.
+- The most important criteria for 2 transaction T1 and T2 can be concurrent is that, whether we execute T2 followed T1 or T1 followed by T2, the system must reach to a consistent same state.
+- Note: If the 2 transactions in discussion don't share any data, then any sort of interleaving is ok. If they do share some common data, then some of the possible interleavings are not fine, which we will see further.
+- A schedule is a sequence in which the transaction occurs.
+- A schedule of transactions, such that one transaction strictly and distinctly follows other is called Serial Schedule.
+- A schedule of transactions, such that one transaction inteleaves with other is called concurrent schedule.
+- Example:
+  ```
+  T0: READ(X)		T1: READ(X)
+      X <- X - 100	    T <- X * 0.2
+      WRITE(X)		    X <- X - T
+      READ(Y)		    WRITE(X)
+      Y <- Y + 100	    READ(Y)
+      WRITE(Y)		    Y <- Y + T
+      			    WRITE(Y)
+  ```
+  - The above transactions if executed in the order T0T1 or T1T0, then it is called serial schedule.
+  - If the above transactions are executed in the following order, then it is called concurrent schedule:
+  - Let's say X = 500, Y = 1000 at the start:
+    ```
+    T0: READ(X)
+        X <- X - 100
+        WRITE(X)		          ---> After this X = 400, Y = 1000
+                          T1: READ(X)
+  			      T <- X * 0.2
+  			      X <- X - T
+  			      WRITE(X)    ---> After this X = 320, Y = 1000
+        READ(Y)
+        Y <- Y + 100
+        WRITE(Y)			  ---> After this X = 320, Y = 1100
+                              READ(Y)
+  			      Y <- Y + T
+  			      WRITE(Y)    ---> After this X = 320, Y = 1180
+    ```
+  - The resultant X and Y values for the concurrent schedule and serial schedule above are same and correct. Such type of concurrent schedules are called serializable concurrent schedule.
+  - Let's take other example: Initial values, X = 500, Y = 1000
+    ```
+    READ(X)
+    X <- X - 100				---> X = 500, Y = 1000
+                              READ(X)
+			      T <- X * 0.2
+			      X <- X - T
+			      WRITE(X)   	---> X = 400, Y = 1000
+    WRITE(X)
+    READ(Y)					---> X = 400, Y = 1000
+                              READ(Y)
+			      Y <- Y + T
+			      WRITE(Y)		---> X = 400, Y = 1100
+    Y <- Y + 100
+    WRITE(Y)					---> X = 400, Y = 1200
+    ```
+    The above schedule gave us an inconsistent output, so this is called non-consistent & Non-Serializable schedule.
