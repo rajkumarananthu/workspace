@@ -1236,3 +1236,93 @@
       ![State Diagram of a Transaction](../images/state_diagram_transaction.png)
 
 -------------------------------------------------------------------------------
+
+- Log Based Recovery:
+  - Every action done by a transaction is written into the log(logging). This is called Transaction log, exists in secondary storage.
+  - Information in Transaction Log:
+    - \<Ti Starts\> - start of the transaction.
+    - \<Ti Commits\> - End of the transaction.
+    - For each write statement:
+      - Transaction Name --
+      - Data item          |- \<Ti, X, old_value, new_value\>
+      - Old Value          |
+      - New Value        --
+    - Example:
+      Transaction:
+       ```
+       T: READ(A, a1)
+          a1 <- a1 + 500
+          WRITE(A, a1)
+          READ(B, b1)
+          b1 <- b1 - 500
+          WRITE(B, b1)
+       ```
+      Transaction Log: Initial Values A = 1000, B = 2000
+       ```
+       <T,starts>
+       <T, A, 1000, 1500>
+       <T, B, 2000, 1500>
+       <T, commits>
+       ```
+  - There are 2 types of data modification(from the transaction) techniques :
+    - Defferred Database Modification:-
+      1. Defers execution of all write operations till transaction is partially committed.
+      2. Maintains log of Database modification.
+      3. Uses *REDO(Ti)* in case of failure.
+      - Example:
+        Transactions: Initial value: A = 900, B = 500, C = 2000
+        ```
+	T0: READ(A)
+	    A = A - 10
+	    WRITE(A)
+	    READ(B)
+	    B = B + 10
+	    WRITE(B)
+	T1: READ(C)
+	    C = C - 100
+	    WRITE(C)
+	```
+	Transaction log:
+	```
+	<T0, Starts>
+	<T0, A, 890> -> We don't care about the old value.
+	<T0, B, 510>
+	<T0, Commits> -> At this point we perform the actual write operation, then we say the transaction is committed(deferred writing).
+	<T1, Starts>
+	<T1, C, 1900>
+	<T1, Commits> -> At this point we perform the actual write operation, then we say the transaction is committed(deferred writing).
+	```
+      - Now if we have a power failure/system failure, then we see the log. If for a transaction there is *START* and *COMMIT*, then we write the values to make the database consistent using the *REDO(Ti)*.
+    - Immediate Database Modification:
+      - This allows database modifications to be output to the database while the transaction is still in ACTIVE state(non-committed modification).
+      - Recovery Scheme:
+        - UNDO
+	- REDO
+      - Example:
+        Transactions: Initial value: A = 900, B = 500, C = 2000
+        ```
+	T0: READ(A)
+	    A = A - 10
+	    WRITE(A)
+	    READ(B)
+	    B = B + 10
+	    WRITE(B)
+	T1: READ(C)
+	    C = C - 100
+	    WRITE(C)
+	```
+	Transaction log:
+	```
+	<T0, Starts>
+	<T0, A, 900, 890> -> We must need the old values. And the write to DB is written.
+	<T0, B, 500, 510> -> We must need the old values. And the write to DB is written.
+	<T0, Commits>
+	<T1, Starts>
+	<T1, C, 2000, 1900> -> We must need the old values. And the write to DB is written.
+	<T1, Commits>
+	```
+      - If the crash/failure happens in between the transaction, we do *UNDO()* (change to old value and restart the transaction) for transaction which don't have both START and COMMIT in the log. We do *REDO()* (update the new values) operation for those transaction which have both START and COMMIT in the log.
+
+-------------------------------------------------------------------------------
+
+
