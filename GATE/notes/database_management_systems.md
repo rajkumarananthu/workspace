@@ -1325,4 +1325,33 @@
 
 -------------------------------------------------------------------------------
 
+- The transaction log that we write is generally stored in a stable storage. But to update these we need to access stable storage whose access cost is more.
+- To speed up this we have some solutions:
+  - Log Record buffering:
+    - We maintain a buffer log record and when it is full we update the whole block to stable storage. But in such cases we need to take care of some additional constraints:
+      - Transaction Ti enters COMMIT state after <Ti, Commit> log records has been output to stable storage.
+      - Before <Ti, Commit> log record may be output to stable storage, all records pertaining to Ti must have been output to stable storage.
+      - Before a block of data (database data) in main memory is output to disk, all log records pertaining to data in that block must have been output to stable storage.
+  - Database Bufferring:
+    - If INPUT of block B2 causes block B1 to be chosen for OUTPUT, then
+      - Output to stable storage all the log records pertaining to block B1.
+      - Output block B1 to Disk.
+      - Input block B2 from disk to memory.
 
+-------------------------------------------------------------------------------
+
+- Check-pointing: This is a point in the transaction log to inform that all the transaction committed above that point are written to the disk.
+  - Steps involved are:
+    - Output all log records currently residing in main memory to stable storage.
+    - Output all modified buffer blocks to disk.
+    - Output a log record \<Checkpoint\> onto stable storage.
+
+- In the case of a disk-crash:
+  - Output all log records currently in main storage to stable storage.
+  - Outut all buffer blocks onto disk.
+  - Copy contents of database to stable storage.
+  - Output a log record \<DUMP\> to stable storage.
+
+- Shadow Paging: ???
+
+-------------------------------------------------------------------------------
