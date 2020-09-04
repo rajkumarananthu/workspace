@@ -1479,6 +1479,81 @@
     - | S | X
     S | t | f
     x | f | f
-  - We cannot arbitrarily write the LOCKS and UNLOCKS in the schedule, because that may result in inconsistent state. So to avoid such inconsistent schedules, we maintain some locking protocols.
+  - We cannot arbitrarily write the LOCKS and UNLOCKS in the schedule, because that may result in inconsistent state. So to avoid such inconsistent schedules, we maintain some locking protocols. How???
+  - Example:
+    ```
+    T0: LOCK_X(P)           T1: LOCK_S(Q)
+        READ(P)                 READ(Q)
+        P <- P - 100            UNLOCK(Q)
+        WRITE(P)                LOCK_S(P)
+        UNLOCK(P)               READ(P)
+        LOCK_X(Q)               UNLOCK(P)
+        READ(Q)                 DISPLAY(P+Q)
+        Q <- Q + 100
+        WRITE(Q)
+        UNLOCK(Q)
+    ```
 
 -------------------------------------------------------------------------------
+
+- 2 Phased Locking Protocol:
+  - Growing Phase: A transaction may acquire locks but will not release them.
+  - Shrinking Phase: A transaction may release locks but will not acquire new locks.
+  - Note: Out aim is to make sure that no LOCK operation after an UNLOCK.
+  - Example:
+    ```
+    T0: LOCK_X(P)           T1: LOCK_S(Q)
+        READ(P)                 READ(Q)
+        P <- P - 100            LOCK_S(P)
+        WRITE(P)                READ(P)
+        LOCK_X(Q)               DISPLAY(P+Q)(P)
+        READ(Q)                 UNLOCK(P)
+        Q <- Q + 100            UNLOCK(Q)
+        WRITE(Q)
+        UNLOCK(P)
+        UNLOCK(Q)
+    ```
+  - 2 phased protocol always give a schedule that is conflict seriealizable, but it may sometime prone to be deadlocked???
+  - Lock Upgradation: To resolve this deadlock situtaion, we introduce some more new functions:
+    - UPGRADE: converts a shared lock to exclusive lock.
+    - DOWNGRADE: converts an exclusive lock to shared lock.
+    - Example:
+      ```
+      T0: LOCK_X(P)         T1: LOCK_S(P)
+          READ(P)               LOCK_S(Q)
+          P <- P - 100          READ(Q)
+          WRITE(P)              READ(P)
+          LOCK_X(Q)             DISPLAY(P+Q)
+          READ(Q)               UNLOCK(P)
+          Q <- Q + 100          UNLOCK(Q)
+          WRITE(Q)
+          UNLOCK(P)
+          UNLOCK(Q)
+      ```
+  - Now we modify the 2 phased locking protocol as:
+    - Growing Phase: A transaction may acquire/upgrade locks but will not release them.
+    - Shrinking Phase: A transaction may release/downgrade locks but will not acquire new locks.
+    - Example:
+      ```
+      T0: LOCK_S(P)         T1: LOCK_S(P)
+          READ(P)               LOCK_S(Q)
+          P <- P - 100          READ(Q)
+          UPGRADE(P)            READ(P)
+          WRITE(P)              DISPLAY(P+Q)
+          LOCK_S(Q)             UNLOCK(P)
+          READ(Q)               UNLOCK(Q)
+          Q <- Q + 100
+          UPGRADE(Q)
+          WRITE(Q)
+          UNLOCK(P)
+          UNLOCK(Q)
+      ```
+  - But in this we need a knowledge of how the transaction is execution and in which order the variables need to be locked.
+  - To solve this we define DATA DEPENDENCY GRAPH for LOCKING called Tree protocol.
+- Tree Protocol: Dependency Graph is a tree using only exclusive locks.
+  - Each transaction Ti can lock a data item atmost once and must observe the following rules:
+    - The first lock by Ti can be on any data item.
+    - Subsequently an item A can be locked by Ti only if the parent of A is currently locked by Ti.
+    - Data item can be unlocked at any time.
+    - subsequent relocking is not allowed.
+  - Both conflict seriallizable and deadlock free.
