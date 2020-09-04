@@ -1402,16 +1402,65 @@
     ```
     READ(X)
     X <- X - 100				---> X = 500, Y = 1000
-                              READ(X)
+                  READ(X)
 			      T <- X * 0.2
 			      X <- X - T
 			      WRITE(X)   	---> X = 400, Y = 1000
     WRITE(X)
     READ(Y)					---> X = 400, Y = 1000
-                              READ(Y)
+                  READ(Y)
 			      Y <- Y + T
 			      WRITE(Y)		---> X = 400, Y = 1100
     Y <- Y + 100
     WRITE(Y)					---> X = 400, Y = 1200
     ```
     The above schedule gave us an inconsistent output, so this is called non-consistent & Non-Serializable schedule.
+  - To analyze what the program/transaction is trying to do is a tougher job. The operations of the transaction that effect the consistency are the READ and WRITE operations.
+  - So we can try to determine the consistency or serializability of a transaction based on the READ and WRITE operations alone. So in effect, the tranasactions:
+     ```
+     T1: READ(X)
+         X <- X - 100
+         WRITE(X)
+         READ(Y)
+         Y <- Y + 100
+         WRITE(Y)
+     T2: READ(X)
+         T <- X * 0.2
+         X <- X - T
+         WRITE(X)
+         READ(Y)
+         Y <- Y + T
+         WRITE(Y)
+     ```
+  - We read the transactions above effectively as:
+    ```
+    T1: READ(X)
+        WRITE(X)
+        READ(Y)
+        WRITE(Y)
+    T2: READ(X)
+        WRITE(X)
+        READ(Y)
+        WRITE(Y)
+    ```
+  - So now the main task in our hand is to determine whether a schedule is serializable or not. We have different algorithms for that.
+- Conflict Serializable Schedule:
+  - In this we try to swap(move the operations up and down in the schedule order) the operations and see whether we can reach a serial schedule by this swapping.
+  - We define some constratints for the swap operation to be performed. Let's say Ii ∈ Tp and Ij ∈ Tk are two operations from two different transactions and let's say that  Ii and Ij are accessing the same data item X. Then if:
+    - Ii: READ(X) and Ij: WRITE(X)  --> we say conflict and swap is not allowed.
+    - Ii: READ(X) and Ij: READ(X)   --> we say not a conflict and swap is allowed.
+    - Ii: WRITE(X) and Ij: WRITE(X) --> we say conflict and swap is not allowed.
+    - Ii: WRITE(X) and Ij: READ(X)  --> we say conflict and swap is not allowed.
+  - If the two transactions are accessing different data items, then those are obviously non-conflict operations and we can swap them.
+  - If there are two schedules S1 and S2 and if one can be obtained by doing some swap operations (following the above rules) on the other, then they are said to be CONFLICT EQUIVALENT.
+  - A schedule S is said to be CONFLICT SERIALIZABLE if it is conflict equivalent to any SERIAL SCHEDULE.
+  - CONFLICT GRAPH: Useful in determining the conflict serializability of schedules.
+  - Note: If we find a schedule not a conflict serializable schedule, then it may be consistent or inconsistent. But if a schedult is inconsistent, then it is compulsory not a coflict serializable schedule.
+- View Serializable Schedule:
+  - Two Schedules S and S' are said to be VIEW EQUIVALENT if:
+    1. For each Q, if Ti reads the initial value of Q in S, then Ti must in S' also read the initial value of Q.
+    2. For each Q, if Ti executes READ(Q) in S and that value was produced by Tj, then Ti must in S' also read the value of Q that was produced by Tj.
+    3. For each Q, the transaction that performs the final WRITE(Q) operation in S must also perform the final WRITE(Q) operation in S'.
+  - If a schedule S is CONFLICT SERIALIZABLE then it is also a VIEW SERIALABLE SCHEDULE, but if a schedule S is VIEW SERIALIZABLE then it may not be CONFLICT SERIALIZABLE.
+  - However testing of VIEW SERIALIZABILITY is a difficult task, in fact it is NP-Complete problem. So this solution not a practical one to implement.
+  - So we use other methodologies where we borrow some concepts from Operating Systems, called lock-based solutions.
