@@ -1464,3 +1464,21 @@
   - If a schedule S is CONFLICT SERIALIZABLE then it is also a VIEW SERIALABLE SCHEDULE, but if a schedule S is VIEW SERIALIZABLE then it may not be CONFLICT SERIALIZABLE.
   - However testing of VIEW SERIALIZABILITY is a difficult task, in fact it is NP-Complete problem. So this solution not a practical one to implement.
   - So we use other methodologies where we borrow some concepts from Operating Systems, called lock-based solutions.
+
+-------------------------------------------------------------------------------
+
+- Lock Based Protocols: Mechanism of Locking.
+  - Locks:
+    1. Shared Lock: If Ti has obtained a shared lock on Q then Ti can read Q but not write it.
+    2. Exclusive Lock:  Both read and write are allowed.
+  - Operations on Locks:
+    - LOCK_S(X)
+    - LOCK_X(X)
+    - UNLOCK(X)
+  - Lock Compatability Function: x-axis: Requesting, y-axis: acquired
+    - | S | X
+    S | t | f
+    x | f | f
+  - We cannot arbitrarily write the LOCKS and UNLOCKS in the schedule, because that may result in inconsistent state. So to avoid such inconsistent schedules, we maintain some locking protocols.
+
+-------------------------------------------------------------------------------
