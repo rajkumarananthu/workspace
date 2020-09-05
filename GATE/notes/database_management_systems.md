@@ -1601,7 +1601,7 @@
   - Time stamp based protocol ensures:-
     - Conflict serializable
     - Deadlock free(allowing ROLL BACK)
-  - Note: Have a lot of overhead in maintaining the time stamps.
+  - Note: Have a lot of overhead in maintaining the time stamps. Sometimes lead to Cascaded ROLL BACKs.
   - Most widely used protocol.
 
 -------------------------------------------------------------------------------
@@ -1629,3 +1629,48 @@
       4. Ti may lock Q in X or SIX or IX if parent of Q is locked by Ti in IX or SIX.
       5. Ti can lock Q if it has not unlocked anything.
       6. Ti can unlock Q if no child of Q remains locked by Ti.
+
+-------------------------------------------------------------------------------
+
+- Multi Version Scheme:
+  - With each data item Q, a sequence `<Q1,Q2,...Qm>` of versions is stored.
+  - Each version Qk contains three fields.
+    - Content: Value of version of Qk.
+    - W-TIMESTAMP(Qk): Value of TS(Ti) of Ti which created Qk.
+    - R-TIMESTAMP(Qk): Denotes the largest timestamp of any transaction that successfully read Qk.
+  - Protocol:
+    - Let Qk denote the version whose W-TIMESTAMP is the largest timestamp < TS(Ti).
+      1. If Ti issues READ(Q) then the value returned is that of the content of version Qk.
+      2. If Ti issues WRITE(Q) and if TS(Ti) < R-TIMESTAMP(Qk) then Ti is ROLLED BACK else A new version of Q is created.
+
+-------------------------------------------------------------------------------
+
+- Cascading ROLL BACK:
+  - Let's say that Ti has done WRITE(Q) and this written value is read by other transacation like Ti1, Ti2, Ti3.
+  - Now if we ROLL BACK Ti, then the transactions Ti1, Ti2, Ti3 must also be ROLLED BACK because they read the value written by Ti.
+  - As a result to ROLL BACK one transaction, we may end up in rolling back multiple transactions. This is called Cascading ROLL BACK.
+
+- Delayed Write: To solve cascading ROLL BACKs.
+  - We delay the writes to end of the transaction(after partial commiting).
+  - So in effective we have the following phases:
+    - Read Phase
+    - Execution Phase
+    - Protocol check/ validation phase
+    - Write Phase.
+  - In case of failure, we can atlease get non-cascading roll backs.
+
+-------------------------------------------------------------------------------
+
+- Along with Read, write we can have insert,delete operations in the database. (update = delete + insert)
+- now the new conflicts are:
+  - Insert conflicts with all the other operations. (changing the state of DB)
+  - Delete conflicts with all the other operations. (changing the state of DB)
+- Protocols for Deletion:
+  - 2 Phase Locking: Lock DELETE by exclusive lock
+  - Time Stamping: 
+    1. If TS(Ti) < R-TIMESTAMP(Q): REJECT DELETE, ROLL BACK
+    2. If TS(Ti) < W-TIMESTAMP(Q): REJECT DELETE, ROLL BACK
+    3. Otherwise: ALLOW DELETE
+- Protocols for Insertion:
+  - 2 Phase Locking: Lock INSERT by exclusive lock
+  - Time stamping: Update R-TIMESTAMP(Q) & W-TIMESTAMP(Q) to TS(Ti) if Ti executes INSERT(Q).
