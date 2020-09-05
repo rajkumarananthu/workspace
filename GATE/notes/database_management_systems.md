@@ -1,17 +1,17 @@
 # Database Management Systems
 
 #### Contents
-1. [INTRODUCTION](database_management_systems.md#INTRODUCTION)
-2. [CONCEPTUAL DESIGN](database_management_systems.md#CONCEPTUAL-DESIGN)
-3. [RELATIONAL ALGEBRA](database_management_systems.md#RELATIONAL-ALGEBRA)
-4. [RELATIONAL CALCULUS](database_management_systems.md#RELATIONAL-CALCULUS)
+1. [Introduction](database_management_systems.md#INTRODUCTION)
+2. [Conceptual Design](database_management_systems.md#CONCEPTUAL-DESIGN)
+3. [Relational Algebra](database_management_systems.md#RELATIONAL-ALGEBRA)
+4. [Relational Calculus](database_management_systems.md#RELATIONAL-CALCULUS)
 5. [SQL](database_management_systems.md#SQL)
-6. [INTEGRITY CONSTRAINTS](database_management_systems.md#INTEGRITY-CONSTRAINTS)
-7. [FUNCTIONAL DEPENDENCIES](database_management_systems.md#FUNCTIONAL-DEPENDENCIES)
-8. [DATABASE DECOMPOSITION](database_management_systems.md#DATABASE-DECOMPOSITION)
-9. [FILE SYSTEM](database_management_systems.md#FILE-SYSTEM)
-10. [RECOVERY FROM FAILURE](database_management_systems.md#RECOVERY-FROM-FAILURE)
-11. [CONCURRENCY CONTROL](database_management_systems.md#CONCURRENCY-CONTROL)
+6. [Integrity Constraints](database_management_systems.md#INTEGRITY-CONSTRAINTS)
+7. [Functional Dependencies](database_management_systems.md#FUNCTIONAL-DEPENDENCIES)
+8. [Database Decomposition](database_management_systems.md#DATABASE-DECOMPOSITION)
+9. [File System](database_management_systems.md#FILE-SYSTEM)
+10. [Recovery From Failure](database_management_systems.md#RECOVERY-FROM-FAILURE)
+11. [Concurrency Control](database_management_systems.md#CONCURRENCY-CONTROL)
 
 -------------------------------------------------------------------------------
 ### INTRODUCTION
@@ -1477,6 +1477,7 @@
     - UNLOCK(X)
   - Lock Compatability Function: x-axis: Requesting, y-axis: acquired
     - | S | X
+    -----------
     S | t | f
     x | f | f
   - We cannot arbitrarily write the LOCKS and UNLOCKS in the schedule, because that may result in inconsistent state. So to avoid such inconsistent schedules, we maintain some locking protocols. How???
@@ -1604,3 +1605,27 @@
   - Most widely used protocol.
 
 -------------------------------------------------------------------------------
+
+- Multiple Granularity: Hierarchically breaking up the database into portions which are lockable.
+  - Locks:
+    - Concept of Intention Locks: if a node is locked with a particular lock, all/some the nodes below are locked node are locked.
+      - S : Shared (all nodes)
+      - X : Exclusive (all nodes)
+      - IS: Intention Shared (some node)
+      - IX: Intention Exclusive (some node)
+      - SIX: Shared and Intention Exclusive (present node in shared mode, some node below in exclusive mode)
+    - Compatibility matrix:
+      -| IS | IX | S | SIX | X
+      --------------------------
+      IS | T | T | T | T | F
+      IX | T | T | F | F | F 
+      S  | T | F | T | F | F
+      SIX | T | F | F | F | F
+      X | F | F | F | F | F
+    - Protocol: Locking Rules
+      1. Follow compatibility function.
+      2. Root may be locked in any(proper) order.
+      3. Ti may lock Q in S or IS if parent of Q is locked by Ti in IX or IS.
+      4. Ti may lock Q in X or SIX or IX if parent of Q is locked by Ti in IX or SIX.
+      5. Ti can lock Q if it has not unlocked anything.
+      6. Ti can unlock Q if no child of Q remains locked by Ti.
