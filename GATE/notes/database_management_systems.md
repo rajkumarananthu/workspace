@@ -1557,3 +1557,50 @@
     - Data item can be unlocked at any time.
     - subsequent relocking is not allowed.
   - Both conflict seriallizable and deadlock free.
+
+-------------------------------------------------------------------------------
+
+- The main problem with the concurrent execution are:
+  - Maintaining the consistency of shared data access during concurrent execution.
+  - Attempting to have maximum possible concurrency without consistency.
+- In an attempt to solve the above problems, we have two strategies:
+  - Onus(Responsibility) is on users to write consistent concurrent transactions.(Lock based protocols)
+  - System itself tries to detect possible inconsistency during the concurrent execution and recovers/avoids it.(Time Stamping Protocols)
+
+-------------------------------------------------------------------------------
+
+- Time Stamp Based Protocols:
+  - TimeStamps:
+    - Each Transaction Ti is assigned a unique timestamp TS(Ti) prior to the begging of execution.
+    - W-TIMESTAMP(Q): Denotes the largest TS value of any transaction that successfully exectues WRITE(Q).
+    - R-TIMESTAMP(Q): Denotes the largest TS value of any transaction that successfully executes READ(Q).
+  - If TS(Ti) < TS(Tj), then we can conclude that Ti started before Tj. Based on this, the system ensures the transaction schedule must be equivalent to the serial schedule TiTj.
+  - Example:
+    - If Ti with TS(Ti) = 3, executes WRITE(Q), then W-TIMESTAMP(Q) = 3.
+    - Later if Tj with TS(Tj) = 7 executes WRITE(Q), then W-TIMESTAMP(Q) = 7.
+    - Later if Tk with TS(Tk) = 4 executes WRITE(Q), then W-TIMESTAMP(Q) remain 7(4 < 7).
+  - Protocol:
+    - Ti issues a READ(Q):
+      - TS(Ti) < W-TIMESTAMP(Q):- REJECT THE READ
+        - If TS(Ti) < W-TIMESTAMP(Q), it means that a transaction Tj which started later than Ti have written Q. This is not a serializable schedule(conflict serializability). So the system will reject the read operation. We ROLL BACK Ti and restart it again.
+      - TS(Ti) > W-TIMESTAMP(Q):- ALLOW THE READ
+        - If TS(Ti) >= W-TIMESTAMP(Q), it means that a Transaction Tj which started earlier that Ti have written Q. And this is not conflict, so we allow the read.
+      - TS(Ti) & R-TIMESTAMP(Q):- ALLOW THE READ.
+        - If TS(Ti) < R-TIMESTAMP(Q), both are reading so no problem, allow the read.
+        - If TS(Ti) > R-TIMESTAMP(Q), both are reading so no problem, allow the read.
+    - Ti issues a WRITE(Q):
+      - TS(Ti) < R-TIMESTAMP(Q): REJECT THE WRITE
+        - If TS(Ti) < R-TIMESTAMP(Q), it means that a transaction Tj which started later than Ti have read Q. This is not conflict equivalent to the schedule TiTj, so we don't allow the write. We ROLL BACK Ti and restart again.
+      - TS(Ti) < W-TIMESTAMP(Q): REJECT THE WRITE
+        - If TS(Ti) < W-TIMESTAMP(Q), it means that a transaction Tj which started later than Ti have written Q. This is also not conflict equivalent to the schedule TiTj, so we don't allow the write. We ROLL BACK Ti and restart it again.
+        - Note: A modification to improve the protocol: Instead of ROLL BACK Ti, we can skip the WRITE(Q) from Ti. Because, we want the effective equivalent schedule to be TiTj, in that case the WRITE from Ti is overewritten by Tj. So there is no effect of WRITE(Q) from Ti. So we just skip/ignore the write operation from Ti instead of ROLL BACK and restart. This is called THOMAS's WRITE RULE.
+      - Other cases: ALLOW THE WRITE
+        - TS(Ti) > R-TIMESTAMP(Q), it means that a transaction Tj which started earlier than Ti have read Q. This is not a conflict, so we allow the write.
+        - TS(Ti) > W-TIMESTAMP(Q), it means that a transactio Tj which started earlier than Ti have written Q. This is not a conflict, so we allow the write.
+  - Time stamp based protocol ensures:-
+    - Conflict serializable
+    - Deadlock free(allowing ROLL BACK)
+  - Note: Have a lot of overhead in maintaining the time stamps.
+  - Most widely used protocol.
+
+-------------------------------------------------------------------------------
