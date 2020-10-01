@@ -2,6 +2,7 @@
 
 #### CONTENTS
 1. [Introduction](data_structures.md#Introduction) 
+2. [Data Structuring - Case Study](data_structures.md#Data-Structuring)
 
 -------------------------------------------------------------------------------
 ### Introduction
@@ -42,4 +43,9 @@
   - Data strcuturing: Data types, operations on them. Data procedure encapsulation. Dynamic data structuring.
   - Algorithmic expression: Control constructs, functions(recursive and non-recursive).
 
+- Note: The Calling in C Programming Language is CALL BY VALUE.
+  - There are three different paradigms for function calling: 1. CALL BY VALUE, 2. CALL BY VALUE RESULT, 3. CALL BY REFERENCE.
+
 -------------------------------------------------------------------------------
+
+### Data Structuring
