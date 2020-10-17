@@ -51,6 +51,7 @@
 
   ![Von-Neumann Architecture](../images/von_neumann-arch.png)
 
+  - Von-Neumann architecure is also called stored-program concept because the program to execute is stored in the memory and the instructions are brought to the processor for execution. And before bringing the instruction to the processor that program/process must be stored in the memory.
   - Processor:
     - Also called CPU: Central Processing Unit.
     - Control Unit: Generates the sequence of control signal to carry out the operaitons.
@@ -62,7 +63,6 @@
       - Contains circuitry for logical operations like AND, OR, NOT, SHIFT, COMPARE and arithemetic operations like addition, subtraction, multiplication, division etc.,.
       - During the execution of instruction, the data to be operated on is brought and stored in some register, the desired operation is performed and the result is stored in some register/memory.
       - Instructions are fetched from memory for execution. And each instruction specifies the operation to be performed and on what data it is to be performed.
-    - A program refers to a set of instructions that are required to carry out a specific task.
   - Memory Unit:
     - Two types:
       - Primary or Main memory: stores the active instructions and data for program being executed on the processor.
@@ -73,3 +73,29 @@
   - Output Unit: Used to send the result of some computation to the outside world.
 
 -------------------------------------------------------------------------------
+
+### Basic Operation of a Computer
+
+- Each operation is carried in the computer in terms of instructions.
+- There are special purpose registers and general purpose registers. General purpose registers are used to store the intermediate values or a final result of an operation. Special purpose registers have a specific purpose and can't be used for genral result storing.
+- Memory is considered as an array of storage locations (can be bytes or words) each having a unique address.
+- A program refers to a set of instructions that are required to carry out a specific task.
+- Special Purpose Registers:
+  - For interfacing between processor and primary memory are:
+    1. Memory Address Register(MAR): Holds the address of the memory location to be accessed.(either for instruction read, or for data read or for data write).
+    2. Memory Data Register(MBR): Holds the data that is being written into memory, or will receive the data being read out of memory.
+
+  ![MAR and MDR](../images/mar_mdr.png)
+
+  - To summarize:
+    - To read data from Memory:
+      1. Place the address in MAR from where the read is to happen.
+      2. Issue the READ control signal.
+      3. Data is loaded to data bus and thus to MDR.
+    - To write data to memory:
+      1. Place the address in MAR to where the write is to happen.
+      2. Data to be written is loaded to MDR.
+      3. Issue the WRITE control signal.
+  - For keeping track of program/instructions are:
+    1. Program Counter(PC): Holds the memory address of the next instruction to be executed. This is automatically incremented to point to the next instruction when an instruction is being executed.
+    2. Instruction Register(IR): Temporarily holds an instruction that has been fetched fro memory. This instruction is decoded to find out the instruction type and also contains information about the location of the data.
