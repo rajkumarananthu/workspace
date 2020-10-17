@@ -18,9 +18,9 @@
 -------------------------------------------------------------------------------
 
 ### Evolution of Computer System
-  - A search to automate computing systems has lead to the evolution of Computers to what they are today.
-  - Initially they have done mechanical pullies and gears, then they used mechanical relays to calculate computations, then vaccum tubes were developed and then semiconductors are developed.
-  - Thus we moved from SMALL SCALL INTEGRATION(SSI) to MSI to LSI to VLSI to ULSI.
+- A search to automate computing systems has lead to the evolution of Computers to what they are today.
+- Initially they have done mechanical pullies and gears, then they used mechanical relays to calculate computations, then vaccum tubes were developed and then semiconductors are developed.
+- Thus we moved from SMALL SCALL INTEGRATION(SSI) to MSI to LSI to VLSI to ULSI.
   ```
   ________________________________________________________________________________________________
   | Generation      | Main Technology              |  Representative Systems                      |
@@ -48,7 +48,8 @@
   - He noticed that the number of transitors per square inch on IC's has doubled every year since their invention.
   - Moore's law predicts that this trend will continue into the forseeable future. Although the pace has slowed, the number of transistor per square inch has since doubled approximately every 18 months. This is used as a current definition of Moore's law.
 - Simplified block diagram of a Computer System:( VON-NEUMANN Architecture, also called stored-program concept)
-  == Image for block diagram ==
+
+  ![Von-Neumann Architecture](../images/von_neumann-arch.png)
 
   - Processor:
     - Also called CPU: Central Processing Unit.
