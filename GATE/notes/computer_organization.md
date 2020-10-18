@@ -87,15 +87,82 @@
 
   ![MAR and MDR](../images/mar_mdr.png)
 
-  - To summarize:
-    - To read data from Memory:
-      1. Place the address in MAR from where the read is to happen.
-      2. Issue the READ control signal.
-      3. Data is loaded to data bus and thus to MDR.
-    - To write data to memory:
-      1. Place the address in MAR to where the write is to happen.
-      2. Data to be written is loaded to MDR.
-      3. Issue the WRITE control signal.
+    - To summarize:
+      - To read data from Memory:
+        1. Place the address in MAR from where the read is to happen.
+        2. Issue the READ control signal.
+        3. Data is loaded to data bus and thus to MDR.
+      - To write data to memory:
+        1. Place the address in MAR to where the write is to happen.
+        2. Data to be written is loaded to MDR.
+        3. Issue the WRITE control signal.
   - For keeping track of program/instructions are:
     1. Program Counter(PC): Holds the memory address of the next instruction to be executed. This is automatically incremented to point to the next instruction when an instruction is being executed.
     2. Instruction Register(IR): Temporarily holds an instruction that has been fetched fro memory. This instruction is decoded to find out the instruction type and also contains information about the location of the data.
+- Example instruction execution:
+  1. ADD R1, LOCA --> Need to add the contents of memory location of LOCA and the contents of GPR R1 and store back the result in GPR R1.
+     - Symbolically: R1 <- R1 + Mem[LOCA]
+     - Assumptions: The instruction is stored in memory location 1000, the initial value of R1 is 50 and LOCA is 5000.
+     - Execution:
+       - Contents of PC is transferred to MAR. * --> MAR <- PC *
+       - READ request is issued to memory unit.
+       - The instruction is fetched to MDR. * --> MDR <- Mem[MAR] *
+       - Content of MDR is transferred to IR. * --> IR <- MDR * 
+       - PC is incremented to point to next instruction. * --> PC <- PC + 4 * (4 because iof word size in 32 bit machine)
+       - The instruction is decoded by CU.
+       - LOCA is transferred to MAR. * --> MAR <- IR[Operand] *
+       - READ request is issued to Memory Unit.
+       - The data is transferred to MDR. * --> MDR <- Mem[MAR] *
+       - The content of MDR is added to R1. * --> R1 <- R1 + MDR *
+     - The actual micro-operations that took place are:
+       ```
+       MAR <- PC
+       MDR <- Mem[MAR]
+       IR <- MDR
+       PC <- PC + 4
+       MAR <- IR[Operand]
+       MDR <- Mem[MAR]
+       R1 <- R1 + MDR
+       ```
+  2. ADD R1, R2 --> Need to add the contents of GPR R1 and GPR R2 and store the result back in GPR R1. 
+     - Symbolically: R1 <- R1 + R2
+     - Assumption: Instruction is stored in memory location 1500, initial value of R1 is 50 and R2 is 200.
+     - Execution:
+       - Contents of PC is transferred to MAR. * --> MAR <- PC *
+       - READ request is issued to memory unit.
+       - The instruction is fetched to MDR. * --> MDR <- Mem[MAR] *
+       - Content of MDR is transferred to IR. * --> IR <- MDR * 
+       - PC is incremented to point to next instruction. * --> PC <- PC + 4 * (4 because iof word size in 32 bit machine)
+       - The instruction is decoded by CU.
+       - R2 is added to R1, * --> R1 <- R1 + R2 *
+     - The actual micro-operations are:
+       ```
+       MAR <- PC
+       MDR <- Mem[MAR]
+       IR <- MDR
+       PC <- PC + 4
+       R1 <- R1 + R2
+       ```
+- Bus Architecture:
+  - Communication path way.
+  - The different functional modules must be connected in an organized manner to form and operational system.
+  - Bus refers to a group of lines that serve as a connecting path for several devices
+  - The simplest way to connect the functional unit is to use the single bus architecture.
+    - Only one data transfer allowed in one clock cycle.
+    - For multi-bus architecture, parallelism in data transfer is allowed.
+
+    ![Sytem Level Single Bus Architecture](../images/single_bus_arch.png)
+
+    ![System Level Two Bus Architecture](../images/two_bus_arch.png)
+
+- Single Bus Architecture inside the processor:
+  - All the above bus architecture are at system level. But we need a bus inside the processor itself, because there are many data transfers from GPRs to ALU and control signal from CU to other units etc.,
+  - ALU and registers are all connected via the single bus.
+  - This bus is internal to the processor.
+  - A typical single bus processor architecture is as follows:
+
+    ![Internal Processor Bus](../images/internal_processor_bus.png)
+
+- Multi-Bus Architecture inside the processor:
+  
+-------------------------------------------------------------------------------
