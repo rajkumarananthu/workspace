@@ -166,3 +166,72 @@
 - Multi-Bus Architecture inside the processor:
   
 -------------------------------------------------------------------------------
+
+### Memory Addressing and Languages
+
+- Overview of Memory Organization:
+  - One of the most important subsystems of a computer that determines the overall performance.
+  - An array of storage locations each having a unique address. And each storage location holds a fixed amount of information.
+  - A memory sytem with M locations and N bits per location is referred to as * M x N * memory.
+  - Bit : 1 bit, Nibble: 4 bits, Byte: 8 bits, Word: no unique length.
+- Organization of Memory:
+  - Memory is often byte organized(each byte have a unique address).
+  - Multiple bytes can be accessed by an instruction. An instruction can span over multiple bytes.
+  - For higher data transfer rate, memory is often organized such that multiple bytes can be read or written simultaneously to speed up the processor and memory speed gap.
+  - There is vast gap between the speed of processor and primary memory, to fill these speed gap we have various solutions proposed like using Cache memory, memory interleaving etc.,
+  - If there are n bits in the address, then we can point to maximum of 2^n memory locations.
+  - Examples:
+    - memory: 64MB, byte-addressable. how many address bits are needed?
+      - 64MB = 2^6 * 2^20 bytes = 2 ^ 26 Bytes => 26 address bits.
+    - memory: 1GB, word size: 32 bits, word-addressable. how many address bits are needed?
+      - 1GB = 2^30 Bytes, word size = 32 bits = 4 Bytes => address bits -> 2^30 / 2^2 = 2^28 Words => 28 address bits.
+- Byte Ordering Conventions:
+  - Many data items require multiple bytes for storage. And different computers use different data ordering conventions.
+    - Low-Order Byte first -> Little endian machines
+      - The least significant byte is stored at lower address(first) followed by most significant byte.
+      - Examples: Intel machines, DEC alpha etc.,
+    - High-Order Byte first -> Big endian machines
+      - The most significant byte is stored at lower address(first) followed by least significant byte.
+      - Examples: IBM's 370 mainframes, Motorola micro processors
+- Memory Access by Instructions:
+  - The program instructions and data are stored in memory.
+  - In von-neumann architecture both of them are stored in same memory.
+  - In Harvard architecture they are stored in different memories.
+  - For execution two basic operations are required:
+    1. Load: the contents of a specified memory location is read into a processor register. LOAD R1, 2000
+    2. Store: the contents of the processor register is written into a specified memory location. STORE 2020, R3
+- Example:
+  ```
+  -> Compute S = (A + B) - (C - D)
+  --------------------------------------
+  LOAD R1, A
+  LOAD R2, B
+  ADD R3, R1, R2 // R3 = R1 + R2
+  LOAD R1, C
+  LOAD R2, D
+  SUB R4, R1, R2 // R4 = R1 - R2
+  SUB R3, R3, R3 // R3 = R3 - R4
+  STORE S, R3
+  --------------------------------------
+  ```
+
+- Machine Language:
+  - native to a processor, executed directly by hardware
+  - instructions consist of binary codes 1's, 0's
+- Assembly Language:
+  - low level symbolic version of machine language, forms one to one correspodance with machine language.(mnemonics)
+  - psuedo-instructions are used that are much more readable and easy to use.
+- High-Level language:
+  - Programming languages like C, C++, Java etc.,
+  - More readable and easy for humans to learn/read/write.
+
+- Assemblers and Compilers:
+  - Anyways assembly language and high level languages are created or defined for increasing the ease of writing computer programs, but these are not understandable to the computer.
+  - We need to convert them to machine language which is understood by machine/computer.
+  - Assembler: Translates the assembly language to machine language.
+  - Compiler: Translates the highlevel language to either a machine language or an assembly language.
+- Cross Compiler/Assembler:
+  - The compiler/assembler may run on a native machine for which the target code is generated, or can be run on another machine.
+  - Example: An 8085-cross assembler is running on a desktop PC(pentium,core etc.) generates 8085 machine code.
+
+-------------------------------------------------------------------------------
