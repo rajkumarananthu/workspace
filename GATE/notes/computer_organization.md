@@ -282,3 +282,59 @@
   - Typical stages are : Instruction Fetch, Instruction Decode, ALU Operation (EX), Memory Access, write back result to register file.
 -------------------------------------------------------------------------------
 
+### Instruction Set Architecture
+
+- A computer system from an eye of programmer's. Defines the set of instructions that a computer can take.
+- ISA serve as an interface between software and hardware, typically consists the info regarding registers, address and data bus etc., and the instruction set.
+- Many ISA'a are not for a particular computer archiecture, they survive across generations like Intel x86 series etc.,
+
+- ISA Design issues:
+  - Number of explicit operands. Whether 0,1,2 or 3 operands?
+  - Location of Operands. Whether in Memory or registers or accumulator?
+  - Specification of Operand Location. How to interpret the operand -> Addressing Modes?
+  - Sizes of the operand supported.
+  - Supported Operation. How many? What kind? 
+- Evolution of Instruction Sets:
+  1. Accumulator based: (1960's, EDSAC, IBM 1130): These support 1 address instructions, the default operand is a register called ACCUMULATOR.
+     ` ADD X --> ACC = ACC + Mem[X]`
+  2. Stack Based: (1960-70, Burroughs 5000): These support 0 address instructions. The operands are from a special memory are called STACK.
+     `ADD -> TOS = TOS + NEXT`
+  3. Memory-Memory Based: (1970-80, IBM 360): Supports 2,3 address instructions.
+     `ADD A,B -> Mem[A] = Mem[A] + Mem[B]`
+     `ADD A,B,C -> Mem[A] = Mem[B] + Mem[C]`
+  4. Register-Memory Based: (1970-Present, Intel x86)
+     `LOAD R1, X --> R1 = Mem[X]`
+  5. Register-Register based: 1960-Present, MIPS, CDC 6600, SPARC
+     `ADD R1,R2,R3 --> R1 = R2 + R3`
+
+  - Example Code sequence of Z = X + Y
+    - Stack based:
+      ```
+       PUSH X
+       PUSH Y
+       ADD
+       POP Z
+      ```
+    - Accumulator based:
+      ```
+       LOAD X 	// ACC = Mem[X]
+       ADD Y	// ACC = ACC + Mem[Y]
+       STORE Z	// Mem[Z] = ACC
+      ```
+    - Register-Memory based:
+      ```
+       LOAD R2, X	// R2 = Mem[X]
+       ADD R2,Y		// R2 = R2 + Mem[Y]
+       STORE Z,R2	// Mem[Z] = R2
+      ```
+    - Register-Register based:(also called as load store architecture)
+      ```
+       LOAD R1, X	// R1 = Mem[X]
+       LOAD R2, Y	// R2 = Mem[Y]
+       ADD R3,R1,R2	// R3 = R1 + R2
+       STORE Z,R3 	// Mem[Z] = R3
+      ```
+- Older architectures have a large number of SPR's where as newer architectures have large number of GPRs. This is because it is easy for compiler to assign some variables to registers, registers are faster than memory, more compact instruction encoding as fewer bits for registers.
+- Many processors have 32 or more GPRs.
+
+-------------------------------------------------------------------------------
