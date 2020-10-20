@@ -235,3 +235,50 @@
   - Example: An 8085-cross assembler is running on a desktop PC(pentium,core etc.) generates 8085 machine code.
 
 -------------------------------------------------------------------------------
+
+### Software and Architecture Types
+
+- A software is a program consists of instructions to perform a specific task.
+- Software Types:
+  - Application Software: Helps the user to solve a particular user problem. May need a system software for execution.
+  - System Software: A collection of programs that helps the users to create, analyze and execute their programs.
+    - Examples: Operating systems, compilers and assemblers, linkers and loaders, editors and debuggers.
+- Operating System: A system software which provides and interface between computer hardware and users.
+  - Two layers: 
+    1. Kernel: low level routines for resource management
+    2. Shell: provides an interface for the users to interact with the computer hardware through kernel.
+  - All the application software uses the shell to interact with the computer hardware.
+  - Collection of routines to control share the computer resources as they execute programs.
+  - Different types:
+    - Classical Multi-programming systems
+    - Modern Time Sharing systems
+    - Real time systems
+    - Mobile (phone) systems
+
+- Classification of Computer Architecture:
+  - Broadly into 2 types:
+    1. Von-Neumann Architecture
+    2. Harvard Architecture
+  - How a computer is different from calculator?
+    - Both uses the same circuitry inside (for doing the arithmetic).
+    - For a calculator we need to interactively give the sequence of commands, where as for a computer you write a program store it in memory and run it in one go.
+    - This is called stored program concept.
+- Von-Neumann Architecture:
+  - Instructions and data are stored in same memory module.
+  - Most flexible and easier to implement and suitable for most of the general purpose processors.
+  - Disadvantage: 
+    - The processor bus acts as a bottleneck. Can't bring both instruction and data at the same time if needed.
+    - All the instructions & data are moved back and forth through pipes.
+- Harvard Architecture:
+  - Separate memory for program(instructions) and data.
+  - Instructions and data access can be done parallelly.
+  - Some microcontrollers and pipelines with separate instruction and data caches follow this concept.
+  - The processor-memory bottleneck remains.
+- Emerging Architectures: Proposal for In-Memory Computing Architecture, where the storage and computation can be done is same functional unit.
+  - Memristors(next to transistors) are projected to make this happen.
+- Pipeline in Instruction execution:
+  - A concept used to speedup the execution of instructions.
+  - An overlapped execution of instructions in the processor.
+  - Typical stages are : Instruction Fetch, Instruction Decode, ALU Operation (EX), Memory Access, write back result to register file.
+-------------------------------------------------------------------------------
+
