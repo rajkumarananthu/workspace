@@ -338,3 +338,82 @@
 - Many processors have 32 or more GPRs.
 
 -------------------------------------------------------------------------------
+
+### Number Representation
+
+- Decimal number system:
+  - 10 digits, 0 to 9.
+  - Every digit position has a weight which is a power of 10.
+  - Base or radix is 10.
+- Binary Number system:
+  - 2 digits, 0,1
+  - Every digit position has a weight of 2.
+  - Base or radix is 2.
+- Hexadecimal Number System:
+  - 0 to 9 and A to F(with decmimal equivalent 10 to 15)
+  - Every digit position has a weight of 16.
+  - Base or radix is 16.
+
+- A hexadecimal number is represented using a suffix 'H' or using a prefix '0x'.
+  - Example: ADDI R1,2AH // add a hexadecimal number 2A to the contents of register R1.
+- Unsigned Binary numbers:
+  - for an n bit binary number we have 2^n distinct combinations.
+- Signed Integer representation: many of the numerical data items are signed that is either positive or negative, so in that case how should we represent signed data?
+  - Three possible approaches:
+    - Sign-magnitude representation:
+      - For an n bit number, the MSB represent the sign of the number and the remaining n-1 bits represent the magnitude of the number.
+      - So for an n bit number the decimal values that we can represent range from -(2^(n-1) - 1) to +(2^(n-1) - 1)
+      - For n = 4 the possible values are as follows:
+        ```
+	 0000 -> +0	1000 -> -0
+	 0001 -> +1	1001 -> -1
+	 0010 -> +2	1010 -> -2
+	 0011 -> +3	1011 -> -3
+	 0100 -> +4	1100 -> -4
+	 0101 -> +5	1101 -> -5
+	 0110 -> +6	1110 -> -6
+	 0111 -> +7	1111 -> -7
+	```
+      - The disadvantage here is that zero has 2 representations i.e., 0000,1000.
+    - One's complement representation
+      - Positive numbers are represented exactly as in sign-magnitude form, negative numbers are represented using 1's complement form.
+      - To compute a 1's complement, complement every bit of the number 0->1 and 1->0.
+      - MSB will indicate the sign 0: Positive, 1: Negative.
+        ```
+	 0000 -> +0	1111 -> -0
+	 0001 -> +1	1110 -> -1
+	 0010 -> +2	1101 -> -2
+	 0011 -> +3	1100 -> -3
+	 0100 -> +4	1011 -> -4
+	 0101 -> +5	1010 -> -5
+	 0110 -> +6	1001 -> -6
+	 0111 -> +7	1000 -> -7
+	```
+      - The disadvantage here is that zero has 2 representations i.e., 0000,1111.
+      - Range of numbers is same as Sign-magnitude: -(2^(n-1) - 1) to +(2^(n-1) - 1)
+      - The advantage of 1's complement is that subtraction can be done using addition, this can lead to substantial saving in circuitry.
+    - Two's complement representation:
+      - Positive numbers are represented exactly as in sign-magnitude form, negative numbers are represented using 2's complement form.
+      - To compute 2's complement, first compute 1's complement and then add 1 to the resulting number.
+      - MSB will indicate the sign 0: Positive, 1: Negative.
+        ```
+	 0000 -> +0	
+	 0001 -> +1	1111 -> -1
+	 0010 -> +2	1110 -> -2
+	 0011 -> +3	1101 -> -3
+	 0100 -> +4	1100 -> -4
+	 0101 -> +5	1011 -> -5
+	 0110 -> +6	1010 -> -6
+	 0111 -> +7	1001 -> -7
+			1000 -> -8
+	```
+      - The range is:-(2^(n-1)) to +(2^(n-1) - 1)
+      - Advantages are: Single zero representation. Subtraction can be done using addition.
+      - Almost all computers today use 2's complement representation for storing negative numbers.
+      - Other feature of 2's complement: is that, 
+	- it is a weighted representaion with the MSB having a weight of -2^(n-1).
+	- The sign bit can be copied as many times as required in the beginning to extend the size of the number, this is called sign extention.
+	- Shift left by k positions with zero padding multiplies the number by 2^k.
+   	- Shift right by k posistion with sign bit padding divides the number by 2^k.
+
+-------------------------------------------------------------------------------
