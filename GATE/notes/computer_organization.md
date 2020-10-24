@@ -523,3 +523,88 @@
   - Sufficient hardware resources are available today to translate from CISC to RISC internally.
   - RISC based computers use compilers to translate into RISC instructions.
   - CISC based computers use hardware to translate into RISC instructions.
+
+- Comparision between CISC and RISC: (VAX 8700 vs MPIS M2000)
+  - MIPS required execution of about twice the number of instrcutions as compared to VAX.
+  - Cycles Per Instruction CPI for VAX is around 6 times larger than that of MIPS.
+  - Hence, MIPS has three the performace of VAX.
+  - Also much less hardware is required for MIPS as compared to VAX.
+
+- Conclusion: 
+  - Persisting with CISC arch is too costly both in terms of hardware and performance.
+  - VAX was replaced by ALPHA(a RISC processor) by Digital Equipment Corporation.
+  - CISC architecture based on x86 is different:
+    - Because of huge number of installed base, backward compatibility of machine code is very important in commercail point of view. 
+    - They have adopted a balenced view: a) user's view is a CISC instruction b) hardware translates every CISC instruction into an equivalent set of RISC instruction internally(I think this is what is called micro programmed control unit) c) an instruction pipeline executes the RISC instructions efficiently.
+
+- Case study: MIPS32 Architecture - A RISC ISA
+  - CPU Registers:
+    - 32, 32-bit GPRs from R0 to R31.
+    - A 32 bit SPR called Program Counter PC:
+      1. Points to next instruction in memory to be fetched and executed.
+      2. Not directly visible to programmer, effected indirectly with certain instructions like CALL, BRANCH etc.,
+    - Pair of 32 bit SPR HI and LO, used to hold the results of multiply, divide and multiply-accumulate instructions.
+      - During a multiply operation the HI and LO registers store the product of an integer multiply - HI denotes the high order 32 bits and LO denotes low order 32 bits.
+      - During multiply-add or multiply-subtract, the HI and LO registes store the result of the integer multiply-add or multiply-subtract.
+      - During a division operation, the HI and LO registers store the quotient in LO and reminder in HI of integer divide.
+    - Some common registers missing from MIPS32: all the missing registers can be implemented using GPRs
+      - Stack Pointer
+      - Index Register
+      - Flag Registers: maintains these in GPRs to avoid problems in pipeline implementation.
+    - Note: Two GPRs are assigned functions:
+      1. R0 is hard-wired to a value 0(zero). So this can be used as the target register for any instructions whose result is to be discarded and as the source register when a value zero is needed.
+      2. R31 is used to store the return address when a function call is made. Used by jump-and-link and branch-and-link instructions like JAL, BLTZAL, BGEZAL etc.,. It can also be used as normal register.
+    - Examples:
+      ```
+       LD R4,50(R3)    // R4 = Mem [50 + R3]
+       ADD R2, R1, R4  // R2 = R1 + R4
+       SD 54(R3), R2   // Mem[54+R3] = R2
+  
+       ADD R2,R5,R0    // R2 = R5, No move instruction
+      ```
+    - Some MIPS32 Assembly language conventions:
+      - Integer registers of MIPS32 can be accessed using R0...R31 or r0...r31 in an assembly language program.
+      - The following conventions are as they are treated by QtSPIM a public domain simulator.
+        ```
+         Register Name  | Register Number |    Usage
+        ------------------------------------------------------------------------------
+           $zero        |       R0        |    Constant Zero
+        ------------------------------------------------------------------------------
+           $at          |       R1        |    Reserved for assembler
+        ------------------------------------------------------------------------------
+           $v0          |       R2        |    Result of function or for expression
+           $v1          |       R3        |    evaluation
+        ------------------------------------------------------------------------------
+           $a0          |       R4        |    Argument1
+           $a1          |       R5        |    Argument2
+           $a2          |       R6        |    Argument3
+           $a3          |       R7        |    Argument4
+        ------------------------------------------------------------------------------
+           $t0          |       R8        |    Temporary(not preserved across CALL)
+           $t1          |       R9        |    Temporary(not preserved across CALL)
+           $t2          |       R10       |    Temporary(not preserved across CALL)
+           $t3          |       R11       |    Temporary(not preserved across CALL)
+           $t4          |       R12       |    Temporary(not preserved across CALL)
+           $t5          |       R13       |    Temporary(not preserved across CALL)
+           $t6          |       R14       |    Temporary(not preserved across CALL)
+           $t7          |       R15       |    Temporary(not preserved across CALL)
+           $t8          |       R24       |    Temporary(not preserved across CALL)
+           $t9          |       R25       |    Temporary(not preserved across CALL)
+        ------------------------------------------------------------------------------
+           $s0          |       R16       |    Temporary(preserved across CALL)
+           $s1          |       R17       |    Temporary(preserved across CALL)
+           $s2          |       R18       |    Temporary(preserved across CALL)
+           $s3          |       R19       |    Temporary(preserved across CALL)
+           $s4          |       R20       |    Temporary(preserved across CALL)
+           $s5          |       R21       |    Temporary(preserved across CALL)
+           $s6          |       R22       |    Temporary(preserved across CALL)
+           $s7          |       R23       |    Temporary(preserved across CALL)
+        ------------------------------------------------------------------------------
+           $gp          |       R28       |    Pointer to global area
+           $sp          |       R29       |    Stack Pointer
+           $fp          |       R30       |    Frame Pointer
+           $ra          |       R31       |    Return address(used by function call)
+       -------------------------------------------------------------------------------
+           $k0          |       R26       |    Reserved for OS kernal
+           $k1          |       R27       |    Reserved for OS kernal
+        ```
