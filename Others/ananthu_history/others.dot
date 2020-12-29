@@ -1,0 +1,15 @@
+digraph {
+    subgraph cluster_other_trees {
+        label="OTHER TREES";
+        Mutyalamma          -> Veeranjaneylu_Kotupalli, Anasuryamma;
+        Veeranjaneylu_Kotupalli -> Kumari[color=blue];
+        Anjamma             -> G4, G5, G6, Ramadevi;
+        Veeranjaneylu_Kotupalli -> Surendra_I, SriDevi;
+        Kumari                  -> Surendra_I, SriDevi;
+        Surendra_I          -> Satyaveni[color=blue];
+        Surendra_I          -> SaiKrishna, SanthiPriya;
+        Satyaveni           -> SaiKrishna, SanthiPriya;
+        SaiKrishna          -> SaiLakshmi[color=blue];
+    }
+}
+

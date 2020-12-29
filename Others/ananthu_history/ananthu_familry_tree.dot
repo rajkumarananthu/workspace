@@ -1,0 +1,118 @@
+digraph {
+    subgraph cluster_legend {
+        label="LEGEND";
+        husband -> wife[color=blue];
+        parent  -> child;
+        sibling1 -> sibling2[color=red];
+        Ananthu[color=green,style=filled];
+        Repalle[color=yellow,style=filled];
+        Kotupalli[color=orange,style=filled];
+    }
+
+    subgraph cluster_ananthu_family_tree {
+        label="ANANTHU FAMILY TREE";
+        /* Node coloring */
+        Ananthu_Head[color=green, style=filled];
+        /* Wife */
+        Ananthu_Head    -> wife1[color=blue];
+        Ananthu_Head    -> wife2[color=blue];
+        /* Children */
+        Ananthu_Head    -> Narayya;
+        wife1           -> Narayya;
+        Ananthu_Head    -> Ramayya;
+        wife2           -> Ramayya;
+        /* Node coloring */
+        Narayya[color=green, style=filled];
+        Ramayya[color=green, style=filled];
+        /* Wife */
+        Narayya         -> G1[color=blue];
+        Ramayya         -> G2[color=blue];
+        /* Children */
+        Narayya         -> Subbayya;
+        G1              -> Subbayya;
+        Ramayya         -> Kotayya, Venkatadri, Venkatachalam, Ramalingam, Anavayamma, Mutyalamma;
+        G2              -> Kotayya, Venkatadri, Venkatachalam, Ramalingam, Anavayamma, Mutyalamma;
+        /* Node Coloring */
+        Subbayya[color=green, style=filled];
+        Kotayya[color=green, style=filled];
+        Venkatadri[color=green, style=filled];
+        Venkatachalam[color=green, style=filled];
+        Ramalingam[color=green, style=filled];
+        /* Wife */
+        Subbayya       -> Anasuryamma[color=blue];
+        Kotayya         -> Masimma[color=blue];
+        Venkatadri      -> Seshamma[color=blue];
+        Venkatachalam   -> LakshmiDevamma[color=blue];
+        Ramalingam      -> Rangamma[color=blue];
+        /* Children */
+        Subbayya        -> Venkateswarlu, Kantam, Aadimma, Achamma;
+        Anasuryamma     -> Venkateswarlu, Kantam, Aadimma, Achamma;
+        Kotayya         -> Kumari;
+        Masimma         -> Kumari;
+        Venkatadri      -> Ramayya_I, Subbaravamma;
+        Seshamma        -> Ramayya_I, Subbaravamma;
+        Venkatachalam   -> Poornai, Ramulu, Nagendram;
+        LakshmiDevamma  -> Poornai, Ramulu, Nagendram;
+        Ramalingam      -> Adinarayana, Anjamma;
+        Rangamma        -> Adinarayana, Anjamma;
+        /* Node Coloring */
+        Venkateswarlu[color=green, style=filled];
+        Kantam[color=green, style=filled];
+        Ramayya_I[color=green, style=filled];
+        Adinarayana[color=green, style=filled];
+        /* Wife */
+        Venkateswarlu   -> Subbaravamma_I[color=blue];
+        Kantam          -> Seethamma[color=blue];
+        Ramayya_I         -> Yankayamma[color=blue];
+        Adinarayana     -> Ramadevi[color=blue];
+        /* Children */
+        Venkateswarlu   -> Poorna_Chandra_Rao, Veeranjaneyulu, Satyaveni;
+        Subbaravamma_I  -> Poorna_Chandra_Rao, Veeranjaneyulu, Satyaveni;
+        Kantam          -> Paddamma, HariBabu, Mahalakshmamma;
+        Seethamma       -> Paddamma, HariBabu, Mahalakshmamma;
+        Ramayya_I         -> RadhaKrishna, Leela, Surendra;
+        Yankayamma      -> RadhaKrishna, Leela, Surendra;
+        Adinarayana     -> Nagaraju, HemaLatha, SriPriya;
+        Ramadevi        -> Nagaraju, HemaLatha, SriPriya;
+        /* Node Coloring */
+        Poorna_Chandra_Rao[color=green, style=filled];
+        Veeranjaneyulu[color=green, style=filled];
+        HariBabu[color=green, style=filled];
+        RadhaKrishna[color=green, style=filled];
+        Surendra[color=green, style=filled];
+        Nagaraju[color=green, style=filled];
+        /* Wife */
+        Poorna_Chandra_Rao  -> SriDevi[color=blue];
+        Veeranjaneyulu      -> Subhashini[color=blue];
+        HariBabu            -> Usha[color=blue];
+        RadhaKrishna        -> BhagyaLakshmi[color=blue];
+        Surendra            -> Saraswathi[color=blue];
+        Nagaraju            -> Madhavi[color=blue];
+        /* Children */
+        Poorna_Chandra_Rao  -> SaiLakshmi, GeethaPrasanna;
+        SriDevi             -> SaiLakshmi, GeethaPrasanna;
+        Veeranjaneyulu      -> Rajkumar, Poorna_Lakshmi_Prasanna;
+        Subhashini          -> Rajkumar, Poorna_Lakshmi_Prasanna;
+        HariBabu            -> CharanTej, Pavan;
+        Usha                -> CharanTej, Pavan;
+        RadhaKrishna        -> Mahesh, Swathi;
+        BhagyaLakshmi       -> Mahesh, Swathi;
+        Surendra            -> Rakesh, G3;
+        Saraswathi          -> Rakesh, G3;
+        Nagaraju            -> UdayRam, UshaSri;
+        Madhavi             -> UdayRam, UshaSri;
+        /* Node Coloring */
+        Rajkumar[color=green,style=filled];
+        CharanTej[color=green, style=filled];
+        Pavan[color=green, style=filled];
+        Mahesh[color=green, style=filled];
+        Rakesh[color=green, style=filled];
+        UdayRam[color=green, style=filled];
+        /* Wife */
+        Mahesh              -> NagaBindu[color=blue];
+        /* Children */
+        Mahesh              -> B1;
+        NagaBindu           -> B1;
+    }
+
+}
