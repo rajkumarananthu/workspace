@@ -1,0 +1,868 @@
+<html>
+	<head>
+		<style>
+			canvas {
+						border : 1px solid #d3d3d3;
+						
+					}
+		</style>
+	</head>
+	<body onload = "startgame()">
+		<canvas id = "canvas"></canvas>
+		<script>
+			function startgame()
+			{
+				jump_ball.draw();
+			}
+			var jump_ball = {
+								canvas : document.getElementById("canvas"),
+								draw : function() {
+														this.canvas.height = 600;
+														this.canvas.width = 1255;
+														this.context = this.canvas.getContext("2d");
+													    document.body.insertBefore(this.canvas,document.body.childNodes[0]);
+														game_tile_1 = new component(100,25,"red",0,0);
+														game_tile_2 = new component(100,25,"red",105,0);
+														game_tile_3 = new component(100,25,"red",210,0);
+														game_tile_4 = new component(100,25,"red",315,0);
+														game_tile_5 = new component(100,25,"red",420,0);
+														game_tile_6 = new component(100,25,"red",525,0);
+														game_tile_7 = new component(100,25,"red",630,0);
+														game_tile_8 = new component(100,25,"red",735,0);
+														game_tile_9 = new component(100,25,"red",840,0);
+														game_tile_10 = new component(100,25,"red",945,0);
+														game_tile_11 = new component(100,25,"red",1050,0);
+														game_tile_12 = new component(100,25,"red",1155,0);
+														game_tile_13 = new component(100,25,"red",50,30);
+														game_tile_14 = new component(100,25,"red",155,30);
+														game_tile_15 = new component(100,25,"red",260,30);
+														game_tile_16 = new component(100,25,"red",365,30);
+														game_tile_17 = new component(100,25,"red",470,30);
+														game_tile_18 = new component(100,25,"red",575,30);
+														game_tile_19 = new component(100,25,"red",680,30);
+														game_tile_20 = new component(100,25,"red",785,30);
+														game_tile_21 = new component(100,25,"red",890,30);
+														game_tile_22 = new component(100,25,"red",995,30);
+														game_tile_23 = new component(100,25,"red",1100,30);
+														game_tile_24 = new component(100,25,"red",100,60);
+														game_tile_25 = new component(100,25,"red",205,60);
+														game_tile_26 = new component(100,25,"red",310,60);
+														game_tile_27 = new component(100,25,"red",415,60);
+														game_tile_28 = new component(100,25,"red",520,60);
+														game_tile_29 = new component(100,25,"red",625,60);
+														game_tile_30 = new component(100,25,"red",730,60);
+														game_tile_31 = new component(100,25,"red",835,60);
+														game_tile_32 = new component(100,25,"red",940,60);
+														game_tile_33 = new component(100,25,"red",1045,60);
+														bottom_tile_x = Math.floor(Math.random()*1200);
+														bottom_tile_y = 555;
+														jumpingball = new component(25,25,"blue",bottom_tile_x+40,bottom_tile_y - 25);
+														bottom_tile = new component(100,5,"blue",bottom_tile_x,bottom_tile_y);
+												   },
+								clear : function(){
+														this.context.clearRect(0,0,this.canvas.width,this.canvas.height);
+												  },
+								start : function(){
+														this.interval = setInterval(updateGame,5);
+												  }
+							};
+
+			function component(width,height,color,x,y)
+			{
+				this.width = width;
+				this.height = height;
+				this.x =x;
+				this.y = y;
+				this.addx = -1;
+				this.addy = -1;
+				this.valid = 1;
+				ctx = jump_ball.context;
+				ctx.fillStyle = color;
+				ctx.fillRect(this.x,this.y,this.width,this.height);
+				this.updatexy = function(){
+										if(this.x == 0)
+											this.addx = 1;
+										if(this.y == 0)
+											this.addy = 1;
+										if((this.y+this.height) ==600)
+											this.addy = -1;
+										if ((this.x+this.width)==1255)
+											this.addx = -1;
+										this.x = this.x+this.addx;
+										this.y = this.y+this.addy;
+										ctx = jump_ball.context;
+										ctx.fillStyle = color;
+										ctx.fillRect(this.x,this.y,this.width,this.height);
+									  };
+				this.update = function(){
+											ctx = jump_ball.context;
+											ctx.fillStyle = color;
+											if(this.valid == 1)
+												{
+													ctx.fillRect(this.x,this.y,this.width,this.height);
+												}
+										};
+				
+			}
+			function startGame()
+			{
+				jump_ball.start();
+			}
+			function resetGame()
+			{
+				jump_ball.clear();
+				jump_ball.draw();
+			}
+			function updateGame()
+			{
+				jump_ball.clear();
+				if(jumpingball.y == game_tile_1.y+game_tile_1.height &&(jumpingball.x >= game_tile_1.x - jumpingball.width && jumpingball.x <= game_tile_1.x + game_tile_1.width) && game_tile_1.valid == 1)
+				{
+					game_tile_1.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_1.y && (jumpingball.x >= game_tile_1.x - jumpingball.width && jumpingball.x <= game_tile_1.x + game_tile_1.width) && game_tile_1.valid == 1)
+				{
+					game_tile_1.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_1.x + game_tile_1.width && (jumpingball.y >= game_tile_1.y - jumpingball.height && jumpingball.y <= game_tile_1.y + game_tile_1.height) && game_tile_1.valid == 1)
+				{
+					game_tile_1.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_1.x && (jumpingball.y >= game_tile_1.y - jumpingball.height && jumpingball.y <= game_tile_1.y + game_tile_1.height) && game_tile_1.valid == 1)
+				{
+					game_tile_1.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/* 2nd tile*/
+				if(jumpingball.y == game_tile_2.y+game_tile_2.height &&(jumpingball.x >= game_tile_2.x - jumpingball.width && jumpingball.x <= game_tile_2.x + game_tile_2.width) && game_tile_2.valid == 1)
+				{
+					game_tile_2.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_2.y && (jumpingball.x >= game_tile_2.x - jumpingball.width && jumpingball.x <= game_tile_2.x + game_tile_2.width) && game_tile_2.valid == 1)
+				{
+					game_tile_2.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_2.x + game_tile_2.width && (jumpingball.y >= game_tile_2.y - jumpingball.height && jumpingball.y <= game_tile_2.y + game_tile_2.height) && game_tile_2.valid == 1)
+				{
+					game_tile_2.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_2.x && (jumpingball.y >= game_tile_2.y - jumpingball.height && jumpingball.y <= game_tile_2.y + game_tile_2.height) && game_tile_2.valid == 1)
+				{
+					game_tile_2.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*3rd tile*/
+				if(jumpingball.y == game_tile_3.y+game_tile_3.height &&(jumpingball.x >= game_tile_3.x - jumpingball.width && jumpingball.x <= game_tile_3.x + game_tile_3.width) && game_tile_3.valid == 1)
+				{
+					game_tile_3.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_3.y && (jumpingball.x >= game_tile_3.x - jumpingball.width && jumpingball.x <= game_tile_3.x + game_tile_3.width) && game_tile_3.valid == 1)
+				{
+					game_tile_3.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_3.x + game_tile_3.width && (jumpingball.y >= game_tile_3.y - jumpingball.height && jumpingball.y <= game_tile_3.y + game_tile_3.height) && game_tile_3.valid == 1)
+				{
+					game_tile_3.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_3.x && (jumpingball.y >= game_tile_3.y - jumpingball.height && jumpingball.y <= game_tile_3.y + game_tile_3.height) && game_tile_3.valid == 1)
+				{
+					game_tile_3.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*4th tile*/
+				if(jumpingball.y == game_tile_4.y+game_tile_4.height &&(jumpingball.x >= game_tile_4.x - jumpingball.width && jumpingball.x <= game_tile_4.x + game_tile_4.width) && game_tile_4.valid == 1)
+				{
+					game_tile_4.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_4.y && (jumpingball.x >= game_tile_4.x - jumpingball.width && jumpingball.x <= game_tile_4.x + game_tile_4.width) && game_tile_4.valid == 1)
+				{
+					game_tile_4.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_4.x + game_tile_4.width && (jumpingball.y >= game_tile_4.y - jumpingball.height && jumpingball.y <= game_tile_4.y + game_tile_4.height) && game_tile_4.valid == 1)
+				{
+					game_tile_4.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_4.x && (jumpingball.y >= game_tile_4.y - jumpingball.height && jumpingball.y <= game_tile_4.y + game_tile_4.height) && game_tile_4.valid == 1)
+				{
+					game_tile_4.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*5th tile*/
+				if(jumpingball.y == game_tile_5.y+game_tile_5.height &&(jumpingball.x >= game_tile_5.x - jumpingball.width && jumpingball.x <= game_tile_5.x + game_tile_5.width) && game_tile_5.valid == 1)
+				{
+					game_tile_5.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_5.y && (jumpingball.x >= game_tile_5.x - jumpingball.width && jumpingball.x <= game_tile_5.x + game_tile_5.width) && game_tile_5.valid == 1)
+				{
+					game_tile_5.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_5.x + game_tile_5.width && (jumpingball.y >= game_tile_5.y - jumpingball.height && jumpingball.y <= game_tile_5.y + game_tile_5.height) && game_tile_5.valid == 1)
+				{
+					game_tile_5.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_5.x && (jumpingball.y >= game_tile_5.y - jumpingball.height && jumpingball.y <= game_tile_5.y + game_tile_5.height) && game_tile_5.valid == 1)
+				{
+					game_tile_5.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*6th tile*/
+				if(jumpingball.y == game_tile_6.y+game_tile_6.height &&(jumpingball.x >= game_tile_6.x - jumpingball.width && jumpingball.x <= game_tile_6.x + game_tile_6.width) && game_tile_6.valid == 1)
+				{
+					game_tile_6.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_6.y && (jumpingball.x >= game_tile_6.x - jumpingball.width && jumpingball.x <= game_tile_6.x + game_tile_6.width) && game_tile_6.valid == 1)
+				{
+					game_tile_6.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_6.x + game_tile_6.width && (jumpingball.y >= game_tile_6.y - jumpingball.height && jumpingball.y <= game_tile_6.y + game_tile_6.height) && game_tile_6.valid == 1)
+				{
+					game_tile_6.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_6.x && (jumpingball.y >= game_tile_6.y - jumpingball.height && jumpingball.y <= game_tile_6.y + game_tile_6.height) && game_tile_6.valid == 1)
+				{
+					game_tile_6.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*7th tile*/
+				if(jumpingball.y == game_tile_7.y+game_tile_7.height &&(jumpingball.x >= game_tile_7.x - jumpingball.width && jumpingball.x <= game_tile_7.x + game_tile_7.width) && game_tile_7.valid == 1)
+				{
+					game_tile_7.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_7.y && (jumpingball.x >= game_tile_7.x - jumpingball.width && jumpingball.x <= game_tile_7.x + game_tile_7.width) && game_tile_7.valid == 1)
+				{
+					game_tile_7.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_7.x + game_tile_7.width && (jumpingball.y >= game_tile_7.y - jumpingball.height && jumpingball.y <= game_tile_7.y + game_tile_7.height) && game_tile_7.valid == 1)
+				{
+					game_tile_7.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_7.x && (jumpingball.y >= game_tile_7.y - jumpingball.height && jumpingball.y <= game_tile_7.y + game_tile_7.height) && game_tile_7.valid == 1)
+				{
+					game_tile_7.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*8th tile*/
+				if(jumpingball.y == game_tile_8.y+game_tile_8.height &&(jumpingball.x >= game_tile_8.x - jumpingball.width && jumpingball.x <= game_tile_8.x + game_tile_8.width) && game_tile_8.valid == 1)
+				{
+					game_tile_8.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_8.y && (jumpingball.x >= game_tile_8.x - jumpingball.width && jumpingball.x <= game_tile_8.x + game_tile_8.width) && game_tile_8.valid == 1)
+				{
+					game_tile_8.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_8.x + game_tile_8.width && (jumpingball.y >= game_tile_8.y - jumpingball.height && jumpingball.y <= game_tile_8.y + game_tile_8.height) && game_tile_8.valid == 1)
+				{
+					game_tile_8.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_8.x && (jumpingball.y >= game_tile_8.y - jumpingball.height && jumpingball.y <= game_tile_8.y + game_tile_8.height) && game_tile_8.valid == 1)
+				{
+					game_tile_8.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*9th tile*/
+				if(jumpingball.y == game_tile_9.y+game_tile_9.height &&(jumpingball.x >= game_tile_9.x - jumpingball.width && jumpingball.x <= game_tile_9.x + game_tile_9.width) && game_tile_9.valid == 1)
+				{
+					game_tile_9.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_9.y && (jumpingball.x >= game_tile_9.x - jumpingball.width && jumpingball.x <= game_tile_9.x + game_tile_9.width) && game_tile_9.valid == 1)
+				{
+					game_tile_9.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_9.x + game_tile_9.width && (jumpingball.y >= game_tile_9.y - jumpingball.height && jumpingball.y <= game_tile_9.y + game_tile_9.height) && game_tile_9.valid == 1)
+				{
+					game_tile_9.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_9.x && (jumpingball.y >= game_tile_9.y - jumpingball.height && jumpingball.y <= game_tile_9.y + game_tile_9.height) && game_tile_9.valid == 1)
+				{
+					game_tile_9.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*10 th tile*/
+				if(jumpingball.y == game_tile_10.y+game_tile_10.height &&(jumpingball.x >= game_tile_10.x - jumpingball.width && jumpingball.x <= game_tile_10.x + game_tile_10.width) && game_tile_10.valid == 1)
+				{
+					game_tile_10.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_10.y && (jumpingball.x >= game_tile_10.x - jumpingball.width && jumpingball.x <= game_tile_10.x + game_tile_10.width) && game_tile_10.valid == 1)
+				{
+					game_tile_10.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_10.x + game_tile_10.width && (jumpingball.y >= game_tile_10.y - jumpingball.height && jumpingball.y <= game_tile_10.y + game_tile_10.height) && game_tile_10.valid == 1)
+				{
+					game_tile_10.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_10.x && (jumpingball.y >= game_tile_10.y - jumpingball.height && jumpingball.y <= game_tile_10.y + game_tile_10.height) && game_tile_10.valid == 1)
+				{
+					game_tile_10.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*11th tile*/
+				if(jumpingball.y == game_tile_11.y+game_tile_11.height &&(jumpingball.x >= game_tile_11.x - jumpingball.width && jumpingball.x <= game_tile_11.x + game_tile_11.width) && game_tile_11.valid == 1)
+				{
+					game_tile_11.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_11.y && (jumpingball.x >= game_tile_11.x - jumpingball.width && jumpingball.x <= game_tile_11.x + game_tile_11.width) && game_tile_11.valid == 1)
+				{
+					game_tile_11.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_11.x + game_tile_11.width && (jumpingball.y >= game_tile_11.y - jumpingball.height && jumpingball.y <= game_tile_11.y + game_tile_11.height) && game_tile_11.valid == 1)
+				{
+					game_tile_11.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_11.x && (jumpingball.y >= game_tile_11.y - jumpingball.height && jumpingball.y <= game_tile_11.y + game_tile_11.height) && game_tile_11.valid == 1)
+				{
+					game_tile_11.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*12th tile*/
+				if(jumpingball.y == game_tile_12.y+game_tile_12.height &&(jumpingball.x >= game_tile_12.x - jumpingball.width && jumpingball.x <= game_tile_12.x + game_tile_12.width) && game_tile_12.valid == 1)
+				{
+					game_tile_12.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_12.y && (jumpingball.x >= game_tile_12.x - jumpingball.width && jumpingball.x <= game_tile_12.x + game_tile_12.width) && game_tile_12.valid == 1)
+				{
+					game_tile_12.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_12.x + game_tile_12.width && (jumpingball.y >= game_tile_12.y - jumpingball.height && jumpingball.y <= game_tile_12.y + game_tile_12.height) && game_tile_12.valid == 1)
+				{
+					game_tile_12.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_12.x && (jumpingball.y >= game_tile_12.y - jumpingball.height && jumpingball.y <= game_tile_12.y + game_tile_12.height) && game_tile_12.valid == 1)
+				{
+					game_tile_12.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*13th tile*/
+				if(jumpingball.y == game_tile_13.y+game_tile_13.height &&(jumpingball.x >= game_tile_13.x - jumpingball.width && jumpingball.x <= game_tile_13.x + game_tile_13.width) && game_tile_13.valid == 1)
+				{
+					game_tile_13.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_13.y && (jumpingball.x >= game_tile_13.x - jumpingball.width && jumpingball.x <= game_tile_13.x + game_tile_13.width) && game_tile_13.valid == 1)
+				{
+					game_tile_13.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_13.x + game_tile_13.width && (jumpingball.y >= game_tile_13.y - jumpingball.height && jumpingball.y <= game_tile_13.y + game_tile_13.height) && game_tile_13.valid == 1)
+				{
+					game_tile_13.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_13.x && (jumpingball.y >= game_tile_13.y - jumpingball.height && jumpingball.y <= game_tile_13.y + game_tile_13.height) && game_tile_13.valid == 1)
+				{
+					game_tile_13.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*14th tile*/
+				if(jumpingball.y == game_tile_14.y+game_tile_14.height &&(jumpingball.x >= game_tile_14.x - jumpingball.width && jumpingball.x <= game_tile_14.x + game_tile_14.width) && game_tile_14.valid == 1)
+				{
+					game_tile_14.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_14.y && (jumpingball.x >= game_tile_14.x - jumpingball.width && jumpingball.x <= game_tile_14.x + game_tile_14.width) && game_tile_14.valid == 1)
+				{
+					game_tile_14.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_14.x + game_tile_14.width && (jumpingball.y >= game_tile_14.y - jumpingball.height && jumpingball.y <= game_tile_14.y + game_tile_14.height) && game_tile_14.valid == 1)
+				{
+					game_tile_14.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_14.x && (jumpingball.y >= game_tile_14.y - jumpingball.height && jumpingball.y <= game_tile_14.y + game_tile_14.height) && game_tile_14.valid == 1)
+				{
+					game_tile_14.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*15 th tile*/
+				if(jumpingball.y == game_tile_15.y+game_tile_15.height &&(jumpingball.x >= game_tile_15.x - jumpingball.width && jumpingball.x <= game_tile_15.x + game_tile_15.width) && game_tile_15.valid == 1)
+				{
+					game_tile_15.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_15.y && (jumpingball.x >= game_tile_15.x - jumpingball.width && jumpingball.x <= game_tile_15.x + game_tile_15.width) && game_tile_15.valid == 1)
+				{
+					game_tile_15.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_15.x + game_tile_15.width && (jumpingball.y >= game_tile_15.y - jumpingball.height && jumpingball.y <= game_tile_15.y + game_tile_15.height) && game_tile_15.valid == 1)
+				{
+					game_tile_15.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_15.x && (jumpingball.y >= game_tile_15.y - jumpingball.height && jumpingball.y <= game_tile_15.y + game_tile_15.height) && game_tile_15.valid == 1)
+				{
+					game_tile_15.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*16th tile*/
+				if(jumpingball.y == game_tile_16.y+game_tile_16.height &&(jumpingball.x >= game_tile_16.x - jumpingball.width && jumpingball.x <= game_tile_16.x + game_tile_16.width) && game_tile_16.valid == 1)
+				{
+					game_tile_16.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_16.y && (jumpingball.x >= game_tile_16.x - jumpingball.width && jumpingball.x <= game_tile_16.x + game_tile_16.width) && game_tile_16.valid == 1)
+				{
+					game_tile_16.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_16.x + game_tile_16.width && (jumpingball.y >= game_tile_16.y - jumpingball.height && jumpingball.y <= game_tile_16.y + game_tile_16.height) && game_tile_16.valid == 1)
+				{
+					game_tile_16.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_16.x && (jumpingball.y >= game_tile_16.y - jumpingball.height && jumpingball.y <= game_tile_16.y + game_tile_16.height) && game_tile_16.valid == 1)
+				{
+					game_tile_16.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*17 th tile*/
+				if(jumpingball.y == game_tile_17.y+game_tile_17.height &&(jumpingball.x >= game_tile_17.x - jumpingball.width && jumpingball.x <= game_tile_17.x + game_tile_17.width) && game_tile_17.valid == 1)
+				{
+					game_tile_17.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_17.y && (jumpingball.x >= game_tile_17.x - jumpingball.width && jumpingball.x <= game_tile_17.x + game_tile_17.width) && game_tile_17.valid == 1)
+				{
+					game_tile_17.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_17.x + game_tile_17.width && (jumpingball.y >= game_tile_17.y - jumpingball.height && jumpingball.y <= game_tile_17.y + game_tile_17.height) && game_tile_17.valid == 1)
+				{
+					game_tile_17.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_17.x && (jumpingball.y >= game_tile_17.y - jumpingball.height && jumpingball.y <= game_tile_17.y + game_tile_17.height) && game_tile_17.valid == 1)
+				{
+					game_tile_17.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*18 th tile*/
+				if(jumpingball.y == game_tile_18.y+game_tile_18.height &&(jumpingball.x >= game_tile_18.x - jumpingball.width && jumpingball.x <= game_tile_18.x + game_tile_18.width) && game_tile_18.valid == 1)
+				{
+					game_tile_18.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_18.y && (jumpingball.x >= game_tile_18.x - jumpingball.width && jumpingball.x <= game_tile_18.x + game_tile_18.width) && game_tile_18.valid == 1)
+				{
+					game_tile_18.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_18.x + game_tile_18.width && (jumpingball.y >= game_tile_18.y - jumpingball.height && jumpingball.y <= game_tile_18.y + game_tile_18.height) && game_tile_18.valid == 1)
+				{
+					game_tile_18.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_18.x && (jumpingball.y >= game_tile_18.y - jumpingball.height && jumpingball.y <= game_tile_18.y + game_tile_18.height) && game_tile_18.valid == 1)
+				{
+					game_tile_18.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*19th tile*/
+				if(jumpingball.y == game_tile_19.y+game_tile_19.height &&(jumpingball.x >= game_tile_19.x - jumpingball.width && jumpingball.x <= game_tile_19.x + game_tile_19.width) && game_tile_19.valid == 1)
+				{
+					game_tile_19.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_19.y && (jumpingball.x >= game_tile_19.x - jumpingball.width && jumpingball.x <= game_tile_19.x + game_tile_19.width) && game_tile_19.valid == 1)
+				{
+					game_tile_19.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_19.x + game_tile_19.width && (jumpingball.y >= game_tile_19.y - jumpingball.height && jumpingball.y <= game_tile_19.y + game_tile_19.height) && game_tile_19.valid == 1)
+				{
+					game_tile_19.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_19.x && (jumpingball.y >= game_tile_19.y - jumpingball.height && jumpingball.y <= game_tile_19.y + game_tile_19.height) && game_tile_19.valid == 1)
+				{
+					game_tile_19.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*20 th tile*/
+				if(jumpingball.y == game_tile_20.y+game_tile_20.height &&(jumpingball.x >= game_tile_20.x - jumpingball.width && jumpingball.x <= game_tile_20.x + game_tile_20.width) && game_tile_20.valid == 1)
+				{
+					game_tile_20.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_20.y && (jumpingball.x >= game_tile_20.x - jumpingball.width && jumpingball.x <= game_tile_20.x + game_tile_20.width) && game_tile_20.valid == 1)
+				{
+					game_tile_20.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_20.x + game_tile_20.width && (jumpingball.y >= game_tile_20.y - jumpingball.height && jumpingball.y <= game_tile_20.y + game_tile_20.height) && game_tile_20.valid == 1)
+				{
+					game_tile_20.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_20.x && (jumpingball.y >= game_tile_20.y - jumpingball.height && jumpingball.y <= game_tile_20.y + game_tile_20.height) && game_tile_20.valid == 1)
+				{
+					game_tile_20.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*21st tile*/
+				if(jumpingball.y == game_tile_21.y+game_tile_21.height &&(jumpingball.x >= game_tile_21.x - jumpingball.width && jumpingball.x <= game_tile_21.x + game_tile_21.width) && game_tile_21.valid == 1)
+				{
+					game_tile_21.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_21.y && (jumpingball.x >= game_tile_21.x - jumpingball.width && jumpingball.x <= game_tile_21.x + game_tile_21.width) && game_tile_21.valid == 1)
+				{
+					game_tile_21.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_21.x + game_tile_21.width && (jumpingball.y >= game_tile_21.y - jumpingball.height && jumpingball.y <= game_tile_21.y + game_tile_21.height) && game_tile_21.valid == 1)
+				{
+					game_tile_21.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_21.x && (jumpingball.y >= game_tile_21.y - jumpingball.height && jumpingball.y <= game_tile_21.y + game_tile_21.height) && game_tile_21.valid == 1)
+				{
+					game_tile_21.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*22nd tile*/
+				if(jumpingball.y == game_tile_22.y+game_tile_22.height &&(jumpingball.x >= game_tile_22.x - jumpingball.width && jumpingball.x <= game_tile_22.x + game_tile_22.width) && game_tile_22.valid == 1)
+				{
+					game_tile_22.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_22.y && (jumpingball.x >= game_tile_22.x - jumpingball.width && jumpingball.x <= game_tile_22.x + game_tile_22.width) && game_tile_22.valid == 1)
+				{
+					game_tile_22.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_22.x + game_tile_22.width && (jumpingball.y >= game_tile_22.y - jumpingball.height && jumpingball.y <= game_tile_22.y + game_tile_22.height) && game_tile_22.valid == 1)
+				{
+					game_tile_22.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_22.x && (jumpingball.y >= game_tile_22.y - jumpingball.height && jumpingball.y <= game_tile_22.y + game_tile_22.height) && game_tile_22.valid == 1)
+				{
+					game_tile_22.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*23rd tile*/
+				if(jumpingball.y == game_tile_23.y+game_tile_23.height &&(jumpingball.x >= game_tile_23.x - jumpingball.width && jumpingball.x <= game_tile_23.x + game_tile_23.width) && game_tile_23.valid == 1)
+				{
+					game_tile_23.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_23.y && (jumpingball.x >= game_tile_23.x - jumpingball.width && jumpingball.x <= game_tile_23.x + game_tile_23.width) && game_tile_23.valid == 1)
+				{
+					game_tile_23.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_23.x + game_tile_23.width && (jumpingball.y >= game_tile_23.y - jumpingball.height && jumpingball.y <= game_tile_23.y + game_tile_23.height) && game_tile_23.valid == 1)
+				{
+					game_tile_23.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_23.x && (jumpingball.y >= game_tile_23.y - jumpingball.height && jumpingball.y <= game_tile_23.y + game_tile_23.height) && game_tile_23.valid == 1)
+				{
+					game_tile_23.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*24th tile*/
+				if(jumpingball.y == game_tile_24.y+game_tile_24.height &&(jumpingball.x >= game_tile_24.x - jumpingball.width && jumpingball.x <= game_tile_24.x + game_tile_24.width) && game_tile_24.valid == 1)
+				{
+					game_tile_24.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_24.y && (jumpingball.x >= game_tile_24.x - jumpingball.width && jumpingball.x <= game_tile_24.x + game_tile_24.width) && game_tile_24.valid == 1)
+				{
+					game_tile_24.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_24.x + game_tile_24.width && (jumpingball.y >= game_tile_24.y - jumpingball.height && jumpingball.y <= game_tile_24.y + game_tile_24.height) && game_tile_24.valid == 1)
+				{
+					game_tile_24.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_24.x && (jumpingball.y >= game_tile_24.y - jumpingball.height && jumpingball.y <= game_tile_24.y + game_tile_24.height) && game_tile_24.valid == 1)
+				{
+					game_tile_24.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*25th tile*/
+				if(jumpingball.y == game_tile_25.y+game_tile_25.height &&(jumpingball.x >= game_tile_25.x - jumpingball.width && jumpingball.x <= game_tile_25.x + game_tile_25.width) && game_tile_25.valid == 1)
+				{
+					game_tile_25.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_25.y && (jumpingball.x >= game_tile_25.x - jumpingball.width && jumpingball.x <= game_tile_25.x + game_tile_25.width) && game_tile_25.valid == 1)
+				{
+					game_tile_25.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_25.x + game_tile_25.width && (jumpingball.y >= game_tile_25.y - jumpingball.height && jumpingball.y <= game_tile_25.y + game_tile_25.height) && game_tile_25.valid == 1)
+				{
+					game_tile_25.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_25.x && (jumpingball.y >= game_tile_25.y - jumpingball.height && jumpingball.y <= game_tile_25.y + game_tile_25.height) && game_tile_25.valid == 1)
+				{
+					game_tile_25.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*26 th tile*/
+				if(jumpingball.y == game_tile_26.y+game_tile_26.height &&(jumpingball.x >= game_tile_26.x - jumpingball.width && jumpingball.x <= game_tile_26.x + game_tile_26.width) && game_tile_26.valid == 1)
+				{
+					game_tile_26.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_26.y && (jumpingball.x >= game_tile_26.x - jumpingball.width && jumpingball.x <= game_tile_26.x + game_tile_26.width) && game_tile_26.valid == 1)
+				{
+					game_tile_26.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_26.x + game_tile_26.width && (jumpingball.y >= game_tile_26.y - jumpingball.height && jumpingball.y <= game_tile_26.y + game_tile_26.height) && game_tile_26.valid == 1)
+				{
+					game_tile_26.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_26.x && (jumpingball.y >= game_tile_26.y - jumpingball.height && jumpingball.y <= game_tile_26.y + game_tile_26.height) && game_tile_26.valid == 1)
+				{
+					game_tile_26.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*27th tile*/
+				if(jumpingball.y == game_tile_27.y+game_tile_27.height &&(jumpingball.x >= game_tile_27.x - jumpingball.width && jumpingball.x <= game_tile_27.x + game_tile_27.width) && game_tile_27.valid == 1)
+				{
+					game_tile_27.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_27.y && (jumpingball.x >= game_tile_27.x - jumpingball.width && jumpingball.x <= game_tile_27.x + game_tile_27.width) && game_tile_27.valid == 1)
+				{
+					game_tile_27.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_27.x + game_tile_27.width && (jumpingball.y >= game_tile_27.y - jumpingball.height && jumpingball.y <= game_tile_27.y + game_tile_27.height) && game_tile_27.valid == 1)
+				{
+					game_tile_27.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_27.x && (jumpingball.y >= game_tile_27.y - jumpingball.height && jumpingball.y <= game_tile_27.y + game_tile_27.height) && game_tile_27.valid == 1)
+				{
+					game_tile_27.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*28th tile*/
+				if(jumpingball.y == game_tile_28.y+game_tile_28.height &&(jumpingball.x >= game_tile_28.x - jumpingball.width && jumpingball.x <= game_tile_28.x + game_tile_28.width) && game_tile_28.valid == 1)
+				{
+					game_tile_28.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_28.y && (jumpingball.x >= game_tile_28.x - jumpingball.width && jumpingball.x <= game_tile_28.x + game_tile_28.width) && game_tile_28.valid == 1)
+				{
+					game_tile_28.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_28.x + game_tile_28.width && (jumpingball.y >= game_tile_28.y - jumpingball.height && jumpingball.y <= game_tile_28.y + game_tile_28.height) && game_tile_28.valid == 1)
+				{
+					game_tile_28.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_28.x && (jumpingball.y >= game_tile_28.y - jumpingball.height && jumpingball.y <= game_tile_28.y + game_tile_28.height) && game_tile_28.valid == 1)
+				{
+					game_tile_28.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*29th tile*/
+				if(jumpingball.y == game_tile_29.y+game_tile_29.height &&(jumpingball.x >= game_tile_29.x - jumpingball.width && jumpingball.x <= game_tile_29.x + game_tile_29.width) && game_tile_29.valid == 1)
+				{
+					game_tile_29.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_29.y && (jumpingball.x >= game_tile_29.x - jumpingball.width && jumpingball.x <= game_tile_29.x + game_tile_29.width) && game_tile_29.valid == 1)
+				{
+					game_tile_29.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_29.x + game_tile_29.width && (jumpingball.y >= game_tile_29.y - jumpingball.height && jumpingball.y <= game_tile_29.y + game_tile_29.height) && game_tile_29.valid == 1)
+				{
+					game_tile_29.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_29.x && (jumpingball.y >= game_tile_29.y - jumpingball.height && jumpingball.y <= game_tile_29.y + game_tile_29.height) && game_tile_29.valid == 1)
+				{
+					game_tile_29.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*30th tile*/
+				if(jumpingball.y == game_tile_30.y+game_tile_30.height &&(jumpingball.x >= game_tile_30.x - jumpingball.width && jumpingball.x <= game_tile_30.x + game_tile_30.width) && game_tile_30.valid == 1)
+				{
+					game_tile_30.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_30.y && (jumpingball.x >= game_tile_30.x - jumpingball.width && jumpingball.x <= game_tile_30.x + game_tile_30.width) && game_tile_30.valid == 1)
+				{
+					game_tile_30.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_30.x + game_tile_30.width && (jumpingball.y >= game_tile_30.y - jumpingball.height && jumpingball.y <= game_tile_30.y + game_tile_30.height) && game_tile_30.valid == 1)
+				{
+					game_tile_30.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_30.x && (jumpingball.y >= game_tile_30.y - jumpingball.height && jumpingball.y <= game_tile_30.y + game_tile_30.height) && game_tile_30.valid == 1)
+				{
+					game_tile_30.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*31st tile*/
+				if(jumpingball.y == game_tile_31.y+game_tile_31.height &&(jumpingball.x >= game_tile_31.x - jumpingball.width && jumpingball.x <= game_tile_31.x + game_tile_31.width) && game_tile_31.valid == 1)
+				{
+					game_tile_31.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_31.y && (jumpingball.x >= game_tile_31.x - jumpingball.width && jumpingball.x <= game_tile_31.x + game_tile_31.width) && game_tile_31.valid == 1)
+				{
+					game_tile_31.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_31.x + game_tile_31.width && (jumpingball.y >= game_tile_31.y - jumpingball.height && jumpingball.y <= game_tile_31.y + game_tile_31.height) && game_tile_31.valid == 1)
+				{
+					game_tile_31.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_31.x && (jumpingball.y >= game_tile_31.y - jumpingball.height && jumpingball.y <= game_tile_31.y + game_tile_31.height) && game_tile_31.valid == 1)
+				{
+					game_tile_31.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*32nd tile*/
+				if(jumpingball.y == game_tile_32.y+game_tile_32.height &&(jumpingball.x >= game_tile_32.x - jumpingball.width && jumpingball.x <= game_tile_32.x + game_tile_32.width) && game_tile_32.valid == 1)
+				{
+					game_tile_32.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_32.y && (jumpingball.x >= game_tile_32.x - jumpingball.width && jumpingball.x <= game_tile_32.x + game_tile_32.width) && game_tile_32.valid == 1)
+				{
+					game_tile_32.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_32.x + game_tile_32.width && (jumpingball.y >= game_tile_32.y - jumpingball.height && jumpingball.y <= game_tile_32.y + game_tile_32.height) && game_tile_32.valid == 1)
+				{
+					game_tile_32.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_32.x && (jumpingball.y >= game_tile_32.y - jumpingball.height && jumpingball.y <= game_tile_32.y + game_tile_32.height) && game_tile_32.valid == 1)
+				{
+					game_tile_32.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*33rd tile*/
+				if(jumpingball.y == game_tile_33.y+game_tile_33.height &&(jumpingball.x >= game_tile_33.x - jumpingball.width && jumpingball.x <= game_tile_33.x + game_tile_33.width) && game_tile_33.valid == 1)
+				{
+					game_tile_33.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.y + jumpingball.height == game_tile_33.y && (jumpingball.x >= game_tile_33.x - jumpingball.width && jumpingball.x <= game_tile_33.x + game_tile_33.width) && game_tile_33.valid == 1)
+				{
+					game_tile_33.valid = 0;
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				if(jumpingball.x == game_tile_33.x + game_tile_33.width && (jumpingball.y >= game_tile_33.y - jumpingball.height && jumpingball.y <= game_tile_33.y + game_tile_33.height) && game_tile_33.valid == 1)
+				{
+					game_tile_33.valid = 0;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				if(jumpingball.x+jumpingball.width == game_tile_33.x && (jumpingball.y >= game_tile_33.y - jumpingball.height && jumpingball.y <= game_tile_33.y + game_tile_33.height) && game_tile_33.valid == 1)
+				{
+					game_tile_33.valid = 0 ;
+					jumpingball.addx = -1 * jumpingball.addx;
+				}
+				/*bottom_tile*/
+				if(jumpingball.y+jumpingball.height == bottom_tile.y && (jumpingball.x >= bottom_tile.x - jumpingball.width && jumpingball.x <= bottom_tile.x + bottom_tile.width))
+				{
+					jumpingball.addy = -1 * jumpingball.addy;
+				}
+				/*drawing the updated tiles*/
+				jumpingball.updatexy();
+				game_tile_1.update();
+				game_tile_2.update();
+				game_tile_3.update();
+				game_tile_4.update();
+				game_tile_5.update();
+				game_tile_6.update();
+				game_tile_7.update();
+				game_tile_8.update();
+				game_tile_9.update();
+				game_tile_10.update();
+				game_tile_11.update();
+				game_tile_12.update();
+				game_tile_13.update();
+				game_tile_14.update();
+				game_tile_15.update();
+				game_tile_16.update();
+				game_tile_17.update();
+				game_tile_18.update();
+				game_tile_19.update();
+				game_tile_20.update();
+				game_tile_21.update();
+				game_tile_22.update();
+				game_tile_23.update();
+				game_tile_24.update();
+				game_tile_25.update();
+				game_tile_26.update();
+				game_tile_27.update();
+				game_tile_28.update();
+				game_tile_29.update();
+				game_tile_30.update();
+				game_tile_31.update();
+				game_tile_32.update();
+				game_tile_33.update();
+				bottom_tile.update();
+			}
+			function movRight()
+			{
+				bottom_tile.x = bottom_tile.x + 50;
+			}
+			function movLeft()
+			{
+				bottom_tile.x = bottom_tile.x - 50;
+			}
+		</script>
+		<br />
+		<input type = "button" value = "start" onclick = "startGame()"></input> 
+		<input type = "button" value ="<" onclick = "movLeft()" ></input>
+		<input type= "button" value = ">" onclick = "movRight()"></input>
+		<!--input type = "button" value = "ResetGame" onclick = "resetGame()" ></input-->
+	</body>
+</html>
