@@ -67,6 +67,6 @@ example for n =3
 ### prob9
 get the min max sum : given 'm' integers and an integer n we have to print the maximum sum of n integers from this set and minimum sum of n integers from this set. provided m >=n.
 
-### Non-divisible-subset[non_divisible_subset.cpp]
+### [Non-divisible-subset](non_divisible_subset.cpp)
 Given a set of distinct integers S, print the size of a maximal subset S' of S where the sum of any 2 numbers in S' is not evenly divisible by k.
 Input: n-size of S, array values of S, k
