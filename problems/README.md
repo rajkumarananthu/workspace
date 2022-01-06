@@ -60,9 +60,9 @@ i is thei−th number in the given list. So following this rule, the given list 
 print a staircase of #
 given a number(integer) n, print the stair case.
 example for n =3
-   #
-  ##
- ###
+       #
+      ##
+     ###
 
 ### prob9
 get the min max sum : given 'm' integers and an integer n we have to print the maximum sum of n integers from this set and minimum sum of n integers from this set. provided m >=n.
