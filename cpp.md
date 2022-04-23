@@ -19,3 +19,4 @@
 ### We generally declare lambdas using auto type, but what is its actual type?
 ### What is a function signature?
 ### What is the need to introduce rvalue references?
+### What is the use of keyword "volatile"?
