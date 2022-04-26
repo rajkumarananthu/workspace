@@ -2,7 +2,9 @@ import enum;
 
 # TaskType enum - enumerates all types of tasks that Shadow can perform
 class TaskType(enum.Enum):
-    ShoppingList = 1;
+    ShoppingList  = 1;
+    Reminder      = 2;
+    BlockCalender = 3
 
 
 # Task class - captures the tasks and their types which Shadow can perform
