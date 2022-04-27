@@ -18,3 +18,6 @@ Features that are targeted for:
   up, there is no need of the reminder, in this case we can use CV to detect whether a person is
   sleeping or not.
 - [ ] [Speech recognition to detect a person and add personalization.]
+  https://ieeexplore.ieee.org/document/9487756
+- [ ] [Taking Notes on a topic.]
+- [ ] [Todo List.]
