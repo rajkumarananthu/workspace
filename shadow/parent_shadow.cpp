@@ -7,6 +7,6 @@
 # The training set for a restart can be formed from including both base training set and the real
 # time commands served so far.
 
-import threading as Threading;
-import shadow;
-
+int main() {
+    shadow_main();
+}
